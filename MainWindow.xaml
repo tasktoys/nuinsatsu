@@ -10,5 +10,6 @@
         <Label Content="お兄ちゃん死亡のお知らせ" Height="28" HorizontalAlignment="Left" Margin="306,119,0,0" Name="label1" VerticalAlignment="Top" />
         <Button Content="qaswderftgyhjukiol;p@:][" Height="23" HorizontalAlignment="Left" Margin="244,46,0,0" Name="button4" VerticalAlignment="Top" Width="75" />
         <Button Content="Confrict Button" Height="35" HorizontalAlignment="Left" Margin="128,133,0,0" Name="button5" VerticalAlignment="Top" Width="146" />
+        <Button Content="test Button" Height="50" HorizontalAlignment="Left" Margin="312,178,0,0" Name="button6" VerticalAlignment="Top" Width="139" />
     </Grid>
 </Window>
