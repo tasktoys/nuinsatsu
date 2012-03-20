@@ -12,18 +12,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NUInsatsu
+namespace NUInsatsu.UI
 {
-
     /// <summary>
-    /// 表示するWindowです。これ自体は何も描画しません。
+    /// スキャンを行うページです。
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class ScanPage : Page
     {
-        public MainWindow()
+        public ScanPage()
         {
             InitializeComponent();
-            ShowsNavigationUI = false;
+        }
+
+        private void scanButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxImage image = MessageBoxImage.Information;
+            MessageBox.Show("スキャン中です", "Please wait", MessageBoxButton.OK, image);
+            NavigationService.Navigate(new ScanDocMotionPage());
         }
     }
 }

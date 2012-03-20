@@ -1,0 +1,15 @@
+﻿<Page x:Class="NUInsatsu.UI.ScanDocMotionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="515
+      "
+	Title="ScanDocPage" xmlns:my="clr-namespace:NUInsatsu.UI">
+
+    <DockPanel>
+        <my:PageHeader x:Name="pageHeader" DockPanel.Dock="Top" Title="「キネクト」と言ってください" />
+        <Button x:Name="kinectButton" Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
+    </DockPanel>
+</Page>

@@ -12,18 +12,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NUInsatsu
+namespace NUInsatsu.UI
 {
-
     /// <summary>
-    /// 表示するWindowです。これ自体は何も描画しません。
+    /// 登録時の顔認識を行うページです。
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class ScanFacePassPage : Page
     {
-        public MainWindow()
+        public ScanFacePassPage()
         {
             InitializeComponent();
-            ShowsNavigationUI = false;
+        }
+
+        private void kinectButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("登録が完了しました", "確認", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigationService.Navigate(new MenuPage());
         }
     }
 }

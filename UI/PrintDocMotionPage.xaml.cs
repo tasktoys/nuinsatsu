@@ -12,18 +12,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NUInsatsu
+namespace NUInsatsu.UI
 {
-
     /// <summary>
-    /// 表示するWindowです。これ自体は何も描画しません。
+    /// 印刷時のモーション取得を行うページです。
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class PrintDocMotionPage : Page
     {
-        public MainWindow()
+        public PrintDocMotionPage()
         {
             InitializeComponent();
-            ShowsNavigationUI = false;
+        }
+
+        private void kinectButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PrintFacePassPage());
         }
     }
 }

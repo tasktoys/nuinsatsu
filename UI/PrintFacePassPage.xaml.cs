@@ -12,18 +12,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NUInsatsu
+namespace NUInsatsu.UI
 {
-
     /// <summary>
-    /// 表示するWindowです。これ自体は何も描画しません。
+    /// 印刷時の顔認証を行うページです。
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class PrintFacePassPage : Page
     {
-        public MainWindow()
+        public PrintFacePassPage()
         {
             InitializeComponent();
-            ShowsNavigationUI = false;
+        }
+
+        private void kinectButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("印刷中です", "確認", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigationService.Navigate(new MenuPage());
         }
     }
 }
