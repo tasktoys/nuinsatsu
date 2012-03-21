@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 
 namespace NUInsatsu
 {
-
     /// <summary>
     /// 表示するWindowです。これ自体は何も描画しません。
     /// </summary>
@@ -24,6 +23,9 @@ namespace NUInsatsu
         {
             InitializeComponent();
             ShowsNavigationUI = false;
+
+            //インスタンス生成
+            KinectServer.Kinect.Camera kinect = KinectServer.Kinect.Camera.GetInstance();
         }
     }
 }
