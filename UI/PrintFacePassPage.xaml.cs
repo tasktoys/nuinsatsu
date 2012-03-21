@@ -26,8 +26,33 @@ namespace NUInsatsu.UI
 
         private void kinectButton_Click(object sender, RoutedEventArgs e)
         {
+            System.Drawing.Printing.PrintDocument pd =
+                new System.Drawing.Printing.PrintDocument();
+            Config config = Config.Load();
+            pd.PrinterSettings.PrinterName = config.PrinterName;
+
+            pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(pd_PrintPage);
+            pd.Print();
+
             MessageBox.Show("印刷中です", "確認", MessageBoxButton.OK, MessageBoxImage.Information);
+
             NavigationService.Navigate(new MenuPage());
+        }
+
+        /// <summary>
+        /// 印刷を行います。
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        void pd_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            System.Drawing.Image img = System.Drawing.Image.FromFile("hikaru.jpg");
+            //画像を描画する
+            e.Graphics.DrawImage(img, e.MarginBounds);
+            //次のページがないことを通知する
+            e.HasMorePages = false;
+            //後始末をする
+            img.Dispose();
         }
     }
 }

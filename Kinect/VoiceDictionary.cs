@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace KinectServer.Kinect
+namespace NUInsatsu
 {
 	class VoiceDictionary
 	{

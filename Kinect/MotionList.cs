@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KinectServer.Kinect
+namespace NUInsatsu
 {
     /// <summary>
     /// 要素数を時間とする、モーションデータ

@@ -25,7 +25,7 @@ namespace NUInsatsu
             ShowsNavigationUI = false;
 
             //インスタンス生成
-            KinectServer.Kinect.Camera kinect = KinectServer.Kinect.Camera.GetInstance();
+            Camera kinect = Camera.GetInstance();
         }
     }
 }

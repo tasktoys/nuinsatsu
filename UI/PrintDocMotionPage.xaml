@@ -9,7 +9,7 @@
 
     <DockPanel>
         <my:PageHeader x:Name="pageHeader" DockPanel.Dock="Top" Title="「キネクト」と言ってください" />
-        <my:SkeletonCanvas x:Name="skeletonCanvas" />
+        <my:SkeletonCanvas x:Name="skeletonCanvas" DockPanel.Dock="Top"/>
         <DockPanel Style="{StaticResource Bottom}">
             <Button x:Name="kinectButton" Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
         </DockPanel>

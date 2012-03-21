@@ -50,7 +50,7 @@ namespace NUInsatsu.UI
 
         private Polyline GetBodySegment(Microsoft.Research.Kinect.Nui.JointsCollection joints, Brush brush, params JointID[] ids)
         {
-            KinectServer.Kinect.Camera kinect = KinectServer.Kinect.Camera.GetInstance();
+            Camera kinect = Camera.GetInstance();
 
             PointCollection points = new PointCollection(ids.Length);
             for (int i = 0; i < ids.Length; ++i)
@@ -98,7 +98,7 @@ namespace NUInsatsu.UI
                     // Draw joints
                     foreach (Joint joint in data.Joints)
                     {
-                        KinectServer.Kinect.Camera kinect = KinectServer.Kinect.Camera.GetInstance();
+                        Camera kinect = Camera.GetInstance();
 
                         Point jointPos = kinect.GetDisplayPosition(joint, skeletonCanvas.Width, skeletonCanvas.Height);
                         Line jointLine = new Line();

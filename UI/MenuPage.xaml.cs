@@ -43,5 +43,10 @@ namespace NUInsatsu.UI
         {
             NavigationService.Navigate(new PrintDocMotionPage());
         }
+
+        private void adminButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdminPage());
+        }
     }
 }

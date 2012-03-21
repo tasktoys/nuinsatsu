@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Research.Kinect.Nui;
 
-namespace KinectServer.Kinect
+namespace NUInsatsu
 {
     class SkeletonDataComparer : IComparer<SkeletonData>
     {
@@ -148,7 +148,7 @@ namespace KinectServer.Kinect
         {
             System.Console.WriteLine("[Camera]time:{0}!", time);
 
-            Kinect.Camera kinect = Kinect.Camera.GetInstance();
+            Camera kinect = Camera.GetInstance();
 
             MotionList motionList = new MotionList();
 

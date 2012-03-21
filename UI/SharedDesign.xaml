@@ -5,6 +5,7 @@
 
     <!-- ジャイストブルー設定　-->
     <SolidColorBrush x:Key="JaistBlue">#FF8F44FF</SolidColorBrush>
+   
     
     <!-- ヘッダー設定 -->
     <Style TargetType="my:PageHeader">

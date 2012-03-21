@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Research.Kinect.Nui;
 
-namespace KinectServer.Kinect
+namespace NUInsatsu
 {
     /// <summary>
     /// 要素数を人数とする、SkeletonDataのリスト

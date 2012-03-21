@@ -1,117 +1,89 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 
-namespace KinectServer
+namespace NUInsatsu
 {
     /// <summary>
-    /// コンフィグの情報を保持します
+    /// コンフィグの情報を読み込み・書き込みします。
     /// </summary>
-    struct ConfigData
+    public class Config
     {
+        const String fileName = "config.xml";
+
         public int ServerPort { get; set; }
         public int NuimagioPort { get; set; }
         public String NuimagioIP { get; set; }
-        public double VoiceOK { get;  set; }
-        public double VoiceNO { get;  set; }
-        public double VoiceYES { get;  set; }
-        public double VoiceNext { get;  set; }
-        public double VoiceKinect { get;  set; }
-        public double VoiceEntry { get;  set; }
-        public double VoiceBack { get;  set; }
-        public double VoiceScan { get;  set; }
-        public double VoicePrint { get;  set; }
-        public double VoiceBalse { get;  set; }
-    }
-
-    class Config
-    {
-
-
+        public double VoiceOK { get; set; }
+        public double VoiceNO { get; set; }
+        public double VoiceYES { get; set; }
+        public double VoiceNext { get; set; }
+        public double VoiceKinect { get; set; }
+        public double VoiceEntry { get; set; }
+        public double VoiceBack { get; set; }
+        public double VoiceScan { get; set; }
+        public double VoicePrint { get; set; }
+        public double VoiceBalse { get; set; }
+        public bool DummyFace { get; set; }
+        public String PrinterName { get; set; }
 
         /// <summary>
-        /// サーバの設定を読み込みます
+        /// コンフィグのデフォルト値を設定し、クラスを構築します。
+        /// 設定値の読み込みはLoadメソッドを利用してください。
         /// </summary>
-        public static ConfigData LoadConfig()
+        private Config()
         {
-            // port番号設定
-            // config.txtのserver_port= の後ろがport番号になる
-            StreamReader stream = new StreamReader("config.txt", Encoding.GetEncoding("Shift_JIS"));
-            string[] splits;
-            string[] sep = { "=" };
-            string line = "";
-
-            ConfigData config = new ConfigData();
-
-            while ((line = stream.ReadLine()) != null)
-            {
-                splits = line.Split(sep, StringSplitOptions.None);
-                if (splits[0].CompareTo("server_port") == 0)
-                {
-                    config.ServerPort = int.Parse(splits[1]);
-                }
-                if (splits[0].CompareTo("nuimagio_port") == 0)
-                {
-                    config.NuimagioPort = int.Parse(splits[1]);
-                }
-                if (splits[0].CompareTo("nuimagio_ip") == 0)
-                {
-                    config.NuimagioIP = splits[1].ToString();
-                }
-                else if (splits[0].CompareTo("voice_ok") == 0)
-                {
-                    config.VoiceOK = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_no") == 0)
-                {
-                    config.VoiceNO = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_yes") == 0)
-                {
-                    config.VoiceYES = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_next") == 0)
-                {
-                    config.VoiceNext = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_kinect") == 0)
-                {
-                    config.VoiceKinect = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_entry") == 0)
-                {
-                    config.VoiceEntry = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_entry") == 0)
-                {
-                    config.VoiceEntry = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_back") == 0)
-                {
-                    config.VoiceBack = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_scan") == 0)
-                {
-                    config.VoiceScan = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_print") == 0)
-                {
-                    config.VoicePrint = double.Parse(splits[1]);
-                }
-                else if (splits[0].CompareTo("voice_balse") == 0)
-                {
-                    config.VoiceBalse = double.Parse(splits[1]);
-                }
-            }
-
-            stream.Close();
-
-            Console.WriteLine("[Config]server_port:" + config.ServerPort.ToString());
-            Console.WriteLine("[nuimagio_port]nuimagio_port" + config.NuimagioPort.ToString());
-            Console.WriteLine("[nuimagio_ip]nuimagio_ip" + config.NuimagioIP.ToString());
-
-            return config;
+            ServerPort = 50001;
+            NuimagioIP = "127.0.0.1";
+            NuimagioPort = 50002;
+            VoiceOK = 0.5;
+            VoiceYES = 0.5;
+            VoiceNO = 0.8;
+            VoiceNext = 0.9;
+            VoiceKinect = 0.5;
+            VoiceEntry = 0.9;
+            VoiceBack = 0.9;
+            VoiceScan = 0.8;
+            VoicePrint = 0.8;
+            VoiceBalse = 0.99;
+            DummyFace = true;
+            PrinterName = System.Drawing.Printing.PrinterSettings.InstalledPrinters[0];
         }
 
+        /// <summary>
+        /// 設定ファイルを読み込みます。設定ファイルが無い場合は、デフォルト値が設定されています。
+        /// </summary>
+        /// <returns>設定を読み込んだインスタンス</returns>
+        public static Config Load()
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(fileName, FileMode.Open))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Config));
+                    return (Config)serializer.Deserialize(fs);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                return new Config();
+            }
+        }
+
+        /// <summary>
+        /// 設定を保存します。
+        /// </summary>
+        public void Save()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Config));
+
+            FileStream fs = new FileStream(fileName, System.IO.FileMode.Create);
+
+            serializer.Serialize(fs, this);
+            fs.Close();
+        }
     }
+
+
 }

@@ -6,7 +6,7 @@ using Microsoft.Research.Kinect.Audio;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
 
-namespace KinectServer.Kinect
+namespace NUInsatsu
 {
     /// <summary>
     /// 音声を認識した際に使われるイベントハンドラです
@@ -74,7 +74,7 @@ namespace KinectServer.Kinect
             sre.SpeechRecognized += sre_SpeechRecognized;
             sre.SpeechHypothesized += sre_SpeechHypothesized;
             sre.SpeechRecognitionRejected += new EventHandler<SpeechRecognitionRejectedEventArgs>(sre_SpeechRecognitionRejected);
-            ConfigData config = Config.LoadConfig();
+            NUInsatsu.Config config = NUInsatsu.Config.Load();
 
             voiceThresholdTable.Add("おーけー", config.VoiceOK);
             voiceThresholdTable.Add("次へ", config.VoiceNext);

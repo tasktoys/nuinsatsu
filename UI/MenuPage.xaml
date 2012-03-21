@@ -14,7 +14,7 @@
         <Button Name="printButton" Content="登録ドキュメントの印刷" Height="83"  Margin="10" VerticalAlignment="Top" Click="printButton_Click" />
 
         <DockPanel Style="{StaticResource Bottom}" >
-            <Button Name="adminButton" Content="管理メニュー" Style="{StaticResource NextButton}" />
+            <Button Name="adminButton" Content="管理メニュー" Style="{StaticResource NextButton}" Click="adminButton_Click" />
         </DockPanel>
         
     </StackPanel>
