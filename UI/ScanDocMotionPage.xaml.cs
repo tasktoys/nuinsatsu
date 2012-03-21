@@ -22,6 +22,13 @@ namespace NUInsatsu.UI
         public ScanDocMotionPage()
         {
             InitializeComponent();
+            KinectServer.Kinect.Camera camera = KinectServer.Kinect.Camera.GetInstance();
+            camera.SkeletonFrameReady += new EventHandler<Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
+        }
+
+        void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
+        {
+            skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
         }
 
         private void kinectButton_Click(object sender, RoutedEventArgs e)
