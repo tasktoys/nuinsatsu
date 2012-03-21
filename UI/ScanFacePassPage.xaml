@@ -10,7 +10,11 @@
     
     <DockPanel>
         <my:PageHeader x:Name="pageHeader" Title="「キネクト」と言ってください" DockPanel.Dock="Top"/>
-        <Button x:Name="kinectButton" Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
+        <Label Content="Kinect" DockPanel.Dock="Top"/>
+        <DockPanel Style="{StaticResource Bottom}" DockPanel.Dock="Bottom" >
+            <Button x:Name="kinectButton" Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
+        </DockPanel>
+        
     </DockPanel>
         
 </Page>

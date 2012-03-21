@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="525" Background="#FF8F44FF">
+             d:DesignHeight="150" d:DesignWidth="525" Background="{StaticResource JaistBlue}">
     <Grid>
         <Label Content="No title" Height="52" HorizontalAlignment="Left" Margin="12,12,0,0" Name="titleLabel" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="21" Width="Auto" />
     </Grid>

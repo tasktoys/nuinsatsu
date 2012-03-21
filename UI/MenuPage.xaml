@@ -12,7 +12,11 @@
         <my:PageHeader x:Name="pageHeader1" VerticalAlignment="Top" Title="項目を選択してください" />
         <Button Name="entryButton" Content="新規ドキュメントの登録" Height="88" Margin="10" VerticalAlignment="Top" Click="entryButton_Click" />
         <Button Name="printButton" Content="登録ドキュメントの印刷" Height="83"  Margin="10" VerticalAlignment="Top" Click="printButton_Click" />
-        <Button Name="adminButton" Content="管理メニュー" Style="{StaticResource NextButton}" />
+
+        <DockPanel Style="{StaticResource Bottom}" >
+            <Button Name="adminButton" Content="管理メニュー" Style="{StaticResource NextButton}" />
+        </DockPanel>
+        
     </StackPanel>
 
 </Page>

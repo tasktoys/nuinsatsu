@@ -8,7 +8,10 @@
 	Title="PrintDocMotionPage" xmlns:my="clr-namespace:NUInsatsu.UI">
 
     <DockPanel>
-        <my:PageHeader x:Name="pageHeader" DockPanel.Dock="Top" Title="「キネクト」と言ってください" />
-        <Button x:Name="kinectButton" Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
+        <my:PageHeader x:Name="pageHeader" Title="「キネクト」と言ってください" DockPanel.Dock="Top"/>
+        <Label Content="キネクトのフレーム表示" DockPanel.Dock="Top" />
+        <DockPanel Style="{StaticResource Bottom}">
+            <Button x:Name="kinectButton"  Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
+        </DockPanel>
     </DockPanel>
 </Page>
