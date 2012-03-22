@@ -4,8 +4,7 @@
                     xmlns:my="clr-namespace:NUInsatsu.UI">
 
     <!-- ジャイストブルー設定　-->
-    <SolidColorBrush x:Key="JaistBlue">#FF8F44FF</SolidColorBrush>
-   
+    <SolidColorBrush x:Key="JaistBlue">#2a1e66</SolidColorBrush>    
     
     <!-- ヘッダー設定 -->
     <Style TargetType="my:PageHeader">

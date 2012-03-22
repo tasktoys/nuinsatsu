@@ -7,5 +7,6 @@
              d:DesignHeight="150" d:DesignWidth="525" Background="{StaticResource JaistBlue}">
     <Grid>
         <Label Content="No title" Height="52" HorizontalAlignment="Left" Margin="12,12,0,0" Name="titleLabel" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="21" Width="Auto" />
+        <Image Height="64" HorizontalAlignment="Left" Margin="305,0,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="208" Source="/NUInsatsu;component/Images/customLogo.gif1.png" />
     </Grid>
 </UserControl>

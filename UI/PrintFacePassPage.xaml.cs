@@ -24,6 +24,7 @@ namespace NUInsatsu.UI
             InitializeComponent();
         }
 
+
         private void kinectButton_Click(object sender, RoutedEventArgs e)
         {
             System.Drawing.Printing.PrintDocument pd =
