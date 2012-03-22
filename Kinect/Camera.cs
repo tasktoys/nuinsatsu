@@ -114,7 +114,7 @@ namespace NUInsatsu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
+        private void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             //スケルトンフレームを保存
             CurrentSkeletonFrame = e.SkeletonFrame;
@@ -128,7 +128,7 @@ namespace NUInsatsu
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
+		private void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
 		{
 			//PlanarImage KImage;
 

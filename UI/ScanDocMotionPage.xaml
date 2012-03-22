@@ -9,8 +9,9 @@
 	Title="ScanDocPage" xmlns:my="clr-namespace:NUInsatsu.UI">
 
     <DockPanel>
+        <!-- 目の前に立つと絵が表示される -->
         <my:PageHeader x:Name="pageHeader" DockPanel.Dock="Top" Title="「キネクト」と言ってください" />
-        <my:SkeletonCanvas x:Name="skeletonCanvas" DockPanel.Dock="Top" />
+        <my:SkeletonCanvas x:Name="skeletonCanvas" DockPanel.Dock="Top" HorizontalAlignment="Center" />
         <DockPanel Style="{StaticResource Bottom}">
             <Button x:Name="kinectButton" Content="Kinect" Style="{StaticResource NextButton}" Click="kinectButton_Click" />
         </DockPanel>

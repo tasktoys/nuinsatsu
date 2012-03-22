@@ -8,13 +8,13 @@
     
     <!-- ヘッダー設定 -->
     <Style TargetType="my:PageHeader">
-        <Setter Property="Height" Value="70"/>
+        <Setter Property="Height" Value="60"/>
     </Style>
 
     <!-- ページ下デザイン -->
     <Style x:Key="Bottom" TargetType="DockPanel">
         <Setter Property="Background" Value="{StaticResource JaistBlue}"/>
-        <Setter Property="Height" Value="70"/>
+        <Setter Property="Height" Value="60"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>
     </Style>
 
