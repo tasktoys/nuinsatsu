@@ -30,7 +30,7 @@ namespace NUInsatsu.UI
         {
             InitializeComponent();
 
-            skeletonSensor = KinectUtility.CreateSkeletonSensorInstance();
+            skeletonSensor = KinectInstanceManager.CreateSkeletonSensorInstance();
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
             skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
 

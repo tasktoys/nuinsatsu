@@ -94,6 +94,8 @@ namespace NUInsatsu.Net
         /// <returns>キーとして利用してよい場合はtrue</returns>
         private bool IsValidMotionList(MotionList motions)
         {
+            if (motions == null) return false;
+
             //最初に認識している人数を調べる。0人だったらロストフレーム例外
             SkeletonDataList skeletonDataList = motions[0];
             int firstHeadCount = skeletonDataList.Count;
@@ -117,7 +119,7 @@ namespace NUInsatsu.Net
         {
             String sendMessage = null;
 
-            using (ISkeletonSensor skeletonSensor = KinectUtility.CreateSkeletonSensorInstance() )
+            using (ISkeletonSensor skeletonSensor = KinectInstanceManager.CreateSkeletonSensorInstance() )
             {
                 // モーションを取得する
                 MotionList motions = skeletonSensor.GetMotionForSeconds(motiontime);

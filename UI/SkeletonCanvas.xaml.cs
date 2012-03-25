@@ -75,7 +75,7 @@ namespace NUInsatsu.UI
         {
             float depthX, depthY;
 
-            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();
+            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinectInstance();
 
             nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
 
@@ -96,6 +96,7 @@ namespace NUInsatsu.UI
         /// <param name="skeletonFrame">描画するスケルトンフレーム</param>
         public void DrawSkeletonFrame(SkeletonFrame skeletonFrame)
         {
+
             int iSkeleton = 0;
             Brush[] brushes = new Brush[6];
             brushes[0] = new SolidColorBrush(Color.FromRgb(255, 0, 0));

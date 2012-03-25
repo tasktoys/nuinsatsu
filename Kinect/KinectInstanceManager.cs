@@ -52,7 +52,15 @@ namespace NUInsatsu.Kinect
         /// <returns>生成されたインスタンス</returns>
         public static ISkeletonSensor CreateSkeletonSensorInstance()
         {
-            return new SkeletonSensorImpl();
+            if (nui == null)
+            {
+                Console.WriteLine("[KinectInstanceManager]create stub");
+                return new SkeletonSensorStub();
+            }
+            else
+            {
+                return new SkeletonSensorImpl();
+            }
         }
 
         public static void UninitializeKinect()

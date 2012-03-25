@@ -25,7 +25,7 @@ namespace NUInsatsu.UI
         public ScanDocMotionPage()
         {
             InitializeComponent();
-            camera = KinectUtility.CreateSkeletonSensorInstance();
+            camera = KinectInstanceManager.CreateSkeletonSensorInstance();
             camera.SkeletonFrameReady += new EventHandler<Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
         }
 

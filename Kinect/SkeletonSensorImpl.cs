@@ -32,7 +32,7 @@ namespace NUInsatsu.Kinect
         public SkeletonSensorImpl()
         {
             Runtime nui;
-            nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();
+            nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinectInstance();
 
             if (nui != null)
             {
@@ -76,7 +76,7 @@ namespace NUInsatsu.Kinect
         /// </summary>
         public void Dispose()
         {
-            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();
+            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinectInstance();
             if (nui != null)
             {
                 nui.SkeletonFrameReady -= new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
@@ -100,6 +100,7 @@ namespace NUInsatsu.Kinect
             }
 
             if (SkeletonFrameReady == null){return; }
+
             SkeletonFrameReady(this, e);
 		}
 
