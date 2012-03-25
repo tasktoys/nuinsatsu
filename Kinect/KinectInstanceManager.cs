@@ -9,6 +9,7 @@ namespace NUInsatsu.Kinect
     class KinectInstanceManager
     {
         private static Runtime nui = null;
+        private static VoiceRecognizer voiceRecognizerInstance = null;
 
         public static Runtime GetKinectInstance()
         {
@@ -61,6 +62,22 @@ namespace NUInsatsu.Kinect
             {
                 return new SkeletonSensorImpl();
             }
+        }
+
+        /// <summary>
+        /// インスタンスを取得します。
+        /// </summary>
+        /// <returns>インスタンス</returns>
+        public static VoiceRecognizer GetVoiceRecognizerInstance()
+        {
+            if (voiceRecognizerInstance == null)
+            {
+                voiceRecognizerInstance = new VoiceRecognizer();
+                VoiceDictionary dict = new VoiceDictionary();
+                dict.AddDic(voiceRecognizerInstance);
+            }
+
+            return voiceRecognizerInstance;
         }
 
         public static void UninitializeKinect()

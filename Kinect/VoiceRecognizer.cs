@@ -22,8 +22,6 @@ namespace NUInsatsu.Kinect
 	/// </summary>
 	class VoiceRecognizer
 	{
-        private static VoiceRecognizer instance = null;
-
         public event EventHandler<SaidWordArgs> Recognized;
 		public event EventHandler<SaidWordArgs> Hypothesized;
 		public event EventHandler<SaidWordArgs> RecognitionRejected;
@@ -48,19 +46,9 @@ namespace NUInsatsu.Kinect
 		}
 
         /// <summary>
-        /// インスタンスを取得します。
-        /// </summary>
-        /// <returns>インスタンス</returns>
-        public static VoiceRecognizer GetInstance()
-        {
-            if( instance == null ) instance = new VoiceRecognizer();
-            return instance;
-        }
-
-        /// <summary>
         /// クラスを構築します。
         /// </summary>
-        private VoiceRecognizer()
+        public VoiceRecognizer()
         {
             ri = SpeechRecognitionEngine.InstalledRecognizers().Where(r => r.Id == RecognizerId).FirstOrDefault();
             if (ri == null)
