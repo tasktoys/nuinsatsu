@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="515"
-	Title="PrintDocMotionPage" xmlns:my="clr-namespace:NUInsatsu.UI">
+	Title="PrintDocMotionPage" xmlns:my="clr-namespace:NUInsatsu.UI" Loaded="Page_Loaded">
 
     <DockPanel>
         <my:PageHeader x:Name="pageHeader" DockPanel.Dock="Top" Title="モーションを取得します" />

@@ -34,21 +34,17 @@ namespace NUInsatsu.Kinect
 		private const string RecognizerId = "SR_MS_ja-JP_TELE_11.0";
         private readonly Dictionary<String, double> voiceThresholdTable = new Dictionary<String, double>();
 
-        private bool isValid;
-        public bool IsValid
-        {
-            get { return isValid; }
-        }
-
 		private Choices words = new Choices();
 
         /// <summary>
         /// 認識する文字を追加します
         /// </summary>
         /// <param name="word">認識する文字</param>
-		public void AddWord(String word)
+        /// <param name="threshold">認識する制度</param>
+		public void AddWord(String word,double threshold)
 		{
 			words.Add(word);
+            voiceThresholdTable.Add(word, threshold);
 		}
 
         /// <summary>
@@ -75,18 +71,6 @@ namespace NUInsatsu.Kinect
             sre.SpeechRecognized += sre_SpeechRecognized;
             sre.SpeechHypothesized += sre_SpeechHypothesized;
             sre.SpeechRecognitionRejected += new EventHandler<SpeechRecognitionRejectedEventArgs>(sre_SpeechRecognitionRejected);
-            NUInsatsu.Config config = NUInsatsu.Config.Load();
-
-            voiceThresholdTable.Add("おーけー", config.VoiceOK);
-            voiceThresholdTable.Add("次へ", config.VoiceNext);
-            voiceThresholdTable.Add("スキャン", config.VoiceScan);
-            voiceThresholdTable.Add("いんさつ", config.VoicePrint);
-            voiceThresholdTable.Add("キネクト", config.VoiceKinect);
-            voiceThresholdTable.Add("とうろく", config.VoiceEntry);
-            voiceThresholdTable.Add("もどる", config.VoiceBack);
-            voiceThresholdTable.Add("いえす", config.VoiceYES);
-            voiceThresholdTable.Add("のー", config.VoiceNO);
-            voiceThresholdTable.Add("ばるす", config.VoiceBalse);
 	    }
 
 		public void Start()
@@ -100,14 +84,12 @@ namespace NUInsatsu.Kinect
                 var g = new Grammar(gb);
                 sre.LoadGrammar(g);
 
-                var t = new Thread(StartThread);
+                var t = new Thread(startThread);
                 t.Start();
-
-                isValid = true;
             }
 		}
 
-        private void StartThread()
+        private void startThread()
         {
             kinectSource = new KinectAudioSource();
             kinectSource.SystemMode = SystemMode.OptibeamArrayOnly;
@@ -132,7 +114,6 @@ namespace NUInsatsu.Kinect
                 sre.RecognizeAsyncCancel();
                 sre.RecognizeAsyncStop();
                 kinectSource.Dispose();
-                isValid = false;
             }
         }
 

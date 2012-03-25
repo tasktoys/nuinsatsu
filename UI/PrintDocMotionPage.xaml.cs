@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Research.Kinect.Nui;
+using System.Threading;
+using NUInsatsu.Kinect;
 
 namespace NUInsatsu.UI
 {
@@ -30,6 +32,7 @@ namespace NUInsatsu.UI
             skeletonSensor = NUInsatsu.Kinect.SkeletonSensor.CreateInstance();
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
             skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
+
         }
 
         void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
@@ -46,6 +49,23 @@ namespace NUInsatsu.UI
         private void free()
         {
             skeletonSensor.Dispose();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            tryPrint();
+        }
+
+        private void tryPrint()
+        {
+            Thread thread = new Thread(print);
+            thread.Start();
+        }
+
+        private void print()
+        {
+            KinectClient client = KinectClientUtility.CreateKinectClientUtility();
+            KinectClientUtility.GetMotionList(client);
         }
     }
 }

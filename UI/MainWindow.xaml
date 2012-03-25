@@ -1,6 +1,6 @@
-﻿<NavigationWindow x:Class="NUInsatsu.MainWindow"
+﻿<NavigationWindow x:Class="NUInsatsu.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="NUInsatsu" Height="360" Width="525"
-        Source="UI/MenuPage.xaml" SizeToContent="Manual" ResizeMode="NoResize">
+        Source="MenuPage.xaml" SizeToContent="Manual" ResizeMode="NoResize">
 </NavigationWindow>

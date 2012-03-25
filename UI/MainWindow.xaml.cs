@@ -11,8 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NUInsatsu.Kinect;
 
-namespace NUInsatsu
+namespace NUInsatsu.UI
 {
     /// <summary>
     /// 表示するWindowです。これ自体は何も描画しません。
@@ -23,6 +24,12 @@ namespace NUInsatsu
         {
             InitializeComponent();
             ShowsNavigationUI = false;
+
+            VoiceRecognizer recognizer = VoiceRecognizer.GetInstance();
+            VoiceDictionary dict = new VoiceDictionary();
+            dict.AddDic(recognizer);
+
+            recognizer.Start();
         }
     }
 }

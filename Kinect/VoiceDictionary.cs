@@ -59,9 +59,24 @@ namespace NUInsatsu.Kinect
 		//認識用辞書への追加
 		public void AddDic(VoiceRecognizer voiceRec)
 		{
-            foreach (String key in commdic.Keys)
+            NUInsatsu.Config config = NUInsatsu.Config.Load();
+
+            Dictionary<String, Double> voiceThresholdTable = new Dictionary<string, double>();
+
+            voiceThresholdTable.Add("おーけー", config.VoiceOK);
+            voiceThresholdTable.Add("次へ", config.VoiceNext);
+            voiceThresholdTable.Add("スキャン", config.VoiceScan);
+            voiceThresholdTable.Add("いんさつ", config.VoicePrint);
+            voiceThresholdTable.Add("キネクト", config.VoiceKinect);
+            voiceThresholdTable.Add("とうろく", config.VoiceEntry);
+            voiceThresholdTable.Add("もどる", config.VoiceBack);
+            voiceThresholdTable.Add("いえす", config.VoiceYES);
+            voiceThresholdTable.Add("のー", config.VoiceNO);
+            voiceThresholdTable.Add("ばるす", config.VoiceBalse);
+
+            foreach (String key in voiceThresholdTable.Keys)
             {
-                voiceRec.AddWord(key);
+                voiceRec.AddWord(key,voiceThresholdTable[key]);
             }
 		}
 

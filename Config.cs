@@ -27,6 +27,7 @@ namespace NUInsatsu
         public double VoiceBalse { get; set; }
         public bool DummyFace { get; set; }
         public String PrinterName { get; set; }
+        public int MotionTime { get; set; }
 
         /// <summary>
         /// コンフィグのデフォルト値を設定し、クラスを構築します。
@@ -49,6 +50,7 @@ namespace NUInsatsu
             VoiceBalse = 0.99;
             DummyFace = true;
             PrinterName = System.Drawing.Printing.PrinterSettings.InstalledPrinters[0];
+            MotionTime = 3;
         }
 
         /// <summary>
