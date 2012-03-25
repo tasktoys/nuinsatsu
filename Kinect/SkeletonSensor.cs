@@ -17,7 +17,12 @@ namespace NUInsatsu.Kinect
             }
         }
 
-        public static SkeletonSensor GetInstance()
+        /// <summary>
+        /// インスタンスを生成します。
+        /// この先、キネクトが無かった場合NULLパターンを利用することを考えての実装です。
+        /// </summary>
+        /// <returns>生成されたインスタンス</returns>
+        public static SkeletonSensor CreateInstance()
         {
             return new SkeletonSensor();
         }
@@ -39,7 +44,7 @@ namespace NUInsatsu.Kinect
         /// <summary>
         /// SkeletonSensorクラスを構築します
         /// </summary>
-        public SkeletonSensor()
+        private SkeletonSensor()
         {
             Runtime nui;
             nui = NUInsatsu.Kinect.KinectManager.GetKinect();

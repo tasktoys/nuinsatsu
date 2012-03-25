@@ -23,7 +23,8 @@ namespace NUInsatsu.Kinect
 	class VoiceRecognizer
 	{
         private static VoiceRecognizer instance = null;
-		public event EventHandler<SaidWordArgs> Recognized;
+
+        public event EventHandler<SaidWordArgs> Recognized;
 		public event EventHandler<SaidWordArgs> Hypothesized;
 		public event EventHandler<SaidWordArgs> RecognitionRejected;
 

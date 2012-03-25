@@ -22,7 +22,7 @@ namespace NUInsatsu.UI
         public ScanDocMotionPage()
         {
             InitializeComponent();
-            NUInsatsu.Kinect.SkeletonSensor camera = NUInsatsu.Kinect.SkeletonSensor.GetInstance();
+            NUInsatsu.Kinect.SkeletonSensor camera = NUInsatsu.Kinect.SkeletonSensor.CreateInstance();
             camera.SkeletonFrameReady += new EventHandler<Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
         }
 

@@ -27,7 +27,7 @@ namespace NUInsatsu.UI
         {
             InitializeComponent();
 
-            skeletonSensor = NUInsatsu.Kinect.SkeletonSensor.GetInstance();
+            skeletonSensor = NUInsatsu.Kinect.SkeletonSensor.CreateInstance();
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
             skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
         }
@@ -35,7 +35,6 @@ namespace NUInsatsu.UI
         void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
         {
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
-            System.Console.WriteLine("[PrintDocMotionPage]Hoge");
         }
 
         private void kinectButton_Click(object sender, RoutedEventArgs e)
