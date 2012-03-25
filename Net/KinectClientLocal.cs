@@ -57,7 +57,7 @@ namespace NUInsatsu.Net
         {
             System.Console.WriteLine("[KinectClientLocal]wait voice recognized kinect");
 
-            VoiceRecognizer recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
+            IVoiceRecognizer recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
 
             //キネクトと呼ばれると、waitoneから先に進めるようになるイベントをセット
             EventHandler<SaidWordArgs> voice_RecognizedHandler = new EventHandler<SaidWordArgs>(voice_Recognized);

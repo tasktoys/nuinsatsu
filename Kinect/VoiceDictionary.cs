@@ -57,7 +57,7 @@ namespace NUInsatsu.Kinect
 		}
 
 		//認識用辞書への追加
-		public void AddDic(VoiceRecognizer voiceRec)
+		public void AddDic(IVoiceRecognizer voiceRec)
 		{
             NUInsatsu.Config config = NUInsatsu.Config.Load();
 

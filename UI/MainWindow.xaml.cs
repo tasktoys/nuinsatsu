@@ -26,7 +26,7 @@ namespace NUInsatsu.UI
             ShowsNavigationUI = false;
 
             KinectInstanceManager.GetKinectInstance();
-            VoiceRecognizer recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
+            IVoiceRecognizer recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
 
             recognizer.Start();
         }

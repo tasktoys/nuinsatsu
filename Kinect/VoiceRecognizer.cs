@@ -20,7 +20,7 @@ namespace NUInsatsu.Kinect
 	/// キネクトを利用した音声認識を行います。
     /// シングルトンクラスです。インスタンスの取得はGetInstanceを利用します。
 	/// </summary>
-	class VoiceRecognizer
+	class VoiceRecognizer : IVoiceRecognizer
 	{
         public event EventHandler<SaidWordArgs> Recognized;
 		public event EventHandler<SaidWordArgs> Hypothesized;
