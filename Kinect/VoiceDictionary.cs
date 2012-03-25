@@ -6,9 +6,9 @@ namespace NUInsatsu.Kinect
 {
 	class VoiceDictionary
 	{
-		//コマンド→ナビの辞書
-		Dictionary<String,String> navidic = new Dictionary<String,String>();
-		//認識→コマンドの辞書
+		// コマンド→ナビの辞書
+		Dictionary<String, String> navidic = new Dictionary<String, String>();
+		// 認識→コマンドの辞書
         Dictionary<String, String> commdic = new Dictionary<String, String>();
 		
 		public VoiceDictionary()
@@ -17,19 +17,19 @@ namespace NUInsatsu.Kinect
 			AddCommDic();
 		}
 
-		//読み上げ用辞書への追加
+		// 読み上げ用辞書への追加
 		private void AddNaviDic() {
 			navidic.Add("WELCOME", "ニュイマジオへようこそ");
-			navidic.Add("SELECT_SCAN_OR_PRINT","スキャンまたはプリントを選択してください");
+			navidic.Add("SELECT_SCAN_OR_PRINT", "スキャンまたはプリントを選択してください");
 
-            navidic.Add("PRINTING","印刷中です");
+            navidic.Add("PRINTING", "印刷中です");
             navidic.Add("END_ENTRY", "登録が完了しました");
 
             navidic.Add("SCAN_START", "紙を設置し、スキャンを選択してください");
-			navidic.Add("SCAN_COMPLETE","スキャンが完了しました");
+			navidic.Add("SCAN_COMPLETE", "スキャンが完了しました");
 
-			navidic.Add("BACK","メニュー画面へ移動します");
-			navidic.Add("CONFIRM_FACEPASS","顔認証を追加しますか？");
+			navidic.Add("BACK", "メニュー画面へ移動します");
+			navidic.Add("CONFIRM_FACEPASS", "顔認証を追加しますか？");
 			navidic.Add("ENTRY_OR_PRINT", "印刷または登録を選択してください");
 
             navidic.Add("WAIT_FACE", "顔情報取得の準備が完了しました。");
@@ -37,18 +37,18 @@ namespace NUInsatsu.Kinect
             navidic.Add("END_FACE", "顔情報の取得が完了しました");
 
             navidic.Add("START_MOTION", "モーションの取得を開始します");
-			navidic.Add("WAIT_MOTION","モーション取得の準備が完了しました。");
+			navidic.Add("WAIT_MOTION", "モーション取得の準備が完了しました。");
             navidic.Add("END_MOTION", "モーションの取得が完了しました");
 		}
 
-		//コマンド用辞書への追加
+		// コマンド用辞書への追加
 		private void AddCommDic()
 		{
-			commdic.Add("おーけー","OK");
-			commdic.Add("次へ","NEXT");
-			commdic.Add("スキャン","SCAN");
-			commdic.Add("いんさつ","PRINT");
-			commdic.Add("キネクト","kinect");
+			commdic.Add("おーけー", "OK");
+			commdic.Add("次へ", "NEXT");
+			commdic.Add("スキャン", "SCAN");
+			commdic.Add("いんさつ", "PRINT");
+			commdic.Add("キネクト", "kinect");
             commdic.Add("とうろく", "ENTRY");
             commdic.Add("もどる", "BACK");
             commdic.Add("いえす", "YES");
@@ -56,7 +56,7 @@ namespace NUInsatsu.Kinect
             commdic.Add("ばるす", "BALSE");
 		}
 
-		//認識用辞書への追加
+		// 認識用辞書への追加
 		public void AddDic(IVoiceRecognizer voiceRec)
 		{
             NUInsatsu.Config config = NUInsatsu.Config.Load();
@@ -76,7 +76,7 @@ namespace NUInsatsu.Kinect
 
             foreach (String key in voiceThresholdTable.Keys)
             {
-                voiceRec.AddWord(key,voiceThresholdTable[key]);
+                voiceRec.AddWord(key, voiceThresholdTable[key]);
             }
 		}
 

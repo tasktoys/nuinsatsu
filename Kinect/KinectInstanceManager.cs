@@ -13,7 +13,7 @@ namespace NUInsatsu.Kinect
 
         public static Runtime GetKinectInstance()
         {
-            if( nui == null)
+            if ( nui == null )
             {
                 if (Runtime.Kinects.Count == 0)
                 {

@@ -31,7 +31,7 @@ namespace NUInsatsu.Net
 
         public List<List<Dictionary<String, Double>>> GetMotionList()
         {
-            //キネクトと発音されるまで待機
+            // キネクトと発音されるまで待機
             waitSaidKinect();
 
             Config config = Config.Load();
@@ -59,12 +59,12 @@ namespace NUInsatsu.Net
 
             IVoiceRecognizer recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
 
-            //キネクトと呼ばれると、waitoneから先に進めるようになるイベントをセット
+            // キネクトと呼ばれると、waitoneから先に進めるようになるイベントをセット
             EventHandler<SaidWordArgs> voice_RecognizedHandler = new EventHandler<SaidWordArgs>(voice_Recognized);
             recognizer.Recognized += voice_RecognizedHandler;
-            //キネクトと発音されるまで待機
+            // キネクトと発音されるまで待機
             SaidKinectEvent.WaitOne();
-            //イベントを削除
+            // イベントを削除
             recognizer.Recognized -= voice_RecognizedHandler;
         }
 
@@ -96,12 +96,12 @@ namespace NUInsatsu.Net
         {
             if (motions == null) return false;
 
-            //最初に認識している人数を調べる。0人だったらロストフレーム例外
+            // 最初に認識している人数を調べる。0人だったらロストフレーム例外
             SkeletonDataList skeletonDataList = motions[0];
             int firstHeadCount = skeletonDataList.Count;
             if (firstHeadCount == 0) return false;
 
-            //最初に認識している人数と違い増減があったらロストフレーム例外
+            // 最初に認識している人数と違い増減があったらロストフレーム例外
             foreach (SkeletonDataList sDataList in motions)
             {
                 if (firstHeadCount != sDataList.Count) return false;
@@ -111,7 +111,7 @@ namespace NUInsatsu.Net
         }
 
         /// <summary>
-        /// /// NMXPのMotionRequestに対するResponseのメッセージを生成します
+        /// NMXPのMotionRequestに対するResponseのメッセージを生成します
         /// </summary>
         /// <param name="motiontime">モーション取得時間</param>
         /// <returns>生成されたメッセージ</returns>
@@ -126,7 +126,7 @@ namespace NUInsatsu.Net
 
                 if (IsValidMotionList(motions))
                 {
-                    //キーを数える
+                    // キーを数える
                     Motion.KeyMaker keyMaker = new Motion.KeyMaker();
                     String str = keyMaker.Make(motions);
                     sendMessage = str;

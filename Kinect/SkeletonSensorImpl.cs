@@ -50,11 +50,10 @@ namespace NUInsatsu.Kinect
             time = time * 10;
 
             motionList = new MotionList();
-            //MotionList motionList = new MotionList();
 
             for (int i = 0; i < time; i++)
             {
-                //motionListにSkeletonDataがAddされるまで待機する
+                // motionListにSkeletonDataがAddされるまで待機する
                 addSkeletonDataFlag = true;
                 AddSkeletonEvent.WaitOne();
                 addSkeletonDataFlag = false;
@@ -64,7 +63,7 @@ namespace NUInsatsu.Kinect
 
             foreach (SkeletonDataList list in motionList)
             {
-                //左にいる人がコレクションの最初の方の要素になるように、x軸でソートする
+                // 左にいる人がコレクションの最初の方の要素になるように、x軸でソートする
                 list.Sort(new SkeletonDataComparer());
             }
 
@@ -92,7 +91,7 @@ namespace NUInsatsu.Kinect
         {
             if (e.SkeletonFrame == null) return;
 
-            //SkeletonDataの保存が命じられている時、保存します。
+            // SkeletonDataの保存が命じられている時、保存します。
             if (addSkeletonDataFlag)
             {
                 motionList.Add(Skeletons2List(e.SkeletonFrame.Skeletons));

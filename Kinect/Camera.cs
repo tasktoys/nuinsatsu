@@ -47,7 +47,7 @@ namespace NUInsatsu.Kinect
 		/// <param name="e"></param>
 		private void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
 		{
-			//PlanarImage KImage;
+			// PlanarImage KImage;
 
 			// 32-bit per pixel, RGBA image
 			cameraimage = e.ImageFrame.Image;

@@ -39,7 +39,7 @@ namespace NUInsatsu.Kinect
         /// </summary>
         /// <param name="word">認識する文字</param>
         /// <param name="threshold">認識する制度</param>
-		public void AddWord(String word,double threshold)
+		public void AddWord(String word, double threshold)
 		{
 			words.Add(word);
             voiceThresholdTable.Add(word, threshold);
