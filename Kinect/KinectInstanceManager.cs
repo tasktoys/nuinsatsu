@@ -10,7 +10,7 @@ namespace NUInsatsu.Kinect
     {
         private static Runtime nui = null;
 
-        public static Runtime GetKinect()
+        public static Runtime GetKinectInstance()
         {
             if( nui == null)
             {
@@ -45,7 +45,17 @@ namespace NUInsatsu.Kinect
             return nui;
         }
 
-        public static void Uninitialize()
+        /// <summary>
+        /// スケルトンを利用するためのインスタンスを生成します.
+        /// キネクトが接続されていない場合、スタブインスタンスを生成します.
+        /// </summary>
+        /// <returns>生成されたインスタンス</returns>
+        public static ISkeletonSensor CreateSkeletonSensorInstance()
+        {
+            return new SkeletonSensorImpl();
+        }
+
+        public static void UninitializeKinect()
         {
             nui.Uninitialize();
         }

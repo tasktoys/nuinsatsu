@@ -67,7 +67,6 @@
     <Compile Include="Net\KinectClient.cs" />
     <Compile Include="Net\KinectClientLocal.cs" />
     <Compile Include="Net\KinectClientUtility.cs" />
-    <Compile Include="Kinect\KinectUtility.cs" />
     <Compile Include="Kinect\SkeletonSensorImpl.cs" />
     <Compile Include="Motion\Key.cs" />
     <Compile Include="Kinect\KinectInstanceManager.cs" />
