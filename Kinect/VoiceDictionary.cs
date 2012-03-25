@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace NUInsatsu
+namespace NUInsatsu.Kinect
 {
 	class VoiceDictionary
 	{

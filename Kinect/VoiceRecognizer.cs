@@ -6,7 +6,7 @@ using Microsoft.Research.Kinect.Audio;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
 
-namespace NUInsatsu
+namespace NUInsatsu.Kinect
 {
     /// <summary>
     /// 音声を認識した際に使われるイベントハンドラです
@@ -90,17 +90,20 @@ namespace NUInsatsu
 
 		public void Start()
 		{
-			var gb = new GrammarBuilder();
-			gb.Append(words);
-			gb.Culture = ri.Culture;
+            if (sre != null)
+            {
+                var gb = new GrammarBuilder();
+                gb.Append(words);
+                gb.Culture = ri.Culture;
 
-			var g = new Grammar(gb);
-			sre.LoadGrammar(g);
+                var g = new Grammar(gb);
+                sre.LoadGrammar(g);
 
-			var t = new Thread(StartThread);
-			t.Start();
+                var t = new Thread(StartThread);
+                t.Start();
 
-            isValid = true;
+                isValid = true;
+            }
 		}
 
         private void StartThread()
