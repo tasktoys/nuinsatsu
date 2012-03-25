@@ -64,6 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
     <Compile Include="Kinect\Camera.cs" />
+    <Compile Include="Kinect\KinectManager.cs" />
     <Compile Include="Kinect\MotionList.cs" />
     <Compile Include="Kinect\SkeletonDataList.cs" />
     <Compile Include="Kinect\VoiceDictionary.cs" />

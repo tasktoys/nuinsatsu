@@ -55,7 +55,7 @@ namespace NUInsatsu.UI
             PointCollection points = new PointCollection(ids.Length);
             for (int i = 0; i < ids.Length; ++i)
             {
-                points.Add(kinect.GetDisplayPosition(joints[ids[i]], skeletonCanvas.Width, skeletonCanvas.Height));
+                points.Add(getDisplayPosition(joints[ids[i]], skeletonCanvas.Width, skeletonCanvas.Height));
             }
 
             Polyline polyline = new Polyline();
@@ -63,6 +63,31 @@ namespace NUInsatsu.UI
             polyline.Stroke = brush;
             polyline.StrokeThickness = 5;
             return polyline;
+        }
+
+        /// <summary>
+        /// 関節座標を画面に表示する座標に変換します
+        /// </summary>
+        /// <param name="joint">関節ID</param>
+        /// <param name="screenWidth">画面の横幅</param>
+        /// <param name="screenWeight">画面の縦幅</param>
+        /// <returns>変換された画面上の座標</returns>
+        private Point getDisplayPosition(Joint joint, double screenWidth, double screenHeight)
+        {
+            float depthX, depthY;
+
+            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+            nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
+
+            depthX = Math.Max(0, Math.Min(depthX * 320, 320));  //convert to 320, 240 space
+            depthY = Math.Max(0, Math.Min(depthY * 240, 240));  //convert to 320, 240 space
+            int colorX, colorY;
+            ImageViewArea iv = new ImageViewArea();
+            // only ImageResolution.Resolution640x480 is supported at this point
+            nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel(ImageResolution.Resolution640x480, iv, (int)depthX, (int)depthY, (short)0, out colorX, out colorY);
+
+            // map back to skeleton.Width & skeleton.Height
+            return new Point((int)(screenWidth * colorX / 640.0), (int)(screenHeight * colorY / 480));
         }
 
         /// <summary>
@@ -100,7 +125,7 @@ namespace NUInsatsu.UI
                     {
                         Camera kinect = Camera.GetInstance();
 
-                        Point jointPos = kinect.GetDisplayPosition(joint, skeletonCanvas.Width, skeletonCanvas.Height);
+                        Point jointPos = getDisplayPosition(joint, skeletonCanvas.Width, skeletonCanvas.Height);
                         Line jointLine = new Line();
                         jointLine.X1 = jointPos.X - 3;
                         jointLine.X2 = jointLine.X1 + 6;

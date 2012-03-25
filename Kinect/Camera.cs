@@ -30,19 +30,13 @@ namespace NUInsatsu
         const int BLUE_IDX = 0;
         byte[] depthFrame32 = new byte[320 * 240 * 4];
         static Camera instance = null;
-		
-        Object pictureLock = new Object();
 
         Runtime nui;
-
 
         private PlanarImage cameraimage;
         private static BitmapSource picture;
         //現在のスケルトンフレームを格納
         private static SkeletonFrame currentSkeletonFrame = null;
-
-        //読み書きのスレッド同期を行う
-        private ReaderWriterLock rwLock = new ReaderWriterLock();
 
         /// <summary>
         /// Cameraインスタンスを取得します。
@@ -83,27 +77,7 @@ namespace NUInsatsu
         /// </summary>
         private Camera()
         {
-            nui = Runtime.Kinects[0];
-
-            try
-            {
-                nui.Initialize(RuntimeOptions.UseDepthAndPlayerIndex | RuntimeOptions.UseSkeletalTracking | RuntimeOptions.UseColor);
-            }
-            catch (InvalidOperationException)
-            {
-                System.Windows.MessageBox.Show("Runtime initialization failed. Please make sure Kinect device is plugged in.");
-                return;
-            }
-            try
-            {
-                nui.DepthStream.Open(ImageStreamType.Depth, 2, ImageResolution.Resolution320x240, ImageType.DepthAndPlayerIndex);
-				nui.VideoStream.Open(ImageStreamType.Video, 2, ImageResolution.Resolution640x480, ImageType.Color);
-			}
-            catch (InvalidOperationException)
-            {
-                System.Windows.MessageBox.Show("Failed to open stream. Please make sure to specify a supported image type and resolution.");
-                return;
-            }
+            nui = NUInsatsu.Kinect.KinectManager.GetKinect();
 
 			nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
             nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
@@ -182,30 +156,6 @@ namespace NUInsatsu
             return list;
         }
 
-
-        /// <summary>
-        /// 関節座標を画面に表示する座標に変換します
-        /// </summary>
-        /// <param name="joint">関節ID</param>
-        /// <param name="screenWidth">画面の横幅</param>
-        /// <param name="screenWeight">画面の縦幅</param>
-        /// <returns>変換された画面上の座標</returns>
-        public Point GetDisplayPosition(Joint joint, double screenWidth, double screenHeight)
-        {
-            float depthX, depthY;
-            nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
-
-            depthX = Math.Max(0, Math.Min(depthX * 320, 320));  //convert to 320, 240 space
-            depthY = Math.Max(0, Math.Min(depthY * 240, 240));  //convert to 320, 240 space
-            int colorX, colorY;
-            ImageViewArea iv = new ImageViewArea();
-            // only ImageResolution.Resolution640x480 is supported at this point
-            nui.NuiCamera.GetColorPixelCoordinatesFromDepthPixel(ImageResolution.Resolution640x480, iv, (int)depthX, (int)depthY, (short)0, out colorX, out colorY);
-
-            // map back to skeleton.Width & skeleton.Height
-            return new Point((int)(screenWidth * colorX / 640.0), (int)(screenHeight * colorY / 480));
-        }
-
 		/// <summary>
 		/// カメラの映像を画像として保存します
 		/// </summary>
@@ -214,11 +164,9 @@ namespace NUInsatsu
             BitmapFrame bmpFrame = BitmapFrame.Create(picture);
 
 			FileStream stream = new FileStream(@"capture.jpeg", FileMode.Create);
-			//PngBitmapEncoder pbenc = new PngBitmapEncoder();
+
 			JpegBitmapEncoder jpenc = new JpegBitmapEncoder();
 
-			//pbenc.Frames.Add(bmpFrame);
-			//pbenc.Save(stream);
 			jpenc.Frames.Add(bmpFrame);
 			jpenc.Save(stream);
 
@@ -234,12 +182,5 @@ namespace NUInsatsu
 			return str;
 		}
 
-        /// <summary>
-        /// キネクトをを解放します
-        /// </summary>
-        public void Uninitialize()
-        {
-            nui.Uninitialize();
-        }
     }
 }
