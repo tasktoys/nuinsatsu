@@ -43,7 +43,7 @@ namespace NUInsatsu.UI
             free();
         }
 
-        void free()
+        private void free()
         {
             skeletonSensor.Dispose();
         }

@@ -6,7 +6,7 @@ using Microsoft.Research.Kinect.Nui;
 
 namespace NUInsatsu.Kinect
 {
-    class KinectManager
+    class KinectInstanceManager
     {
         private static Runtime nui = null;
 

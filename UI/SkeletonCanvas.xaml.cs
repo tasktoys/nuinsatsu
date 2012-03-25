@@ -76,7 +76,7 @@ namespace NUInsatsu.UI
         {
             float depthX, depthY;
 
-            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();
 
             nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
 

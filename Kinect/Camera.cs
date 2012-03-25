@@ -35,7 +35,7 @@ namespace NUInsatsu.Kinect
         /// </summary>
         private Camera()
         {
-            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();
 
 			nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
         }
@@ -87,7 +87,7 @@ namespace NUInsatsu.Kinect
         /// </summary>
         public void Dispose()
         {
-            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+            Runtime nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();
 
             if (nui != null)
             {
