@@ -64,14 +64,16 @@
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
     <Compile Include="Kinect\Camera.cs" />
-    <Compile Include="Kinect\KinectClient.cs" />
-    <Compile Include="Kinect\KinectClientLocal.cs" />
-    <Compile Include="Kinect\KinectClientUtility.cs" />
+    <Compile Include="Net\KinectClient.cs" />
+    <Compile Include="Net\KinectClientLocal.cs" />
+    <Compile Include="Net\KinectClientUtility.cs" />
+    <Compile Include="Kinect\KinectUtility.cs" />
+    <Compile Include="Kinect\SkeletonSensorImpl.cs" />
     <Compile Include="Motion\Key.cs" />
     <Compile Include="Kinect\KinectInstanceManager.cs" />
     <Compile Include="Kinect\MotionList.cs" />
     <Compile Include="Kinect\SkeletonDataList.cs" />
-    <Compile Include="Kinect\SkeletonSensor.cs" />
+    <Compile Include="Kinect\ISkeletonSensor.cs" />
     <Compile Include="Kinect\VoiceDictionary.cs" />
     <Compile Include="Kinect\VoiceRecognizer.cs" />
     <Compile Include="Motion\KeyMaker.cs" />

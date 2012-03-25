@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NUInsatsu.Kinect
+namespace NUInsatsu.Net
 {
     /// <summary>
     /// Kinect制御アプリケーションに接続するためのクラス構造を定めたアプリケーションです

@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NUInsatsu.Kinect;
 
 namespace NUInsatsu.UI
 {
@@ -19,16 +20,19 @@ namespace NUInsatsu.UI
     /// </summary>
     public partial class ScanDocMotionPage : Page
     {
+        ISkeletonSensor camera;
+
         public ScanDocMotionPage()
         {
             InitializeComponent();
-            NUInsatsu.Kinect.SkeletonSensor camera = NUInsatsu.Kinect.SkeletonSensor.CreateInstance();
+            camera = KinectUtility.CreateSkeletonSensorInstance();
             camera.SkeletonFrameReady += new EventHandler<Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
         }
 
         void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
         {
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
+            
         }
 
         private void kinectButton_Click(object sender, RoutedEventArgs e)
@@ -47,6 +51,8 @@ namespace NUInsatsu.UI
                     break;
             }
 
+
+            camera.Dispose();
             
         }
     }

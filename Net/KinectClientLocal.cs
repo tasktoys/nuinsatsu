@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using NUInsatsu.Kinect;
 
-namespace NUInsatsu.Kinect
+namespace NUInsatsu.Net
 {
     /// <summary>
     /// Kinect制御アプリケーションの接続方法インターフェースKinectClientの実装です.
@@ -116,7 +117,7 @@ namespace NUInsatsu.Kinect
         {
             String sendMessage = null;
 
-            using (SkeletonSensor skeletonSensor = SkeletonSensor.CreateInstance())
+            using (ISkeletonSensor skeletonSensor = KinectUtility.CreateSkeletonSensorInstance() )
             {
                 // モーションを取得する
                 MotionList motions = skeletonSensor.GetMotionForSeconds(motiontime);

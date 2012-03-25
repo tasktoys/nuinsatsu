@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace NUInsatsu.Kinect
 {
-    class SkeletonSensor : IDisposable
+    class SkeletonSensorImpl : ISkeletonSensor
     {
         class SkeletonDataComparer : IComparer<SkeletonData>
         {
@@ -21,25 +21,15 @@ namespace NUInsatsu.Kinect
         /// SkeletonDataが追加されるまで待機するイベント
         /// </summary>
         private readonly AutoResetEvent AddSkeletonEvent = new AutoResetEvent(false);
-        MotionList motionList;
-        bool addSkeletonDataFlag = false;
-
-        /// <summary>
-        /// インスタンスを生成します。
-        /// この先、キネクトが無かった場合NULLパターンを利用することを考えての実装です。
-        /// </summary>
-        /// <returns>生成されたインスタンス</returns>
-        public static SkeletonSensor CreateInstance()
-        {
-            return new SkeletonSensor();
-        }
+        private MotionList motionList;
+        private bool addSkeletonDataFlag = false;
 
         public event EventHandler<SkeletonFrameReadyEventArgs> SkeletonFrameReady;
 
         /// <summary>
         /// SkeletonSensorクラスを構築します
         /// </summary>
-        private SkeletonSensor()
+        public SkeletonSensorImpl()
         {
             Runtime nui;
             nui = NUInsatsu.Kinect.KinectInstanceManager.GetKinect();

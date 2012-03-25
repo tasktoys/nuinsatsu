@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Research.Kinect.Nui;
 using System.Threading;
+using NUInsatsu.Net;
 using NUInsatsu.Kinect;
 
 namespace NUInsatsu.UI
@@ -23,13 +24,13 @@ namespace NUInsatsu.UI
     public partial class PrintDocMotionPage : Page
     {
         EventHandler<SkeletonFrameReadyEventArgs> skeletonFrameReadyHandler;
-        NUInsatsu.Kinect.SkeletonSensor skeletonSensor;
+        NUInsatsu.Kinect.ISkeletonSensor skeletonSensor;
 
         public PrintDocMotionPage()
         {
             InitializeComponent();
 
-            skeletonSensor = NUInsatsu.Kinect.SkeletonSensor.CreateInstance();
+            skeletonSensor = KinectUtility.CreateSkeletonSensorInstance();
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
             skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
 
