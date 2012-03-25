@@ -21,14 +21,15 @@ namespace NUInsatsu.UI
     public partial class PrintDocMotionPage : Page
     {
         EventHandler<SkeletonFrameReadyEventArgs> skeletonFrameReadyHandler;
+        NUInsatsu.Kinect.SkeletonSensor skeletonSensor;
 
         public PrintDocMotionPage()
         {
             InitializeComponent();
 
-            NUInsatsu.Kinect.SkeletonSensor camera = NUInsatsu.Kinect.SkeletonSensor.GetInstance();
+            skeletonSensor = NUInsatsu.Kinect.SkeletonSensor.GetInstance();
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
-            camera.SkeletonFrameReady += skeletonFrameReadyHandler;
+            skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
         }
 
         void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
@@ -45,8 +46,7 @@ namespace NUInsatsu.UI
 
         void free()
         {
-            NUInsatsu.Kinect.SkeletonSensor camera = NUInsatsu.Kinect.SkeletonSensor.GetInstance();
-            camera.SkeletonFrameReady -= skeletonFrameReadyHandler;
+            skeletonSensor.Dispose();
         }
     }
 }

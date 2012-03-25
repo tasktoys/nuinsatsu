@@ -77,6 +77,7 @@ namespace NUInsatsu.UI
             float depthX, depthY;
 
             Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+
             nui.SkeletonEngine.SkeletonToDepthImage(joint.Position, out depthX, out depthY);
 
             depthX = Math.Max(0, Math.Min(depthX * 320, 320));  //convert to 320, 240 space

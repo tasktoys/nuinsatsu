@@ -14,7 +14,11 @@ namespace NUInsatsu.Kinect
         {
             if( nui == null)
             {
-                if (Runtime.Kinects.Count == 0) return null;
+                if (Runtime.Kinects.Count == 0)
+                {
+                    System.Windows.MessageBox.Show("キネクトが接続されていません。");
+                    return null;
+                }
                 nui = Runtime.Kinects[0];
 
                 try

@@ -9,29 +9,13 @@ using Microsoft.Research.Kinect.Nui;
 
 namespace NUInsatsu.Kinect
 {
-
-
     /// <summary>
     /// Kinectのカメラに関する機能を提供します。
     /// </summary>
-    class Camera
+    class Camera : IDisposable
     {
-        static Camera instance = null;
-
-        Runtime nui;
-
         private PlanarImage cameraimage;
-        private static BitmapSource picture;
-
-        /// <summary>
-        /// Cameraインスタンスを取得します。
-        /// </summary>
-        /// <returns></returns>
-        public static Camera GetInstance()
-        {
-            if ( instance == null ) instance = new Camera();
-            return instance;
-        }
+        private BitmapSource picture;
 
         /// <summary>
         /// 現在カメラが認識しているイメージを取得します
@@ -51,7 +35,7 @@ namespace NUInsatsu.Kinect
         /// </summary>
         private Camera()
         {
-            nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
 
 			nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
         }
@@ -97,5 +81,19 @@ namespace NUInsatsu.Kinect
 
 			return str;
 		}
+
+        /// <summary>
+        /// リソースを解放します。利用し終わったら必ず呼び出してください。
+        /// </summary>
+        public void Dispose()
+        {
+            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+
+            if (nui != null)
+            {
+                nui.VideoFrameReady += new EventHandler<ImageFrameReadyEventArgs>(nui_ColorFrameReady);
+            }
+            
+        }
     }
 }

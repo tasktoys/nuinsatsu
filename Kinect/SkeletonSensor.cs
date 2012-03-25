@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace NUInsatsu.Kinect
 {
-    class SkeletonSensor
+    class SkeletonSensor : IDisposable
     {
         class SkeletonDataComparer : IComparer<SkeletonData>
         {
@@ -17,22 +17,13 @@ namespace NUInsatsu.Kinect
             }
         }
 
-        static SkeletonSensor instance;
-        
-        Runtime nui;
-
-        //現在のスケルトンフレームを格納
-        private static SkeletonFrame currentSkeletonFrame = null;
-
-        /// <summary>
-        /// SkeletonSensorインスタンスを取得します。
-        /// </summary>
-        /// <returns></returns>
         public static SkeletonSensor GetInstance()
         {
-            if ( instance == null ) instance = new SkeletonSensor();
-            return instance;
+            return new SkeletonSensor();
         }
+
+        //現在のスケルトンフレームを格納
+        private SkeletonFrame currentSkeletonFrame = null;
 
         /// <summary>
         /// 現在カメラが認識しているフレームを取得します
@@ -48,26 +39,16 @@ namespace NUInsatsu.Kinect
         /// <summary>
         /// SkeletonSensorクラスを構築します
         /// </summary>
-        private SkeletonSensor()
+        public SkeletonSensor()
         {
+            Runtime nui;
             nui = NUInsatsu.Kinect.KinectManager.GetKinect();
 
-            nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
+            if (nui != null)
+            {
+                nui.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
+            }
         }
-
-        /// <summary>
-        /// フレームが認識され取得できる状態になったときに呼び出されます
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
-        {
-            //スケルトンフレームを保存
-            CurrentSkeletonFrame = e.SkeletonFrame;
-
-            if (SkeletonFrameReady == null){return; }
-            SkeletonFrameReady(this, e);
-		}
 
         /// <summary>
         /// 指定時間モーションを取得する
@@ -85,13 +66,41 @@ namespace NUInsatsu.Kinect
                 //現在のスケルトンを得る
                 SkeletonDataList datas = Skeletons2List(CurrentSkeletonFrame.Skeletons);
                 //左にいる人がコレクションの最初の方の要素になるように、x軸でソートする
-                datas.Sort( new SkeletonDataComparer() );
+                datas.Sort(new SkeletonDataComparer());
                 motionList.Add(datas);
                 Thread.Sleep(100);
             }
 
             return motionList;
         }
+
+        /// <summary>
+        /// リソースを解放します。利用し終わったら必ず呼び出してください。
+        /// </summary>
+        public void Dispose()
+        {
+            Runtime nui = NUInsatsu.Kinect.KinectManager.GetKinect();
+            if (nui != null)
+            {
+                nui.SkeletonFrameReady -= new EventHandler<SkeletonFrameReadyEventArgs>(nui_SkeletonFrameReady);
+            }
+        }
+
+        /// <summary>
+        /// フレームが認識され取得できる状態になったときに呼び出されます
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nui_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
+        {
+            //スケルトンフレームを保存
+            CurrentSkeletonFrame = e.SkeletonFrame;
+
+            if (SkeletonFrameReady == null){return; }
+            SkeletonFrameReady(this, e);
+		}
+
+
 
         /// <summary>
         /// SkeletonDataの配列をSkeletonDataのリストに変換します。
@@ -109,6 +118,5 @@ namespace NUInsatsu.Kinect
             }
             return list;
         }
-
     }
 }
