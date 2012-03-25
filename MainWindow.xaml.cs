@@ -23,9 +23,6 @@ namespace NUInsatsu
         {
             InitializeComponent();
             ShowsNavigationUI = false;
-
-            //インスタンス生成
-            Camera kinect = Camera.GetInstance();
         }
     }
 }

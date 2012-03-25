@@ -67,6 +67,7 @@
     <Compile Include="Kinect\KinectManager.cs" />
     <Compile Include="Kinect\MotionList.cs" />
     <Compile Include="Kinect\SkeletonDataList.cs" />
+    <Compile Include="Kinect\SkeletonSensor.cs" />
     <Compile Include="Kinect\VoiceDictionary.cs" />
     <Compile Include="Kinect\VoiceRecognizer.cs" />
     <Compile Include="UI\AdminPage.xaml.cs">

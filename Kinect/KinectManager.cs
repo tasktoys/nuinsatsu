@@ -14,6 +14,7 @@ namespace NUInsatsu.Kinect
         {
             if( nui == null)
             {
+                if (Runtime.Kinects.Count == 0) return null;
                 nui = Runtime.Kinects[0];
 
                 try
