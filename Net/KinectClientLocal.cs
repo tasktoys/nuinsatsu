@@ -35,7 +35,7 @@ namespace NUInsatsu.Net
             waitSaidKinect();
 
             Config config = Config.Load();
-            String xml = MakeMotionXML(config.MotionTime);
+            String xml = makeMotionXML(config.MotionTime);
 
             Dictionary<String, Double> d = new Dictionary<string, double>();
             List<Dictionary<String, Double>> l = new List<Dictionary<string, double>>();
@@ -92,7 +92,7 @@ namespace NUInsatsu.Net
         /// </summary>
         /// <param name="motions">識別するモーション</param>
         /// <returns>キーとして利用してよい場合はtrue</returns>
-        private bool IsValidMotionList(MotionList motions)
+        private bool isValidMotionList(MotionList motions)
         {
             if (motions == null) return false;
 
@@ -115,7 +115,7 @@ namespace NUInsatsu.Net
         /// </summary>
         /// <param name="motiontime">モーション取得時間</param>
         /// <returns>生成されたメッセージ</returns>
-        private String MakeMotionXML(int motiontime)
+        private String makeMotionXML(int motiontime)
         {
             String sendMessage = null;
 
@@ -124,7 +124,7 @@ namespace NUInsatsu.Net
                 // モーションを取得する
                 MotionList motions = skeletonSensor.GetMotionForSeconds(motiontime);
 
-                if (IsValidMotionList(motions))
+                if (isValidMotionList(motions))
                 {
                     // キーを数える
                     Motion.KeyMaker keyMaker = new Motion.KeyMaker();

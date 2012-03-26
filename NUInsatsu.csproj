@@ -67,6 +67,13 @@
     <Compile Include="Kinect\IVoiceRecognizer.cs" />
     <Compile Include="Kinect\SkeletonSensorStub.cs" />
     <Compile Include="Kinect\VoiceRecognizerStub.cs" />
+    <Compile Include="Motion\JointUtility.cs" />
+    <Compile Include="Motion\KeyGenerator.cs" />
+    <Compile Include="Motion\KeyGeneratorHelper.cs" />
+    <Compile Include="Motion\KeyGeneratorVersion5.cs" />
+    <Compile Include="Motion\Point.cs" />
+    <Compile Include="Motion\Skeleton.cs" />
+    <Compile Include="Motion\SkeletonTimeline.cs" />
     <Compile Include="Net\KinectClient.cs" />
     <Compile Include="Net\KinectClientLocal.cs" />
     <Compile Include="Net\KinectClientUtility.cs" />

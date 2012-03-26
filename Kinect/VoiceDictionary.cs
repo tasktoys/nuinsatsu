@@ -56,7 +56,10 @@ namespace NUInsatsu.Kinect
             commdic.Add("ばるす", "BALSE");
 		}
 
-		// 認識用辞書への追加
+        /// <summary>
+        /// VoiceRecognizerに認識する音声を追加します.
+        /// </summary>
+        /// <param name="voiceRec">音声を追加するVoiceRecognizer</param>
 		public void AddDic(IVoiceRecognizer voiceRec)
 		{
             NUInsatsu.Config config = NUInsatsu.Config.Load();
@@ -80,7 +83,8 @@ namespace NUInsatsu.Kinect
             }
 		}
 
-		public String discToNavi(string disc)
+
+		public String DiscToNavi(string disc)
 		{
 			try
 			{

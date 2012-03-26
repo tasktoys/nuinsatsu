@@ -11,6 +11,10 @@ namespace NUInsatsu.Kinect
         private static Runtime nui = null;
         private static IVoiceRecognizer voiceRecognizerInstance = null;
 
+        /// <summary>
+        /// キネクトの初期化を行い、インスタンスを取得します
+        /// </summary>
+        /// <returns>キネクトのインスタンス</returns>
         public static Runtime GetKinectInstance()
         {
             if ( nui == null )
@@ -55,7 +59,6 @@ namespace NUInsatsu.Kinect
         {
             if (nui == null)
             {
-                Console.WriteLine("[KinectInstanceManager]create stub");
                 return new SkeletonSensorStub();
             }
             else
@@ -92,6 +95,9 @@ namespace NUInsatsu.Kinect
             }
         }
 
+        /// <summary>
+        /// キネクトのリソースを解放します.
+        /// </summary>
         public static void UninitializeKinect()
         {
             nui.Uninitialize();
