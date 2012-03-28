@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NUInsatsu.Motion;
 
 namespace NUInsatsu.Net
 {
@@ -26,7 +27,7 @@ namespace NUInsatsu.Net
         /// Kinectへの入力を開始し、座標データを取得します.
         /// </summary>
         /// <returns>座標データ</returns>
-        List<List<Dictionary<String, Double>>> GetMotionList();
+        List<SkeletonTimeline> GetMotionList();
 
         /// <summary>
         /// ナビゲーションメッセージを送信します.

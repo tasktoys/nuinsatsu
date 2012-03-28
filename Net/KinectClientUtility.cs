@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NUInsatsu.Motion;
 
 namespace NUInsatsu.Net
 {
@@ -28,14 +29,14 @@ namespace NUInsatsu.Net
         /// </summary>
         /// <param name="client">サーバと接続するためのクライアント</param>
         /// <returns>取得した座標データ</returns>
-        public static List<List<Dictionary<String, Double>>> GetMotionList(KinectClient client)
+        public static List<SkeletonTimeline> GetMotionList(KinectClient client)
         {
             client.Connect();
 
-            List<List<Dictionary<String, Double>>> motionList = client.GetMotionList();
+            List<SkeletonTimeline> motionList = client.GetMotionList();
             if (motionList == null)
             {
-                throw new Exception("モーションの取得に失敗しました。");
+                throw new ConnectFailedException();
             }
 
             client.Close();

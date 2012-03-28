@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using NUInsatsu.Kinect;
+using NUInsatsu.Motion;
 
 namespace NUInsatsu.Net
 {
@@ -29,7 +30,7 @@ namespace NUInsatsu.Net
             return true;
         }
 
-        public List<List<Dictionary<String, Double>>> GetMotionList()
+        public List<SkeletonTimeline> GetMotionList()
         {
             // キネクトと発音されるまで待機
             waitSaidKinect();
@@ -37,13 +38,10 @@ namespace NUInsatsu.Net
             Config config = Config.Load();
             String xml = makeMotionXML(config.MotionTime);
 
-            Dictionary<String, Double> d = new Dictionary<string, double>();
-            List<Dictionary<String, Double>> l = new List<Dictionary<string, double>>();
-            l.Add(d);
-            List<List<Dictionary<String, Double>>> l2 = new List<List<Dictionary<string, double>>>();
-            l2.Add(l);
+            MotionResponseParser parser = new MotionResponseParser();
+            List<SkeletonTimeline> list = parser.Parse(xml);
 
-            return l2;
+            return list;
         }
 
         public void SendNavigation(String str)
