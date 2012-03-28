@@ -44,6 +44,16 @@ namespace NUInsatsu.Net
             return motionList;
         }
 
-
+        /// <summary>
+        /// KeyGeneratorを用い、座標データからモーション識別子を取得します.
+        /// </summary>
+        /// <param name="motionList">座標データ</param>
+        /// <returns>モーション識別子</returns>
+        public static Key GetKey(List<SkeletonTimeline> motionList)
+        {
+            KeyGenerator keyGen = new KeyGeneratorVersion5();
+            Key key = keyGen.Generate(motionList);
+            return key;
+        }
     }
 }

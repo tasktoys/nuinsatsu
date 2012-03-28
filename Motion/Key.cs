@@ -18,8 +18,8 @@ namespace NUInsatsu.Motion
             get { return keyString; }
             set
             {
-                if (keyString == null) throw new NullReferenceException("Key is null.");
-                if (keyString.Length <= 0) throw new ArgumentException("key is empty.");
+                if (keyString == value) throw new NullReferenceException("Key is null.");
+                if (value.Length <= 0) throw new ArgumentException("key is empty.");
                 keyString = value;
             }
         }

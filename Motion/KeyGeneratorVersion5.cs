@@ -72,7 +72,7 @@ namespace NUInsatsu.Motion
             foreach(var timeline in timelineList) {
                 //SkeletonTimeline timeline = (SkeletonTimeline)timelineList.get(0);
                 float[,,] timelinearray = TimelineToArray(timeline);
-                hash += MakeHash(hash, timelinearray, threshold, is_used);
+                hash = MakeHash(hash, timelinearray, threshold, is_used);
             }
 
             //if (timelineList.size() > 1)
@@ -146,6 +146,7 @@ namespace NUInsatsu.Motion
 				    a[t,joint,2] = p.Z/10000;
                     joint++;
 			    }
+                joint = 0;
                 t++;
 		    }
 		    return a;

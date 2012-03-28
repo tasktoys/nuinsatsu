@@ -7,6 +7,6 @@ namespace NUInsatsu.Motion
 {
     interface KeyGenerator
     {
-       Key Generate(List<SkeletonTimeline> timelineList);
+       Key Generate(List<SkeletonTimeline> motionList);
     }
 }

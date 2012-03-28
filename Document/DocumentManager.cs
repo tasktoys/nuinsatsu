@@ -35,14 +35,5 @@ namespace NUInsatsu.Document
             return instance;
         }
 
-        /// <summary>
-        /// モーションから生成したキーを与えて、それに最も近いドキュメントのキーを取得します.
-        /// </summary>
-        /// <param name="docKey">モーションから生成したドキュメントキー</param>
-        /// <returns>登録済ドキュメントキー</returns>
-        public Key GetNearestDocumentKey(Key docKey)
-        {
-        }
-
     }
 }
