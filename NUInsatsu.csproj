@@ -63,6 +63,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
+    <Compile Include="Document\DocumentFileIO.cs" />
+    <Compile Include="Document\DocumentManager.cs" />
     <Compile Include="Kinect\Camera.cs" />
     <Compile Include="Kinect\IVoiceRecognizer.cs" />
     <Compile Include="Kinect\SkeletonSensorStub.cs" />

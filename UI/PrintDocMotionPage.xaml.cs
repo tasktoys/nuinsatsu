@@ -15,6 +15,7 @@ using Microsoft.Research.Kinect.Nui;
 using System.Threading;
 using NUInsatsu.Net;
 using NUInsatsu.Kinect;
+using NUInsatsu.Motion;
 
 namespace NUInsatsu.UI
 {
@@ -66,7 +67,9 @@ namespace NUInsatsu.UI
         private void print()
         {
             KinectClient client = KinectClientUtility.CreateKinectClientUtility();
-            KinectClientUtility.GetMotionList(client);
+            List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(client);
+
+            Key docKeyByMotion = KinectClientUtility.get
         }
     }
 }
