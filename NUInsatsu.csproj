@@ -73,6 +73,7 @@
     <Compile Include="Motion\KeyGenerator.cs" />
     <Compile Include="Motion\KeyGeneratorHelper.cs" />
     <Compile Include="Motion\KeyGeneratorVersion5.cs" />
+    <Compile Include="Motion\KeyGeneratorVersion6.cs" />
     <Compile Include="Motion\Point.cs" />
     <Compile Include="Motion\Skeleton.cs" />
     <Compile Include="Motion\SkeletonTimeline.cs" />

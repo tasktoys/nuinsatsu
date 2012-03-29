@@ -12,6 +12,7 @@ namespace NUInsatsu
     {
         const String fileName = "config.xml";
 
+        public String MotionAlgorithm { get; set; }
         public int ServerPort { get; set; }
         public int NuimagioPort { get; set; }
         public String NuimagioIP { get; set; }
@@ -36,6 +37,7 @@ namespace NUInsatsu
         private Config()
         {
             ServerPort = 50001;
+            MotionAlgorithm = "5";
             NuimagioIP = "127.0.0.1";
             NuimagioPort = 50002;
             VoiceOK = 0.5;
