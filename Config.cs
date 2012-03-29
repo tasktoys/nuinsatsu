@@ -12,6 +12,8 @@ namespace NUInsatsu
     {
         const String fileName = "config.xml";
 
+        // 以下に作ったプロパティが保存時にXMLに吐き出されます。気軽に追加してね。
+        // できればコンストラクタで初期値を設定してあげてね。
         public String MotionAlgorithm { get; set; }
         public int ServerPort { get; set; }
         public int NuimagioPort { get; set; }
@@ -61,7 +63,7 @@ namespace NUInsatsu
         }
 
         /// <summary>
-        /// 設定ファイルを読み込みます。設定ファイルが無い場合は、デフォルト値が設定されています。
+        /// 設定ファイルを読み込みます。設定ファイルが無い場合は、デフォルト値が設定されます。
         /// </summary>
         /// <returns>設定を読み込んだインスタンス</returns>
         public static Config Load()
