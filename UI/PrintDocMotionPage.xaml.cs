@@ -15,6 +15,7 @@ using System.Threading;
 using NUInsatsu.Net;
 using NUInsatsu.Kinect;
 using NUInsatsu.Motion;
+using NUInsatsu.Document;
 
 namespace NUInsatsu.UI
 {
@@ -65,10 +66,27 @@ namespace NUInsatsu.UI
 
         private void print()
         {
-            KinectClient client = KinectClientUtility.CreateKinectClientUtility();
-            List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(client);
+            try
+            {
+                KinectClient client = KinectClientUtility.CreateKinectClientUtility();
+                List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(client);
 
-            Key docKeyByMotion = KinectClientUtility.GetKey(list);
+                Key docKeyByMotion = KinectClientUtility.GetKey(list);
+
+                DocumentManager manager = DocumentManager.GetInstance();
+                Key docKey = manager.GetNearestDocumentKey(docKeyByMotion);
+            }
+            catch (DocumentNotFoundException)
+            {
+                MessageBox.Show("ドキュメントが見つかりませんでした。");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[PrintDocMotionPage]予期しない例外が発生しました。 {0}", e.Message);
+                String errorMessage = String.Format("予期しない例外が発生しました。\n ErrorMessage: {0}\n StackTrace:{1}", e.Message, e.StackTrace);
+                MessageBox.Show(errorMessage);
+            }
+            
         }
     }
 }

@@ -50,8 +50,8 @@ namespace NUInsatsu.Motion
 		
 		    switch (id) {
 		    case JointID.Head:				return "a";
-		    case JointID.Spine:				return "b";		
-		    case JointID.HipCenter :		return "c";
+            case JointID.Spine:               return "b";
+		    case JointID.HipCenter :          return "c";
 		    case JointID.HipLeft :			return "d";
 		    case JointID.HipRight :			return "e";
 		    case JointID.ShoulderCenter :	return "f";

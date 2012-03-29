@@ -146,7 +146,7 @@ namespace NUInsatsu.Net
                     }
                 }
             }
-            catch (XmlException e)
+            catch (XmlException)
             {
                 throw new NMXPParseErrorException();
             }

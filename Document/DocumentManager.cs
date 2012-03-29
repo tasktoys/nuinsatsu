@@ -12,13 +12,14 @@ namespace NUInsatsu.Document
     class DocumentManager
     {
         private static DocumentManager instance = new DocumentManager();
+        private DocumentFileIO io = null;
 
         /// <summary>
         /// コンストラクタです.
         /// </summary>
         private DocumentManager()
         {
-
+            selectTypeIO();
         }
 
         /// <summary>
@@ -33,6 +34,33 @@ namespace NUInsatsu.Document
             }
 
             return instance;
+        }
+
+        /// <summary>
+        /// モーションから生成したキーを与えて、それに最も近いドキュメントのキーを取得します.
+        /// </summary>
+        /// <param name="docKey">モーションから生成したドキュメントキー</param>
+        /// <returns>登録済ドキュメントキー</returns>
+        public Key GetNearestDocumentKey(Key docKey)
+        {
+            return io.GetNearestDocument(docKey);
+        }
+
+        /// <summary>
+        /// DocumentFileIOの種類をプロパティから設定します。
+        /// </summary>
+        private void selectTypeIO()
+        {
+            Config config = Config.Load();
+
+            if (config.DocumentIOType == "local")
+            {
+                io = new LocalFileIO();
+            }
+            else
+            {
+                io = new LocalFileIO();
+            }
         }
 
     }

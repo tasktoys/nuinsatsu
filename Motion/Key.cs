@@ -8,7 +8,7 @@ namespace NUInsatsu.Motion
     /// <summary>
     /// モーションのパターンを示す識別子です。
     /// </summary>
-    class Key
+    class Key : IComparable
     {
         public int Distance { get; set; }
 
@@ -38,6 +38,21 @@ namespace NUInsatsu.Motion
             this.keyString = keyString;
         }
 
+        public int CompareTo(object obj)
+        {
+            // ヌルより大きい
+            if (obj == null)
+            {
+                return 1;
+            }
 
+            // 他の型とは比較できない
+            if (this.GetType() != obj.GetType())
+            {
+                throw new ArgumentException("別の型とは比較できません。", "obj");
+            }
+
+            return this.Distance - ((Key)obj).Distance;
+        }
     }
 }

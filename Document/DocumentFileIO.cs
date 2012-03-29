@@ -11,5 +11,11 @@ namespace NUInsatsu.Document
     /// </summary>
     interface DocumentFileIO
     {
+        /// <summary>
+        /// モーションから生成されたキーを与えて、それに最も近いドキュメントのキーを取得します。
+        /// </summary>
+        /// <param name="docKey">モーションから生成他ドキュメントキー</param>
+        /// <returns>登録済みドキュメントキー</returns>
+        Key GetNearestDocument(Key docKey);
     }
 }

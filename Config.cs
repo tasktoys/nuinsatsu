@@ -29,6 +29,9 @@ namespace NUInsatsu
         public bool DummyFace { get; set; }
         public String PrinterName { get; set; }
         public int MotionTime { get; set; }
+        public int MatchingThreshold { get; set; }
+        public String DocumentIOType { get; set; }
+
 
         /// <summary>
         /// コンフィグのデフォルト値を設定し、クラスを構築します。
@@ -53,6 +56,8 @@ namespace NUInsatsu
             DummyFace = true;
             PrinterName = System.Drawing.Printing.PrinterSettings.InstalledPrinters[0];
             MotionTime = 3;
+            MatchingThreshold = 10;
+            DocumentIOType = "local";
         }
 
         /// <summary>
@@ -65,12 +70,14 @@ namespace NUInsatsu
             {
                 using (FileStream fs = new FileStream(fileName, FileMode.Open))
                 {
+                    // コンフィグをXMLから読み取りシリアライズします。
                     XmlSerializer serializer = new XmlSerializer(typeof(Config));
                     return (Config)serializer.Deserialize(fs);
                 }
             }
             catch (FileNotFoundException)
             {
+                // ファイルが見つからない場合、デフォルト設定値のコンフィグを返します。
                 return new Config();
             }
         }

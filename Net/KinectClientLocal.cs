@@ -11,7 +11,7 @@ namespace NUInsatsu.Net
 {
     /// <summary>
     /// Kinect制御アプリケーションの接続方法インターフェースKinectClientの実装です.
-    /// NUInsatsuを起動しているマシンに直接キネクトを接続している場合です.
+    /// NUInsatsuを起動しているマシンに直接キネクトを接続している場合に利用します.
     /// </summary>
     class KinectClientLocal : KinectClient
     {
@@ -32,12 +32,15 @@ namespace NUInsatsu.Net
 
         public List<SkeletonTimeline> GetMotionList()
         {
-            // キネクトと発音されるまで待機
+            // キネクトと発音されるまで待機します
             waitSaidKinect();
 
             Config config = Config.Load();
+
+            // モーションを取得し、XML文字列を生成します。
             String xml = makeMotionXML(config.MotionTime);
 
+            // XMLをパースし、構造化します。
             MotionResponseParser parser = new MotionResponseParser();
             List<SkeletonTimeline> list = parser.Parse(xml);
 
@@ -68,8 +71,10 @@ namespace NUInsatsu.Net
 
         /// <summary>
         /// ボイスがRecognizedされた場合に呼び出されます.
-        /// 「キネクト」と発音すると、GetMotionListのwaitSaidKinectでwaitされている部分から先に進みます。
         /// </summary>
+        /// <remarks>
+        /// 「キネクト」と発音すると、<see cref="waitSaidKinect"/> のWaitOneされている部分から先に進みます。
+        /// </remarks>
         /// <param name="sender">送信元オブジェクト</param>
         /// <param name="e">イベント情報</param>
         private void voice_Recognized(object sender, SaidWordArgs e)
@@ -77,17 +82,21 @@ namespace NUInsatsu.Net
             VoiceDictionary voicedic = new VoiceDictionary();
             String rectext = "";
             rectext = voicedic.RecognizeToCommand(e.Text);
+
             if (rectext == "kinect")
             {
+                // 発音がキネクトだった場合、WaitOneから先に進むようイベントをセットします.
                 SaidKinectEvent.Set();
             }
         }
 
         /// <summary>
-        /// キーとして利用してよいモーションかどうか検証します
+        /// キーとして利用してよいモーションかどうか検証します。
+        /// </summary>
+        /// <remarks>
         /// 利用してはいけないモーションとは、
         /// 識別人数が０、もしくは識別人数が途中で増減した場合です
-        /// </summary>
+        /// </remarks>
         /// <param name="motions">識別するモーション</param>
         /// <returns>キーとして利用してよい場合はtrue</returns>
         private bool isValidMotionList(MotionList motions)
@@ -117,20 +126,23 @@ namespace NUInsatsu.Net
         {
             String sendMessage = null;
 
+            // スケルトンを取得するためにインスタンスを生成します.
             using (ISkeletonSensor skeletonSensor = KinectInstanceManager.CreateSkeletonSensorInstance() )
             {
-                // モーションを取得する
+                // 指定した秒間のモーションを取得します
                 MotionList motions = skeletonSensor.GetMotionForSeconds(motiontime);
 
+                // モーションを利用できるかどうか検査します。
                 if (isValidMotionList(motions))
                 {
-                    // キーを数える
                     Motion.KeyMaker keyMaker = new Motion.KeyMaker();
+                    // モーションをXMLに変換します。
                     String str = keyMaker.Make(motions);
                     sendMessage = str;
                 }
                 else
                 {
+                    // 利用できないモーションデータの場合、NMXPのエラーを返します.
                     sendMessage = "<?xml version=\"1.0\"?><nmxp version=\"2.0\"><error>LostFrameException</error></nmxp>";
                 }
 
