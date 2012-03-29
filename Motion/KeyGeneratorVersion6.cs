@@ -13,7 +13,7 @@ namespace NUInsatsu.Motion
         float[] area_threshold = new float[20];
         bool[] is_used = new bool[20];
 
-        KeyGeneratorVersion6()
+        public KeyGeneratorVersion6()
         {
             for (int i = 0; i < move_threshold.GetLength(0); i++)
             {

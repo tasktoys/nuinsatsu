@@ -51,7 +51,19 @@ namespace NUInsatsu.Net
         /// <returns>モーション識別子</returns>
         public static Key GetKey(List<SkeletonTimeline> motionList)
         {
-            KeyGenerator keyGen = new KeyGeneratorVersion5();
+            Config config = Config.Load();
+
+            KeyGenerator keyGen;
+
+            if (config.MotionAlgorithm == "6")
+            {
+                keyGen = new KeyGeneratorVersion6();
+            }
+            else
+            {
+                keyGen = new KeyGeneratorVersion5();
+            }
+
             Key key = keyGen.Generate(motionList);
             return key;
         }
