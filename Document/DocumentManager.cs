@@ -37,6 +37,16 @@ namespace NUInsatsu.Document
         }
 
         /// <summary>
+        /// 指定されたドキュメントキーにはパスキーが必要かどうか判定します.
+        /// </summary>
+        /// <param name="docKey">ドキュメントキー</param>
+        /// <returns>パスキーが必要ならtrue、不要ならfalse</returns>
+        public bool IsPassRequired(Key docKey)
+        {
+            return io.IsPassRequired(docKey);
+        }
+
+        /// <summary>
         /// モーションから生成したキーを与えて、それに最も近いドキュメントのキーを取得します.
         /// </summary>
         /// <param name="docKey">モーションから生成したドキュメントキー</param>

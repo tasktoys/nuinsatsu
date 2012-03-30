@@ -20,6 +20,11 @@ namespace NUInsatsu.Document
 
         }
 
+        public bool IsPassRequired(Key docKey)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 登録されているドキュメントのキー一覧を取得します。
         /// </summary>
