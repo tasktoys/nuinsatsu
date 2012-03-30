@@ -42,28 +42,54 @@ namespace NUInsatsu.UI
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
         }
 
-        private void kinectButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// メニュー画面に遷移します.
+        /// </summary>
+        private void transMenuPage()
         {
-            NavigationService.Navigate(new PrintFacePassPage());
             free();
+            NavigationService.Navigate(new MenuPage());
         }
 
+        /// <summary>
+        /// 顔認証を行う場合の印刷ページに移動します。
+        /// </summary>
+        private void transPrintFacePassPage()
+        {
+            free();
+            NavigationService.Navigate(new PrintFacePassPage());
+        }
+
+        /// <summary>
+        /// 画面遷移によりこの場面から離れる場合、必ず呼び出してください.
+        /// </summary>
         private void free()
         {
             skeletonSensor.Dispose();
         }
 
+        /// <summary>
+        /// このページがロードされたとき、印刷にトライします.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             tryPrint();
         }
 
+        /// <summary>
+        /// 印刷処理を起動します。
+        /// </summary>
         private void tryPrint()
         {
             Thread thread = new Thread(print);
             thread.Start();
         }
 
+        /// <summary>
+        /// 印刷を行います。
+        /// </summary>
         private void print()
         {
             try
@@ -75,10 +101,18 @@ namespace NUInsatsu.UI
 
                 DocumentManager manager = DocumentManager.GetInstance();
                 Key docKey = manager.GetNearestDocumentKey(docKeyByMotion);
+
+                if (manager.IsPassRequired(docKey))
+                {
+                    //transPrintFacePassPage();
+                }
+                else
+                {
+                }
             }
             catch (DocumentNotFoundException)
             {
-                MessageBox.Show("ドキュメントが見つかりませんでした。");
+                showRetryDialog("ドキュメントが見つかりませんでした。");
             }
             catch (Exception e)
             {
@@ -87,6 +121,28 @@ namespace NUInsatsu.UI
                 MessageBox.Show(errorMessage);
             }
             
+        }
+
+        /// <summary>
+        /// エラーが起こり、リトライを尋ねるダイアログを表示します。
+        /// </summary>
+        /// <param name="message">表示するメッセージ</param>
+        private void showRetryDialog(String message)
+        {
+            MessageBoxResult result = MessageBox.Show(message, "失敗", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    // 印刷処理にトライする
+                    tryPrint();
+                    break;
+
+                case MessageBoxResult.No:
+                    // ホームに戻る
+                    transMenuPage();
+                    break;
+            }
         }
     }
 }

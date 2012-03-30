@@ -17,9 +17,18 @@ namespace NUInsatsu.Net
         /// <returns>KinectClientインターフェースを実装したクラスのインスタンス</returns>
         public static KinectClient CreateKinectClientUtility()
         {
-            KinectClient client;
+            KinectClient client = null;
+            Config config = Config.Load();
 
-            client = new KinectClientLocal();
+            if (config.KinectType == "stub")
+            {
+                client = new KinectClientStub();
+            }
+            else
+            {
+                // default
+                client = new KinectClientLocal();
+            }
 
             return client;
         }

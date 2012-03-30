@@ -30,7 +30,7 @@ namespace NUInsatsu.Document
                 throw new NullReferenceException("doc key is null");
             }
 
-            String[] fileNames = Directory.GetFiles(DOC_DIR, "*", SearchOption.AllDirectories);
+            String[] fileNames = Directory.GetFiles(DOC_DIR, docKey + "-*", SearchOption.AllDirectories);
             if (fileNames.Length <= 0)
             {
                 String str = String.Format("Requested key {0} is not found.", docKey.KeyString);
@@ -39,7 +39,8 @@ namespace NUInsatsu.Document
             else
             {
                 String fileName = fileNames.First();
-                if (fileName.StartsWith(docKey.KeyString + "-0"))
+                FileInfo fileInfo = new FileInfo(fileName);
+                if (fileInfo.Name.StartsWith(docKey.KeyString + "-0"))
                 {
                     return false;
                 }

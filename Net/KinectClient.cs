@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUInsatsu.Motion;
+using System.IO;
 
 namespace NUInsatsu.Net
 {
@@ -28,6 +29,17 @@ namespace NUInsatsu.Net
         /// </summary>
         /// <returns>座標データ</returns>
         List<SkeletonTimeline> GetMotionList();
+
+        /// <summary>
+        /// 顔認証用の画像を取得します。
+        /// </summary>
+        /// <returns>顔画像のテンポラリファイル</returns>
+        FileInfo GetFaceImage();
+
+        /// <summary>
+        /// テストメッセージを送信します。
+        /// </summary>
+        void SendTest();
 
         /// <summary>
         /// ナビゲーションメッセージを送信します.

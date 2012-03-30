@@ -20,17 +20,17 @@ namespace NUInsatsu.Net
         /// </summary>
         private readonly AutoResetEvent SaidKinectEvent = new AutoResetEvent(false);
 
-        public bool Connect()
+        bool KinectClient.Connect()
+        {
+            return true;
+        }
+        
+        bool KinectClient.Close()
         {
             return true;
         }
 
-        public bool Close()
-        {
-            return true;
-        }
-
-        public List<SkeletonTimeline> GetMotionList()
+        List<SkeletonTimeline> KinectClient.GetMotionList()
         {
             // キネクトと発音されるまで待機します
             waitSaidKinect();
@@ -47,8 +47,19 @@ namespace NUInsatsu.Net
             return list;
         }
 
-        public void SendNavigation(String str)
+        FileInfo KinectClient.GetFaceImage()
         {
+            throw new NotImplementedException("Not still implement KinectClientLocal.GetFaceImage");
+        }
+
+        void KinectClient.SendNavigation(String str)
+        {
+            throw new NotImplementedException("Not still implement KinectClientLocal.SendNavigation");
+        }
+
+        void KinectClient.SendTest()
+        {
+            throw new NotImplementedException("Not still implement KinectClientLocal.SendTest");
         }
 
         /// <summary>
