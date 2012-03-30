@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUInsatsu.Motion;
+using System.IO;
 
 namespace NUInsatsu.Document
 {
@@ -79,7 +80,7 @@ namespace NUInsatsu.Document
         /// <param name="docKey">ドキュメント識別キー</param>
         public void Print(Key docKey)
         {
-            throw new NotImplementedException("Not still implement DocumentManager.Print");
+            throw new NotImplementedException();
         }
 
     }

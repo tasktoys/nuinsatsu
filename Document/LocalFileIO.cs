@@ -41,7 +41,23 @@ namespace NUInsatsu.Document
 
         FileInfo DocumentFileIO.Get(Key docKey, Key passKey)
         {
-            throw new NotImplementedException();
+            if (docKey == null)
+            {
+                throw new NullReferenceException("doc key is null");
+            }
+            if (passKey == null)
+            {
+                throw new NullReferenceException("pass key is null");
+            }
+
+            String[] targetFileNames = Directory.GetFiles(DOC_DIR, docKey + "-" + passKey + "*.*", SearchOption.AllDirectories);
+
+            if (targetFileNames.Length == 0)
+            {
+                throw new DocumentNotFoundException("File not found:" + docKey);
+            }
+
+            return new FileInfo(targetFileNames.First());
         }
 
         FileInfo[] DocumentFileIO.GetAll()

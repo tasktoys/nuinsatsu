@@ -129,6 +129,9 @@ namespace NUInsatsu.UI
                 }
                 else
                 {
+                    // 印刷
+                    manager.Print(docKey);
+
                     transMenuPage();
                 }
             }
