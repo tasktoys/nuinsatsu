@@ -68,6 +68,7 @@
     <Compile Include="Document\DocumentManager.cs" />
     <Compile Include="Document\DocumentNotFoundException.cs" />
     <Compile Include="Document\LocalFileIO.cs" />
+    <Compile Include="Document\PrintController.cs" />
     <Compile Include="Kinect\Camera.cs" />
     <Compile Include="Kinect\IVoiceRecognizer.cs" />
     <Compile Include="Kinect\SkeletonSensorStub.cs" />

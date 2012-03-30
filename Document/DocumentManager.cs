@@ -14,6 +14,7 @@ namespace NUInsatsu.Document
     {
         private static DocumentManager instance = new DocumentManager();
         private DocumentFileIO io = null;
+        private PrintController printer = null;
 
         /// <summary>
         /// コンストラクタです.
@@ -80,7 +81,10 @@ namespace NUInsatsu.Document
         /// <param name="docKey">ドキュメント識別キー</param>
         public void Print(Key docKey)
         {
-            throw new NotImplementedException();
+            printer = new PrintController();
+            FileInfo fileInfo = io.Get(docKey);
+
+            printer.Print(fileInfo);
         }
 
     }
