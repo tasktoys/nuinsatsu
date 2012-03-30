@@ -47,8 +47,15 @@ namespace NUInsatsu.UI
         /// </summary>
         private void transMenuPage()
         {
-            free();
-            NavigationService.Navigate(new MenuPage());
+            // NavigationServiceと別スレッドでも画面遷移が行えるように、アクションを生成します.
+            Action transAct = ()=>
+                {
+                       free();
+                       NavigationService.Navigate(new MenuPage());
+                };
+
+            // アクションを起動させます
+            Dispatcher.Invoke(transAct);
         }
 
         /// <summary>
@@ -56,8 +63,14 @@ namespace NUInsatsu.UI
         /// </summary>
         private void transPrintFacePassPage()
         {
-            free();
-            NavigationService.Navigate(new PrintFacePassPage());
+            Action transAct = () =>
+                {
+                    free();
+                    NavigationService.Navigate(new PrintFacePassPage());
+                };
+
+            Dispatcher.Invoke(transAct);
+
         }
 
         /// <summary>
@@ -104,10 +117,11 @@ namespace NUInsatsu.UI
 
                 if (manager.IsPassRequired(docKey))
                 {
-                    //transPrintFacePassPage();
+                    transPrintFacePassPage();
                 }
                 else
                 {
+                    transMenuPage();
                 }
             }
             catch (DocumentNotFoundException)
