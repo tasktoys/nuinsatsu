@@ -14,27 +14,25 @@ namespace NUInsatsu.Document
     {
         const String DOC_DIR = ".\\documents";
 
-        bool Put(Key docKey, FileInfo file)
+        public bool Put(Key docKey, FileInfo file)
         {
             if (docKey == null) throw new NullReferenceException("doc key is null");
             if (file == null)   throw new NullReferenceException("file is null");
             return Put(docKey, new Key("0"), file);
         }
 
-        bool Put(Key docKey, Key passKey, FileInfo file)
+        public bool Put(Key docKey, Key passKey, FileInfo file)
         {
             if (docKey == null) throw new NullReferenceException("doc key is null");
             if (passKey == null)throw new NullReferenceException("pass key is null");
             if (file == null)   throw new NullReferenceException("file is null");
 
-            // かとうが書く
             String ext = GetExtension(file);
-            
             file.MoveTo(DOC_DIR + "\\" + docKey.KeyString + "-" + passKey.KeyString + "." + ext);
             return true;
         }
 
-        FileInfo Get(Key docKey)
+        public FileInfo Get(Key docKey)
         {
             if (docKey == null)
             {
@@ -45,7 +43,7 @@ namespace NUInsatsu.Document
             return Get(docKey, passKey);
         }
 
-        FileInfo Get(Key docKey, Key passKey)
+        public FileInfo Get(Key docKey, Key passKey)
         {
             if (docKey == null)
             {
@@ -66,32 +64,38 @@ namespace NUInsatsu.Document
             return new FileInfo(targetFileNames.First());
         }
 
-        FileInfo[] GetAll()
+        public FileInfo[] GetAll()
         {
             throw new NotImplementedException();
         }
 
-        bool Exists(Key docKey)
+        public bool Exists(Key docKey)
+        {
+            if (docKey == null) throw new NullReferenceException("doc key is null");
+
+            String[] fileNames = Directory.GetFiles(DOC_DIR, docKey + "-*", SearchOption.AllDirectories);
+            if (fileNames.Length <= 0)
+                return false;
+            else
+                return true;
+        }
+
+        public Key GetFaceKey(Key docKey)
         {
             throw new NotImplementedException();
         }
 
-        Key GetFaceKey(Key docKey)
+        public int GetDocumentCount()
         {
             throw new NotImplementedException();
         }
 
-        int GetDocumentCount()
+        public void DeleteAll()
         {
             throw new NotImplementedException();
         }
 
-        void DeleteAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Key GetNearestDocument(Key docKey)
+        public Key GetNearestDocument(Key docKey)
         {
             List<Key> keyList = GetRegisteredKeyList();
 
@@ -100,7 +104,7 @@ namespace NUInsatsu.Document
             return targetKey;
         }
 
-        bool IsPassRequired(Key docKey)
+        public bool IsPassRequired(Key docKey)
         {
             if (docKey == null)
             {
