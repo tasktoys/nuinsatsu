@@ -14,17 +14,27 @@ namespace NUInsatsu.Document
     {
         const String DOC_DIR = ".\\documents";
 
-        bool DocumentFileIO.Put(Key docKey, FileInfo file)
+        bool Put(Key docKey, FileInfo file)
         {
-            throw new NotImplementedException();
+            if (docKey == null) throw new NullReferenceException("doc key is null");
+            if (file == null)   throw new NullReferenceException("file is null");
+            return Put(docKey, new Key("0"), file);
         }
 
-        bool DocumentFileIO.Put(Key docKey, Key passKey, FileInfo fileInfo)
+        bool Put(Key docKey, Key passKey, FileInfo file)
         {
-            throw new NotImplementedException();
+            if (docKey == null) throw new NullReferenceException("doc key is null");
+            if (passKey == null)throw new NullReferenceException("pass key is null");
+            if (file == null)   throw new NullReferenceException("file is null");
+
+            // かとうが書く
+            String ext = GetExtension(file);
+            
+            file.MoveTo(DOC_DIR + "\\" + docKey.KeyString + "-" + passKey.KeyString + "." + ext);
+            return true;
         }
 
-        FileInfo DocumentFileIO.Get(Key docKey)
+        FileInfo Get(Key docKey)
         {
             if (docKey == null)
             {
@@ -32,14 +42,10 @@ namespace NUInsatsu.Document
             }
             Key passKey = new Key("0");
 
-            // 明示的にインタフェースを実装しているので、
-            // 同じクラス内でもインタフェース経由でしかメソッドを呼ぶことができない
-            DocumentFileIO io = this;
-
-            return io.Get(docKey, passKey);
+            return Get(docKey, passKey);
         }
 
-        FileInfo DocumentFileIO.Get(Key docKey, Key passKey)
+        FileInfo Get(Key docKey, Key passKey)
         {
             if (docKey == null)
             {
@@ -60,41 +66,41 @@ namespace NUInsatsu.Document
             return new FileInfo(targetFileNames.First());
         }
 
-        FileInfo[] DocumentFileIO.GetAll()
+        FileInfo[] GetAll()
         {
             throw new NotImplementedException();
         }
 
-        bool DocumentFileIO.Exists(Key docKey)
+        bool Exists(Key docKey)
         {
             throw new NotImplementedException();
         }
 
-        Key DocumentFileIO.GetFaceKey(Key docKey)
+        Key GetFaceKey(Key docKey)
         {
             throw new NotImplementedException();
         }
 
-        int DocumentFileIO.GetDocumentCount()
+        int GetDocumentCount()
         {
             throw new NotImplementedException();
         }
 
-        void DocumentFileIO.deleteAll()
+        void DeleteAll()
         {
             throw new NotImplementedException();
         }
 
-        Key DocumentFileIO.GetNearestDocument(Key docKey)
+        Key GetNearestDocument(Key docKey)
         {
-            List<Key> keyList = getRegisteredKeyList();
+            List<Key> keyList = GetRegisteredKeyList();
 
             Key targetKey = DistanceUtility.GetNearestDocumentKey(docKey, keyList);
 
             return targetKey;
         }
 
-        bool DocumentFileIO.IsPassRequired(Key docKey)
+        bool IsPassRequired(Key docKey)
         {
             if (docKey == null)
             {
@@ -129,14 +135,14 @@ namespace NUInsatsu.Document
         /// ドキュメントを保存するディレクトリが無い場合、ディレクトリを生成し、空のリストを返します。
         /// </remarks>
         /// <returns>キー一覧</returns>
-        private List<Key> getRegisteredKeyList()
+        private List<Key> GetRegisteredKeyList()
         {
             try
             {
                 // documentsディレクトリ以下のファイルパスを取得
                 String[] filePasses = Directory.EnumerateFiles(DOC_DIR).ToArray();
                 // ファイルパスからキー文字列を抽出
-                String[] keyStrings = filePasses.Select(getKey).ToArray();
+                String[] keyStrings = filePasses.Select(GetKey).ToArray();
 
                 // キー文字列からKeyクラスに変換
                 return keyStrings.Select(str => new Key(str)).ToList();
@@ -154,7 +160,7 @@ namespace NUInsatsu.Document
         /// </summary>
         /// <param name="filePass">ファイルパス</param>
         /// <returns>キー文字列</returns>
-        private String getKey(String filePass)
+        private String GetKey(String filePass)
         {
             int lastIndex = filePass.LastIndexOf("\\");
             int indexOf = filePass.IndexOf('-');
@@ -164,6 +170,18 @@ namespace NUInsatsu.Document
             return s;
         }
 
-
+        /// <summary>
+        /// ファイルから拡張子を抽出します。
+        /// </summary>
+        /// <param name="file">ファイル</param>
+        /// <returns>拡張子</returns>
+        private String GetExtension(FileInfo file)
+        {
+            String fileExt = file.Name;
+            int point = file.Name.LastIndexOf(".");
+            if (point != -1)
+                return fileExt.Substring(point + 1);
+            return fileExt;
+        }
     }
 }

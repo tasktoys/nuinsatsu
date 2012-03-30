@@ -29,7 +29,7 @@ namespace NUInsatsu.Document
         /// <param name="file">ドキュメントファイル情報</param>
         /// <returns>成功でtrue,失敗でfalse</returns>
         /// <exception cref="NullReferenceException">引数が空の場合</exception>
-        bool Put(Key docKey, Key passKey, FileInfo fileInfo);
+        bool Put(Key docKey, Key passKey, FileInfo file);
 
         /// <summary>
         /// ドキュメントキーを指定しファイルの実体を取得します。
@@ -96,6 +96,6 @@ namespace NUInsatsu.Document
         /// <summary>
         /// 全ての登録済みドキュメントを削除します。
         /// </summary>
-        void deleteAll();
+        void DeleteAll();
     }
 }
