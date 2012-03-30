@@ -14,7 +14,52 @@ namespace NUInsatsu.Document
     {
         const String DOC_DIR = ".\\documents";
 
-        public Key GetNearestDocument(Key docKey)
+        bool DocumentFileIO.Put(Key docKey, FileInfo file)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool DocumentFileIO.Put(Key docKey, Key passKey, FileInfo fileInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        FileInfo DocumentFileIO.Get(Key docKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        FileInfo DocumentFileIO.Get(Key docKey, Key passKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        FileInfo[] DocumentFileIO.GetAlll()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool DocumentFileIO.Exists(Key docKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        Key DocumentFileIO.GetFaceKey(Key docKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        int DocumentFileIO.GetDocumentCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        void DocumentFileIO.deleteAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Key DocumentFileIO.GetNearestDocument(Key docKey)
         {
             List<Key> keyList = getRegisteredKeyList();
 
@@ -23,7 +68,7 @@ namespace NUInsatsu.Document
 
         }
 
-        public bool IsPassRequired(Key docKey)
+        bool DocumentFileIO.IsPassRequired(Key docKey)
         {
             if (docKey == null)
             {
@@ -92,5 +137,7 @@ namespace NUInsatsu.Document
 
             return s;
         }
+
+
     }
 }
