@@ -73,5 +73,14 @@ namespace NUInsatsu.Document
             }
         }
 
+        /// <summary>
+        /// パスモーションなしで印刷を行います.
+        /// </summary>
+        /// <param name="docKey">ドキュメント識別キー</param>
+        public void Print(Key docKey)
+        {
+            throw new NotImplementedException("Not still implement DocumentManager.Print");
+        }
+
     }
 }

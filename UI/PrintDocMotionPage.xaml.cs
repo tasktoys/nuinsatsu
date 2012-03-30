@@ -31,19 +31,26 @@ namespace NUInsatsu.UI
         {
             InitializeComponent();
 
+            // スケルトンセンサーのインスタンスを生成
             skeletonSensor = KinectInstanceManager.CreateSkeletonSensorInstance();
+            // イベント登録
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
             skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
 
         }
 
+        /// <summary>
+        /// スケルトンの準備が出来たら呼び出され、キャンバスに描画を行います。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
         {
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
         }
 
         /// <summary>
-        /// メニュー画面に遷移します.
+        /// メニュー画面に遷移します。
         /// </summary>
         private void transMenuPage()
         {
@@ -78,6 +85,7 @@ namespace NUInsatsu.UI
         /// </summary>
         private void free()
         {
+            // スケルトンセンサーのリソースを解放します
             skeletonSensor.Dispose();
         }
 
