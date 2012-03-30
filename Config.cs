@@ -33,6 +33,7 @@ namespace NUInsatsu
         public int MotionTime { get; set; }
         public int MatchingThreshold { get; set; }
         public String DocumentIOType { get; set; }
+        public String KinectType { get; set; }
 
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace NUInsatsu
             MotionTime = 3;
             MatchingThreshold = 10;
             DocumentIOType = "local";
+            KinectType = "local";
         }
 
         /// <summary>
