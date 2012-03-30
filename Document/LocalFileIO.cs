@@ -7,6 +7,9 @@ using System.IO;
 
 namespace NUInsatsu.Document
 {
+    /// <summary>
+    /// ドキュメント入出力インタフェースDocumentManagerのローカルファイルシステム入出力による実装です。
+    /// </summary>
     class LocalFileIO : DocumentFileIO
     {
         const String DOC_DIR = ".\\documents";
