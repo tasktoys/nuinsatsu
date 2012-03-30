@@ -25,7 +25,29 @@ namespace NUInsatsu.Document
 
         public bool IsPassRequired(Key docKey)
         {
-            throw new NotImplementedException();
+            if (docKey == null)
+            {
+                throw new NullReferenceException("doc key is null");
+            }
+
+            String[] fileNames = Directory.GetFiles(DOC_DIR, "*", SearchOption.AllDirectories);
+            if (fileNames.Length <= 0)
+            {
+                String str = String.Format("Requested key {0} is not found.", docKey.KeyString);
+                throw new DocumentNotFoundException(str);
+            }
+            else
+            {
+                String fileName = fileNames.First();
+                if (fileName.StartsWith(docKey.KeyString + "-0"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
         /// <summary>

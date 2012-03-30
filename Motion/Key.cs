@@ -54,5 +54,10 @@ namespace NUInsatsu.Motion
 
             return this.Distance - ((Key)obj).Distance;
         }
+
+        public override string ToString()
+        {
+            return KeyString;
+        }
     }
 }

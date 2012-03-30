@@ -90,7 +90,7 @@ namespace NUInsatsu.Kinect
 			{
 				return navidic[disc].ToString();
 			}
-			catch (NullReferenceException e)
+			catch (NullReferenceException)
 			{
 				System.Console.Out.WriteLine("[VoiceDictionary]navigation not found");
 				System.Console.Out.WriteLine("message : " + disc);
