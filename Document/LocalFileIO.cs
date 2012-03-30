@@ -26,7 +26,17 @@ namespace NUInsatsu.Document
 
         FileInfo DocumentFileIO.Get(Key docKey)
         {
-            throw new NotImplementedException();
+            if (docKey == null)
+            {
+                throw new NullReferenceException("doc key is null");
+            }
+            Key passKey = new Key("0");
+
+            // 明示的にインタフェースを実装しているので、
+            // 同じクラス内でもインタフェース経由でしかメソッドを呼ぶことができない
+            DocumentFileIO io = this;
+
+            return io.Get(docKey, passKey);
         }
 
         FileInfo DocumentFileIO.Get(Key docKey, Key passKey)
@@ -34,7 +44,7 @@ namespace NUInsatsu.Document
             throw new NotImplementedException();
         }
 
-        FileInfo[] DocumentFileIO.GetAlll()
+        FileInfo[] DocumentFileIO.GetAll()
         {
             throw new NotImplementedException();
         }
@@ -64,8 +74,8 @@ namespace NUInsatsu.Document
             List<Key> keyList = getRegisteredKeyList();
 
             Key targetKey = DistanceUtility.GetNearestDocumentKey(docKey, keyList);
-            return targetKey;
 
+            return targetKey;
         }
 
         bool DocumentFileIO.IsPassRequired(Key docKey)

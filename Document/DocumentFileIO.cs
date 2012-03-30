@@ -52,7 +52,7 @@ namespace NUInsatsu.Document
         /// 全ての登録済みドキュメントのリストを取得します。
         /// </summary>
         /// <returns>ドキュメント情報一覧</returns>
-        FileInfo[] GetAlll();
+        FileInfo[] GetAll();
 
         /// <summary>
         /// モーションから生成されたキーを与えて、それに最も近いドキュメントのキーを取得します。
