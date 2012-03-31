@@ -52,12 +52,12 @@ namespace NUInsatsu.UI
         /// <summary>
         /// メニュー画面に遷移します。
         /// </summary>
-        private void transMenuPage()
+        private void TransMenuPage()
         {
             // NavigationServiceと別スレッドでも画面遷移が行えるように、アクションを生成します.
             Action transAct = ()=>
                 {
-                       free();
+                       Free();
                        NavigationService.Navigate(new MenuPage());
                 };
 
@@ -68,11 +68,11 @@ namespace NUInsatsu.UI
         /// <summary>
         /// 顔認証を行う場合の印刷ページに移動します。
         /// </summary>
-        private void transPrintFacePassPage()
+        private void TransPrintFacePassPage()
         {
             Action transAct = () =>
                 {
-                    free();
+                    Free();
                     NavigationService.Navigate(new PrintFacePassPage());
                 };
 
@@ -83,7 +83,7 @@ namespace NUInsatsu.UI
         /// <summary>
         /// 画面遷移によりこの場面から離れる場合、必ず呼び出してください.
         /// </summary>
-        private void free()
+        private void Free()
         {
             // スケルトンセンサーのリソースを解放します
             skeletonSensor.Dispose();
@@ -125,19 +125,19 @@ namespace NUInsatsu.UI
 
                 if (manager.IsPassRequired(docKey))
                 {
-                    transPrintFacePassPage();
+                    TransPrintFacePassPage();
                 }
                 else
                 {
                     // 印刷
                     manager.Print(docKey);
 
-                    transMenuPage();
+                    TransMenuPage();
                 }
             }
             catch (DocumentNotFoundException)
             {
-                showRetryDialog("ドキュメントが見つかりませんでした。");
+                ShowRetryDialog("ドキュメントが見つかりませんでした。");
             }
             catch (Exception e)
             {
@@ -152,7 +152,7 @@ namespace NUInsatsu.UI
         /// エラーが起こり、リトライを尋ねるダイアログを表示します。
         /// </summary>
         /// <param name="message">表示するメッセージ</param>
-        private void showRetryDialog(String message)
+        private void ShowRetryDialog(String message)
         {
             MessageBoxResult result = MessageBox.Show(message, "失敗", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
@@ -165,7 +165,7 @@ namespace NUInsatsu.UI
 
                 case MessageBoxResult.No:
                     // ホームに戻る
-                    transMenuPage();
+                    TransMenuPage();
                     break;
             }
         }

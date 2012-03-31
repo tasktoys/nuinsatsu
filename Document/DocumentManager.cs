@@ -22,7 +22,7 @@ namespace NUInsatsu.Document
         /// </summary>
         private DocumentManager()
         {
-            selectTypeIO();
+            SelectTypeIO();
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace NUInsatsu.Document
         /// <summary>
         /// DocumentFileIOの種類をプロパティから設定します。
         /// </summary>
-        private void selectTypeIO()
+        private void SelectTypeIO()
         {
             Config config = Config.Load();
 

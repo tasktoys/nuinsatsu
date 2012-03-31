@@ -37,14 +37,14 @@ namespace NUInsatsu.Document
                     return item;
                 }
 
-                int dist = distance(motion.KeyString, item.KeyString);
+                int dist = Distance(motion.KeyString, item.KeyString);
 
                 // 距離が閾値以下ならば、目的のドキュメントの候補とみなします
                 if (dist <= threshold)
                 {
                     Console.WriteLine("[DistanceUtility] source: {0}", motion.KeyString);
                     Console.WriteLine("[DistanceUtility] target: {0}", item.KeyString);
-                    Console.WriteLine("[DistanceUtility] distance: {0}", dist);
+                    Console.WriteLine("[DistanceUtility] Distance: {0}", dist);
                     item.Distance = dist;
                     candidateList.Add(item);
                 }
@@ -70,7 +70,7 @@ namespace NUInsatsu.Document
         /// <param name="px">文字列1</param>
         /// <param name="py">文字列2</param>
         /// <returns>レーベンシュタイン距離</returns>
-        private static int distance(String px, String py)
+        private static int Distance(String px, String py)
         {
             int len1 = px.Length;
             int len2 = py.Length;

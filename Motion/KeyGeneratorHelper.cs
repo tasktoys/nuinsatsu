@@ -38,7 +38,7 @@ namespace NUInsatsu.Motion
 			    center[i] = (anklel[i] + ankler[i] + shoulderl[i] + shoulderr[i]) / 4;
 
 		    center[1] = head[1];
-		    data = centerize(data, center);
+		    data = Centerize(data, center);
 
 		    // 体の向きを真正面を向いているようにそろえる
 		    float theta = 0;
@@ -50,22 +50,22 @@ namespace NUInsatsu.Motion
 
 		    // 左肩が前で右肩が後ろのときは時計回り
 		    if (shoulderl[2] < shoulderr[2])
-			    data = rotate(data, -1 * theta);
+			    data = Rotate(data, -1 * theta);
 		    // 右肩が前で左肩が後ろのときは反時計回り
 		    else if (shoulderr[2] < shoulderl[2])
-			    data = rotate(data, theta);
+			    data = Rotate(data, theta);
 
 		    // 座標の規格化
 		    float ratio = (anklel[1] + ankler[1]) / 2 - head[1];
 		    if (0 < ratio)
-			    data = normalize(data, ratio);
+			    data = Normalize(data, ratio);
 		    else
-			    data = normalize(data, 1);
+			    data = Normalize(data, 1);
 
 		    return data;
 	    }
 
-        private float[,,] rotate(float[,,] data, float theta)
+        private float[,,] Rotate(float[,,] data, float theta)
         {
             for (int t = 0; t < data.GetLength(0); t++)
                 for (int joint = 0; joint < data.GetLength(1); joint++)
@@ -82,7 +82,7 @@ namespace NUInsatsu.Motion
             return data;
         }
 
-        private float[,,] centerize(float[,,] data, float[] center)
+        private float[,,] Centerize(float[,,] data, float[] center)
         {
             for (int t = 0; t < data.GetLength(0); t++)
                 for (int joint = 0; joint < data.GetLength(1); joint++)
@@ -91,7 +91,7 @@ namespace NUInsatsu.Motion
             return data;
         }
 
-        private float[,,] normalize(float[,,] data, float ratio)
+        private float[,,] Normalize(float[,,] data, float ratio)
         {
             for (int t = 0; t < data.GetLength(0); t++)
                 for (int joint = 0; joint < data.GetLength(1); joint++)

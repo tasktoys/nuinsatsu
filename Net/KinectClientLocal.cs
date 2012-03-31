@@ -33,12 +33,12 @@ namespace NUInsatsu.Net
         List<SkeletonTimeline> KinectClient.GetMotionList()
         {
             // キネクトと発音されるまで待機します
-            waitSaidKinect();
+            WaitSaidKinect();
 
             Config config = Config.Load();
 
             // モーションを取得し、XML文字列を生成します。
-            String xml = makeMotionXML(config.MotionTime);
+            String xml = MakeMotionXML(config.MotionTime);
 
             // XMLをパースし、構造化します。
             MotionResponseParser parser = new MotionResponseParser();
@@ -65,7 +65,7 @@ namespace NUInsatsu.Net
         /// <summary>
         /// キネクトと発音されるまで待機します。
         /// </summary>
-        private void waitSaidKinect()
+        private void WaitSaidKinect()
         {
             System.Console.WriteLine("[KinectClientLocal]wait voice recognized kinect");
 
@@ -84,7 +84,7 @@ namespace NUInsatsu.Net
         /// ボイスがRecognizedされた場合に呼び出されます.
         /// </summary>
         /// <remarks>
-        /// 「キネクト」と発音すると、<see cref="waitSaidKinect"/> のWaitOneされている部分から先に進みます。
+        /// 「キネクト」と発音すると、<see cref="WaitSaidKinect"/> のWaitOneされている部分から先に進みます。
         /// </remarks>
         /// <param name="sender">送信元オブジェクト</param>
         /// <param name="e">イベント情報</param>
@@ -110,7 +110,7 @@ namespace NUInsatsu.Net
         /// </remarks>
         /// <param name="motions">識別するモーション</param>
         /// <returns>キーとして利用してよい場合はtrue</returns>
-        private bool isValidMotionList(MotionList motions)
+        private bool IsValidMotionList(MotionList motions)
         {
             if (motions == null) return false;
 
@@ -133,7 +133,7 @@ namespace NUInsatsu.Net
         /// </summary>
         /// <param name="motiontime">モーション取得時間</param>
         /// <returns>生成されたメッセージ</returns>
-        private String makeMotionXML(int motiontime)
+        private String MakeMotionXML(int motiontime)
         {
             String sendMessage = null;
 
@@ -144,7 +144,7 @@ namespace NUInsatsu.Net
                 MotionList motions = skeletonSensor.GetMotionForSeconds(motiontime);
 
                 // モーションを利用できるかどうか検査します。
-                if (isValidMotionList(motions))
+                if (IsValidMotionList(motions))
                 {
                     Motion.KeyMaker keyMaker = new Motion.KeyMaker();
                     // モーションをXMLに変換します。

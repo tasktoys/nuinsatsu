@@ -72,12 +72,12 @@ namespace NUInsatsu.Kinect
                 var g = new Grammar(gb);
                 sre.LoadGrammar(g);
 
-                var t = new Thread(startThread);
+                var t = new Thread(StartThread);
                 t.Start();
             }
 		}
 
-        private void startThread()
+        private void StartThread()
         {
             kinectSource = new KinectAudioSource();
             kinectSource.SystemMode = SystemMode.OptibeamArrayOnly;

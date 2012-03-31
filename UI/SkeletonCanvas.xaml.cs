@@ -54,7 +54,7 @@ namespace NUInsatsu.UI
             PointCollection points = new PointCollection(ids.Length);
             for (int i = 0; i < ids.Length; ++i)
             {
-                points.Add(getDisplayPosition(joints[ids[i]], skeletonCanvas.Width, skeletonCanvas.Height));
+                points.Add(GetDisplayPosition(joints[ids[i]], skeletonCanvas.Width, skeletonCanvas.Height));
             }
 
             Polyline polyline = new Polyline();
@@ -71,7 +71,7 @@ namespace NUInsatsu.UI
         /// <param name="screenWidth">画面の横幅</param>
         /// <param name="screenWeight">画面の縦幅</param>
         /// <returns>変換された画面上の座標</returns>
-        private Point getDisplayPosition(Joint joint, double screenWidth, double screenHeight)
+        private Point GetDisplayPosition(Joint joint, double screenWidth, double screenHeight)
         {
             float depthX, depthY;
 
@@ -124,7 +124,7 @@ namespace NUInsatsu.UI
                     // Draw joints
                     foreach (Joint joint in data.Joints)
                     {
-                        Point jointPos = getDisplayPosition(joint, skeletonCanvas.Width, skeletonCanvas.Height);
+                        Point jointPos = GetDisplayPosition(joint, skeletonCanvas.Width, skeletonCanvas.Height);
                         Line jointLine = new Line();
                         jointLine.X1 = jointPos.X - 3;
                         jointLine.X2 = jointLine.X1 + 6;

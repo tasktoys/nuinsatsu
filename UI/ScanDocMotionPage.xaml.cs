@@ -40,25 +40,6 @@ namespace NUInsatsu.UI
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
         }
 
-        private void kinectButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxResult result = MessageBox.Show("パスワードを入力しますか？", "確認", button, MessageBoxImage.Asterisk);
-
-            switch (result)
-            {
-                case MessageBoxResult.Yes:
-                    NavigationService.Navigate(new ScanFacePassPage());
-                    break;
-                case MessageBoxResult.No:
-                    MessageBox.Show("登録が完了しました", "確認", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NavigationService.Navigate(new MenuPage());
-                    break;
-            }
-
-            skeletonSensor.Dispose();
-        }
-
         /// <summary>
         /// メニューに画面遷移します。
         /// </summary>
@@ -66,9 +47,18 @@ namespace NUInsatsu.UI
         {
             Action act = () =>
             {
+                Free();
                 NavigationService.Navigate(new MenuPage());
             };
             Dispatcher.Invoke(act);
+        }
+
+        /// <summary>
+        /// このページが持つリソースを解放します。
+        /// </summary>
+        private void Free()
+        {
+            skeletonSensor.Dispose();
         }
 
 

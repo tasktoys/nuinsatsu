@@ -59,11 +59,11 @@ namespace NUInsatsu.Kinect
 		/// <summary>
 		/// カメラの映像を画像として保存します
 		/// </summary>
-		public string capture()
+		public string Capture()
 		{
             BitmapFrame bmpFrame = BitmapFrame.Create(picture);
 
-			FileStream stream = new FileStream(@"capture.jpeg", FileMode.Create);
+			FileStream stream = new FileStream(@"Capture.jpeg", FileMode.Create);
 
 			JpegBitmapEncoder jpenc = new JpegBitmapEncoder();
 
@@ -72,7 +72,7 @@ namespace NUInsatsu.Kinect
 
 			stream.Close();
 
-			FileStream fstr = File.Open("capture.jpeg", FileMode.Open, FileAccess.Read);
+			FileStream fstr = File.Open("Capture.jpeg", FileMode.Open, FileAccess.Read);
 			byte[] bytes = new byte[fstr.Length];
 			string str;
 			fstr.Read(bytes, 0, bytes.Length);
