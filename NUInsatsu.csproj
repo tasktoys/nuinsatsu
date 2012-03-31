@@ -69,6 +69,7 @@
     <Compile Include="Document\DocumentNotFoundException.cs" />
     <Compile Include="Document\LocalFileIO.cs" />
     <Compile Include="Document\PrintController.cs" />
+    <Compile Include="Document\ScanController.cs" />
     <Compile Include="Kinect\Camera.cs" />
     <Compile Include="Kinect\IVoiceRecognizer.cs" />
     <Compile Include="Kinect\SkeletonSensorStub.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="UI\ScanPage.xaml.cs">
       <DependentUpon>ScanPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SharedData.cs" />
     <Compile Include="UI\SkeletonCanvas.xaml.cs">
       <DependentUpon>SkeletonCanvas.xaml</DependentUpon>
     </Compile>
@@ -208,6 +210,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\customLogo.gif1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

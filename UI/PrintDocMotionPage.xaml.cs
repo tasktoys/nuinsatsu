@@ -96,26 +96,26 @@ namespace NUInsatsu.UI
         /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            tryPrint();
+            TryPrint();
         }
 
         /// <summary>
         /// 印刷処理を起動します。
         /// </summary>
-        private void tryPrint()
+        private void TryPrint()
         {
-            Thread thread = new Thread(print);
+            Thread thread = new Thread(Print);
             thread.Start();
         }
 
         /// <summary>
         /// 印刷を行います。
         /// </summary>
-        private void print()
+        private void Print()
         {
             try
             {
-                KinectClient client = KinectClientUtility.CreateKinectClientUtility();
+                KinectClient client = KinectClientUtility.CreateKinectClientInstance();
                 List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(client);
 
                 Key docKeyByMotion = KinectClientUtility.GetKey(list);
@@ -160,7 +160,7 @@ namespace NUInsatsu.UI
             {
                 case MessageBoxResult.Yes:
                     // 印刷処理にトライする
-                    tryPrint();
+                    TryPrint();
                     break;
 
                 case MessageBoxResult.No:

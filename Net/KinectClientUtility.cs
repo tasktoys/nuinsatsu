@@ -15,7 +15,7 @@ namespace NUInsatsu.Net
         /// 設定値から適切なKinectClientインターフェースの実装を選択し、そのインスタンスを生成します.
         /// </summary>
         /// <returns>KinectClientインターフェースを実装したクラスのインスタンス</returns>
-        public static KinectClient CreateKinectClientUtility()
+        public static KinectClient CreateKinectClientInstance()
         {
             KinectClient client = null;
             Config config = Config.Load();

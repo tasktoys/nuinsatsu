@@ -15,6 +15,7 @@ namespace NUInsatsu.Document
         private static DocumentManager instance = new DocumentManager();
         private DocumentFileIO io = null;
         private PrintController printer = null;
+        private ScanController scanner = null;
 
         /// <summary>
         /// コンストラクタです.
@@ -85,6 +86,15 @@ namespace NUInsatsu.Document
             FileInfo fileInfo = io.Get(docKey);
 
             printer.Print(fileInfo);
+        }
+
+        /// <summary>
+        /// スキャン処理を行います。
+        /// </summary>
+        public FileInfo Scan()
+        {
+            scanner = new ScanController();
+            return scanner.Scan();
         }
 
     }
