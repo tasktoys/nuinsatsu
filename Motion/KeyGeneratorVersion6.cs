@@ -21,7 +21,28 @@ namespace NUInsatsu.Motion
             {
                 move_threshold[i] = 0.2F;
             }
+            move_threshold[(int)JointID.Spine] = 0.2F;
+            move_threshold[(int)JointID.ShoulderCenter] = 0.2F;
+            move_threshold[(int)JointID.Head] = 0.1F;
+            move_threshold[(int)JointID.ShoulderLeft] = 0.2F;
 
+            move_threshold[(int)JointID.ElbowLeft] = 0.2F;
+            move_threshold[(int)JointID.WristLeft] = 0.2F;
+            move_threshold[(int)JointID.HandLeft] = 0.1F;
+            move_threshold[(int)JointID.ShoulderRight] = 0.2F;
+            move_threshold[(int)JointID.ElbowRight] = 0.2F;
+
+            move_threshold[(int)JointID.WristRight] = 0.2F;
+            move_threshold[(int)JointID.HandRight] = 0.1F;
+            move_threshold[(int)JointID.HipLeft] = 0.2F;
+            move_threshold[(int)JointID.KneeLeft] = 0.2F;
+            move_threshold[(int)JointID.AnkleLeft] = 0.2F;
+
+            move_threshold[(int)JointID.FootLeft] = 0.2F;
+            move_threshold[(int)JointID.HipRight] = 0.2F;
+            move_threshold[(int)JointID.KneeRight] = 0.25F;
+            move_threshold[(int)JointID.AnkleRight] = 0.2F;
+            move_threshold[(int)JointID.FootRight] = 0.2F;
             for (int i = 0; i < area_threshold.GetLength(0); i++)
             {
                 area_threshold[i] = 0.2F;
