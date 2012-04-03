@@ -10,6 +10,9 @@
     <DockPanel>
         <my:PageHeader x:Name="pageHeader" Title="スキャンを行います" DockPanel.Dock="Top"/>
         <TextBlock Text="用紙をセットし、スキャンを押してください" DockPanel.Dock="Top"/>
+        <Image Height="159" Name="image1" Stretch="Fill" Width="455" DockPanel.Dock="Top" 
+               VerticalAlignment="Center"
+               Source="/NUInsatsu;component/Images/scan.jpg" HorizontalAlignment="Center" Margin="20" />
         <DockPanel Style="{StaticResource Bottom}">
             <Button x:Name="prevButton"  Content="戻る" Style="{StaticResource PrevButton}" Click="prevButton_Click" />
             <Button Name="scanButton" Content="スキャン" Style="{StaticResource NextButton}" Click="scanButton_Click" />
