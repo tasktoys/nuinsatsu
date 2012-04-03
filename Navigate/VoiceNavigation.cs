@@ -13,7 +13,6 @@ namespace NUInsatsu.Navigate
 		private SpVoice tts;
 		private System.Threading.Timer cdtimer;
 		private int counter;
-		string name;
 
 		public VoiceNavigation()
 		{
@@ -27,7 +26,7 @@ namespace NUInsatsu.Navigate
                 while (true)
                 {
                     tts.Voice = voiceInfo.Item(i);// 音声の設定
-                    name = tts.Voice.GetAttribute("NAME");
+                    string name = tts.Voice.GetAttribute("NAME");
                     if (name.CompareTo(haruka) == 0)
                     {
                         break;
@@ -47,26 +46,29 @@ namespace NUInsatsu.Navigate
             }
 		}
 
-		public void PlaySound(string text)
+		public void PlaySoundSync(string text)
 		{
 			Kinect.VoiceDictionary voiceDictionary = new Kinect.VoiceDictionary();
 			string navi = voiceDictionary.DiscToNavi(text);
-			string s = navi.Replace("<", "&lt;");
-			s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
-			tts.Speak(s, flg);          // 読み上げ
+            PlaySync(navi);
 		}
 
-		private void PlaySync(string text)
+        public void PlaySoundASync(string text)
+        {
+            Kinect.VoiceDictionary voiceDictionary = new Kinect.VoiceDictionary();
+            string navi = voiceDictionary.DiscToNavi(text);
+            PlayASync(navi);
+        }
+
+		private void PlayASync(string text)
 		{
-			Kinect.VoiceDictionary voiceDictionary = new Kinect.VoiceDictionary();
 			string s = text.Replace("<", "&lt;");
 			s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
 			tts.Speak(s, cdflg);          // 読み上げ
 		}
 
-		private void PlayAsync(string text)
+		private void PlaySync(string text)
 		{
-			Kinect.VoiceDictionary voiceDictionary = new Kinect.VoiceDictionary();
 			string s = text.Replace("<", "&lt;");
 			s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
 			tts.Speak(s, flg);          // 読み上げ
@@ -74,14 +76,14 @@ namespace NUInsatsu.Navigate
 
 		public void PlayLength(int length)
 		{
-			PlaySound("LENGTH1");
-			PlaySync(length.ToString());
-			PlaySound("LENGTH2");
+			PlaySoundSync("LENGTH1");
+			PlayASync(length.ToString());
+			PlaySoundSync("LENGTH2");
 		}
 
 		public void PlayNum(int num)
 		{
-			PlaySync(num.ToString());
+			PlayASync(num.ToString());
 		}
 
 		public void CountDown(int count)
@@ -96,7 +98,7 @@ namespace NUInsatsu.Navigate
 		{
 			if (counter > 0)
 			{
-				PlaySync(counter.ToString());
+				PlayASync(counter.ToString());
 				counter--;
 			}
 			else

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace NUInsatsu.Kinect
 {
+
 	class VoiceDictionary
 	{
 		// コマンド→ナビの辞書
@@ -17,10 +18,13 @@ namespace NUInsatsu.Kinect
 			AddCommDic();
 		}
 
-		// 読み上げ用辞書への追加
+
+        /// <summary>
+        /// 読み上げ用辞書への追加
+        /// </summary>
 		private void AddNaviDic() {
 			navidic.Add("WELCOME", "ニュイマジオへようこそ");
-			navidic.Add("SELECT_SCAN_OR_PRINT", "スキャンまたはプリントを選択してください");
+            navidic.Add("ENTRY_OR_PRINT", "印刷または登録を選択してください");
 
             navidic.Add("PRINTING", "印刷中です");
             navidic.Add("END_ENTRY", "登録が完了しました");
@@ -28,9 +32,7 @@ namespace NUInsatsu.Kinect
             navidic.Add("SCAN_START", "紙を設置し、スキャンを選択してください");
 			navidic.Add("SCAN_COMPLETE", "スキャンが完了しました");
 
-			navidic.Add("BACK", "メニュー画面へ移動します");
 			navidic.Add("CONFIRM_FACEPASS", "顔認証を追加しますか？");
-			navidic.Add("ENTRY_OR_PRINT", "印刷または登録を選択してください");
 
             navidic.Add("WAIT_FACE", "顔情報取得の準備が完了しました。");
             navidic.Add("START_FACE", "顔情報の取得を開始します");
@@ -41,7 +43,9 @@ namespace NUInsatsu.Kinect
             navidic.Add("END_MOTION", "モーションの取得が完了しました");
 		}
 
-		// コマンド用辞書への追加
+		/// <summary>
+        /// コマンド用辞書への追加
+		/// </summary>
 		private void AddCommDic()
 		{
 			commdic.Add("おーけー", "OK");

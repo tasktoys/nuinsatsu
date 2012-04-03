@@ -28,11 +28,11 @@ namespace NUInsatsu.Net
             VoiceNavigation sound = new VoiceNavigation();
 
             //「Kinect」といわれるまで待機
-            sound.PlaySound("WAIT_MOTION");
+            sound.PlaySoundSync("WAIT_MOTION");
 
             List<SkeletonTimeline> motionList = MakeMotionList();
 
-            sound.PlaySound("START_MOTION");
+            sound.PlaySoundSync("START_MOTION");
 
             Config config = Config.Load();
 

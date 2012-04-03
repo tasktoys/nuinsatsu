@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using NUInsatsu.Document;
 using System.Runtime.InteropServices;
 using System.IO;
+using NUInsatsu.Navigate;
 
 namespace NUInsatsu.UI
 {
@@ -22,9 +23,38 @@ namespace NUInsatsu.UI
     /// </summary>
     public partial class ScanPage : Page
     {
+
         public ScanPage()
         {
             InitializeComponent();
+
+            VoiceNavigation navigation = new VoiceNavigation();
+            navigation.PlaySoundASync("SCAN_START");
+        }
+
+        /// <summary>
+        /// リソースの解放を行います。
+        /// </summary>
+        private void Free()
+        {
+        }
+
+        /// <summary>
+        /// ScanDocMotionPageに遷移します。
+        /// </summary>
+        private void TransScanDocMotionPage()
+        {
+            Free();
+            NavigationService.Navigate(new ScanDocMotionPage());
+        }
+
+        /// <summary>
+        /// メニューに遷移します。
+        /// </summary>
+        private void TransMenuPage()
+        {
+            Free();
+            NavigationService.Navigate(new MenuPage());
         }
 
         private void scanButton_Click(object sender, RoutedEventArgs e)
@@ -33,7 +63,7 @@ namespace NUInsatsu.UI
             try
             {
                 SharedData.ScanImageFile = manager.Scan();
-                NavigationService.Navigate(new ScanDocMotionPage());
+                TransScanDocMotionPage();
             }
             catch (COMException)
             {
@@ -44,7 +74,7 @@ namespace NUInsatsu.UI
 
         private void prevButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MenuPage());
+            TransMenuPage();
         }
     }
 }

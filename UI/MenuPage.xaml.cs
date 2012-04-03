@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NUInsatsu.Kinect;
+using NUInsatsu.Navigate;
 
 namespace NUInsatsu.UI
 {
@@ -29,6 +30,9 @@ namespace NUInsatsu.UI
             voiceRecognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
 
             voiceRecognizer.Recognized += new EventHandler<SaidWordArgs>(voiceRecognizer_Recognized);
+
+            VoiceNavigation navigation = new VoiceNavigation();
+            navigation.PlaySoundASync("ENTRY_OR_PRINT");
         }
 
         void voiceRecognizer_Recognized(object sender, SaidWordArgs e)
@@ -62,6 +66,15 @@ namespace NUInsatsu.UI
         }
 
         /// <summary>
+        /// 管理ページに遷移します。
+        /// </summary>
+        private void TransAdminPage()
+        {
+            Free();
+            NavigationService.Navigate(new AdminPage());
+        }
+
+        /// <summary>
         /// このページのリソースを解放します。
         /// </summary>
         private void Free()
@@ -71,7 +84,7 @@ namespace NUInsatsu.UI
         }
 
         /// <summary>
-        /// ドキュメントの登録画面に遷移します。
+        /// ボタンを押したら呼び出され、ドキュメントの登録画面に遷移します。
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">routed event</param>
@@ -81,7 +94,7 @@ namespace NUInsatsu.UI
         }
 
         /// <summary>
-        /// ドキュメントの印刷画面に遷移します。
+        /// ボタンを押したら呼び出され、ドキュメントの印刷画面に遷移します。
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">routed event</param>
@@ -90,9 +103,14 @@ namespace NUInsatsu.UI
             TransPrintDocMotionPage();
         }
 
+        /// <summary>
+        /// ボタンを押したら呼び出され、管理画面に遷移します。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void adminButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AdminPage());
+            TransAdminPage();
         }
     }
 }

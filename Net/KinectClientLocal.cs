@@ -45,7 +45,7 @@ namespace NUInsatsu.Net
             VoiceNavigation sound = new VoiceNavigation();
 
             //「Kinect」といわれるまで待機
-            sound.PlaySound("WAIT_MOTION");
+            sound.PlaySoundSync("WAIT_MOTION");
 
             // キネクトと発音されるまで待機します
             WaitSaidKinect();
@@ -57,7 +57,7 @@ namespace NUInsatsu.Net
                 return stub.MakeMotionList();
             }
 
-            sound.PlaySound("START_MOTION");
+            sound.PlaySoundSync("START_MOTION");
 
             Config config = Config.Load();
 
