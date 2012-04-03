@@ -29,9 +29,6 @@ namespace NUInsatsu.UI
 
         private void scanButton_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBoxImage image = MessageBoxImage.Information;
-            //MessageBox.Show("スキャン中です", "Please wait", MessageBoxButton.OK, image);
-
             DocumentManager manager = DocumentManager.GetInstance();
             try
             {
