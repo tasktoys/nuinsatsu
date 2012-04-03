@@ -97,5 +97,14 @@ namespace NUInsatsu.Document
             return scanner.Scan();
         }
 
+        /// <summary>
+        /// ドキュメント入出力クラスのインスタンスを取得します
+        /// </summary>
+        /// <returns>DocumentFileIOのインスタンス</returns>
+        public DocumentFileIO GetIOInstance()
+        {
+            return io;
+        }
+
     }
 }

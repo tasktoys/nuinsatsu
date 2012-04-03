@@ -43,6 +43,16 @@ namespace NUInsatsu.UI
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
         }
 
+        private void TransScanPage()
+        {
+            Action act = () =>
+            {
+                Free();
+                NavigationService.Navigate(new ScanPage());
+            };
+            Dispatcher.Invoke(act);
+        }
+
         /// <summary>
         /// メニューに画面遷移します。
         /// </summary>
@@ -94,10 +104,19 @@ namespace NUInsatsu.UI
 
                 NUInsatsu.Motion.Key docKeyByMotion = KinectClientUtility.GetKey(list);
 
-                DocumentManager manager = DocumentManager.GetInstance();
+                DocumentFileIO io = DocumentManager.GetInstance().GetIOInstance();
+                try
+                {
+                    io.GetNearestDocument(docKeyByMotion);
+                    ShowRetryDialog("モーションが重複しています。\nモーションを登録しなおしますか？");
+                    return;
+                }
+                catch (DocumentNotFoundException)
+                {
+                    // ドキュメントが見つからない場合・・・登録できる
+                }
 
-                LocalFileIO io = new LocalFileIO();
-                io.Put(docKeyByMotion, SharedData.ScanImageFile );
+                io.Put(docKeyByMotion, SharedData.ScanImageFile);
 
                 MessageBox.Show("登録が完了しました。");
                 TransMenuPage();
@@ -107,9 +126,35 @@ namespace NUInsatsu.UI
                 MessageBox.Show("音声エンジン（Speech Platform Runtime）か、音声データ「はるか」がインストールされていません。");
                 TransMenuPage();
             }
+            catch (NMXPErrorMessageException)
+            {
+                ShowRetryDialog("フレームの認識数が増減しました。\nリトライしますか？");
+            }
             catch (COMException)
             {
                 Console.WriteLine("[ScanDocMotionPage]スキャナーが接続されていません。");
+            }
+        }
+
+        /// <summary>
+        /// エラーが起こり、リトライを尋ねるダイアログを表示します。
+        /// </summary>
+        /// <param name="message">表示するメッセージテキスト</param>
+        private void ShowRetryDialog(String message)
+        {
+            MessageBoxResult result = MessageBox.Show(message, "失敗", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    // 印刷処理にトライする
+                    TryEntry();
+                    break;
+
+                case MessageBoxResult.No:
+                    // ホームに戻る
+                    TransMenuPage();
+                    break;
             }
         }
 

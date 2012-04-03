@@ -141,12 +141,16 @@ namespace NUInsatsu.UI
             }
             catch (DocumentNotFoundException)
             {
-                ShowRetryDialog("ドキュメントが見つかりませんでした。");
+                ShowRetryDialog("ドキュメントが見つかりませんでした。\nリトライしますか？");
             }
             catch (NotInstalledSpeechLibraryException)
             {
                 MessageBox.Show("音声エンジン（Speech Platform Runtime）か、音声データ「はるか」がインストールされていません。");
                 TransMenuPage();
+            }
+            catch (NMXPErrorMessageException)
+            {
+                ShowRetryDialog("フレームの認識数が変化しました。\nリトライしますか？");
             }
             //catch (Exception e)
             //{
@@ -160,7 +164,7 @@ namespace NUInsatsu.UI
         /// <summary>
         /// エラーが起こり、リトライを尋ねるダイアログを表示します。
         /// </summary>
-        /// <param name="message">表示するメッセージ</param>
+        /// <param name="message">表示するメッセージテキスト</param>
         private void ShowRetryDialog(String message)
         {
             MessageBoxResult result = MessageBox.Show(message, "失敗", MessageBoxButton.YesNo, MessageBoxImage.Information);
