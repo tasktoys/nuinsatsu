@@ -16,18 +16,27 @@ namespace NUInsatsu.Net
     /// </summary>
     class KinectClientLocal : KinectClient
     {
+        private bool isCanceled = false;
+
         /// <summary>
         /// キネクトと言うまで待機するイベント
         /// </summary>
-        private readonly AutoResetEvent SaidKinectEvent = new AutoResetEvent(false);
+        private readonly AutoResetEvent saidKinectEvent = new AutoResetEvent(false);
 
         bool KinectClient.Connect()
         {
+            isCanceled = false;
             return true;
         }
         
         bool KinectClient.Close()
         {
+            // キャンセルフラグをtrueに。
+            isCanceled = true;
+
+            // キネクトと発音するのを待機中なのを先に進める
+            saidKinectEvent.Set();
+
             return true;
         }
 
@@ -40,6 +49,14 @@ namespace NUInsatsu.Net
 
             // キネクトと発音されるまで待機します
             WaitSaidKinect();
+
+            // もしキャンセルされたらダミーデータを返す
+            if (isCanceled)
+            {
+                KinectClientStub stub = new KinectClientStub();
+                return stub.MakeMotionList();
+            }
+
             sound.PlaySound("START_MOTION");
 
             Config config = Config.Load();
@@ -87,7 +104,7 @@ namespace NUInsatsu.Net
             EventHandler<SaidWordArgs> voice_RecognizedHandler = new EventHandler<SaidWordArgs>(voice_Recognized);
             recognizer.Recognized += voice_RecognizedHandler;
             // キネクトと発音されるまで待機
-            SaidKinectEvent.WaitOne();
+            saidKinectEvent.WaitOne();
             // イベントを削除
             recognizer.Recognized -= voice_RecognizedHandler;
         }
@@ -109,7 +126,7 @@ namespace NUInsatsu.Net
             if (rectext == "kinect")
             {
                 // 発音がキネクトだった場合、WaitOneから先に進むようイベントをセットします.
-                SaidKinectEvent.Set();
+                saidKinectEvent.Set();
             }
         }
 

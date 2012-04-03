@@ -17,27 +17,34 @@ namespace NUInsatsu.Navigate
 
 		public VoiceNavigation()
 		{
-			tts = new SpVoice();      // 音声合成のオブジェクト
-			ISpeechObjectTokens voiceInfo;    // 音声の情報
-			voiceInfo = tts.GetVoices("", "");
-			string haruka = "Microsoft Server Speech Text to Speech Voice (ja-JP, Haruka)";
-			int i = 0;
-			while (true)
-			{
-				tts.Voice = voiceInfo.Item(i);// 音声の設定
-				name = tts.Voice.GetAttribute("NAME");
-				if (name.CompareTo(haruka) == 0)
-				{
-					break;
-				}
-				i++;
-			}
-			System.Console.Out.WriteLine();
+            try
+            {
+                tts = new SpVoice();      // 音声合成のオブジェクト
+                ISpeechObjectTokens voiceInfo;    // 音声の情報
+                voiceInfo = tts.GetVoices("", "");
+                string haruka = "Microsoft Server Speech Text to Speech Voice (ja-JP, Haruka)";
+                int i = 0;
+                while (true)
+                {
+                    tts.Voice = voiceInfo.Item(i);// 音声の設定
+                    name = tts.Voice.GetAttribute("NAME");
+                    if (name.CompareTo(haruka) == 0)
+                    {
+                        break;
+                    }
+                    i++;
+                }
+                System.Console.Out.WriteLine();
 
-			tts.Volume = int.Parse("100");                // 音量の設定
-			tts.Rate = int.Parse("-1");                    // 速度の設定
-			flg = SpeechVoiceSpeakFlags.SVSFIsXML /*| SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak*/;
-			cdflg = SpeechVoiceSpeakFlags.SVSFIsXML | SpeechVoiceSpeakFlags.SVSFlagsAsync /*| SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak*/;
+                tts.Volume = int.Parse("100");                // 音量の設定
+                tts.Rate = int.Parse("-1");                    // 速度の設定
+                flg = SpeechVoiceSpeakFlags.SVSFIsXML /*| SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak*/;
+                cdflg = SpeechVoiceSpeakFlags.SVSFIsXML | SpeechVoiceSpeakFlags.SVSFlagsAsync /*| SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak*/;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                throw new NotInstalledSpeechLibraryException();
+            }
 		}
 
 		public void PlaySound(string text)

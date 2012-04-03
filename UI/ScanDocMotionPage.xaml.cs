@@ -18,6 +18,7 @@ using NUInsatsu.Motion;
 using NUInsatsu.Document;
 using System.IO;
 using System.Runtime.InteropServices;
+using NUInsatsu.Navigate;
 
 namespace NUInsatsu.UI
 {
@@ -27,6 +28,8 @@ namespace NUInsatsu.UI
     public partial class ScanDocMotionPage : Page
     {
         ISkeletonSensor skeletonSensor;
+        KinectClient client = null;
+        bool isFree = false;
 
         public ScanDocMotionPage()
         {
@@ -59,6 +62,8 @@ namespace NUInsatsu.UI
         private void Free()
         {
             skeletonSensor.Dispose();
+            client.Close();
+            isFree = true;
         }
 
 
@@ -78,8 +83,15 @@ namespace NUInsatsu.UI
         {
             try
             {
-                KinectClient client = KinectClientUtility.CreateKinectClientInstance();
+                client = KinectClientUtility.CreateKinectClientInstance();
                 List<SkeletonTimeline> list = client.GetMotionList();
+
+                // キネクトと発音される前に
+                if (isFree)
+                {
+                    return;
+                }
+
                 NUInsatsu.Motion.Key docKeyByMotion = KinectClientUtility.GetKey(list);
 
                 DocumentManager manager = DocumentManager.GetInstance();
@@ -88,6 +100,11 @@ namespace NUInsatsu.UI
                 io.Put(docKeyByMotion, SharedData.ScanImageFile );
 
                 MessageBox.Show("登録が完了しました。");
+                TransMenuPage();
+            }
+            catch (NotInstalledSpeechLibraryException)
+            {
+                MessageBox.Show("音声エンジン（Speech Platform Runtime）か、音声データ「はるか」がインストールされていません。");
                 TransMenuPage();
             }
             catch (COMException)
@@ -99,6 +116,11 @@ namespace NUInsatsu.UI
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             TryEntry();
+        }
+
+        private void prevButton_Click(object sender, RoutedEventArgs e)
+        {
+            TransMenuPage();
         }
     }
 }

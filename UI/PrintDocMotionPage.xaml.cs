@@ -16,6 +16,7 @@ using NUInsatsu.Net;
 using NUInsatsu.Kinect;
 using NUInsatsu.Motion;
 using NUInsatsu.Document;
+using NUInsatsu.Navigate;
 
 namespace NUInsatsu.UI
 {
@@ -26,6 +27,8 @@ namespace NUInsatsu.UI
     {
         EventHandler<SkeletonFrameReadyEventArgs> skeletonFrameReadyHandler;
         NUInsatsu.Kinect.ISkeletonSensor skeletonSensor;
+        private KinectClient kinectClient;
+        private bool isFree = false;
 
         public PrintDocMotionPage()
         {
@@ -87,6 +90,8 @@ namespace NUInsatsu.UI
         {
             // スケルトンセンサーのリソースを解放します
             skeletonSensor.Dispose();
+            kinectClient.Close();
+            isFree = true;
         }
 
         /// <summary>
@@ -115,11 +120,17 @@ namespace NUInsatsu.UI
         {
             try
             {
-                KinectClient client = KinectClientUtility.CreateKinectClientInstance();
-                List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(client);
+                kinectClient = KinectClientUtility.CreateKinectClientInstance();
+                List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(kinectClient);
+
+                // キネクト発音を待機中にフリーが呼ばれた場合、印刷を中断
+                if (isFree)
+                {
+                    return;
+                }
 
                 Key docKeyByMotion = KinectClientUtility.GetKey(list);
-                
+
                 DocumentManager manager = DocumentManager.GetInstance();
                 Key docKey = manager.GetNearestDocumentKey(docKeyByMotion);
 
@@ -132,12 +143,17 @@ namespace NUInsatsu.UI
             {
                 ShowRetryDialog("ドキュメントが見つかりませんでした。");
             }
-            catch (Exception e)
+            catch (NotInstalledSpeechLibraryException)
             {
-                Console.WriteLine("[PrintDocMotionPage]予期しない例外が発生しました。 {0}", e.Message);
-                String errorMessage = String.Format("予期しない例外が発生しました。\n ErrorMessage: {0}\n StackTrace:{1}", e.Message, e.StackTrace);
-                MessageBox.Show(errorMessage);
+                MessageBox.Show("音声エンジン（Speech Platform Runtime）か、音声データ「はるか」がインストールされていません。");
+                TransMenuPage();
             }
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("[PrintDocMotionPage]予期しない例外が発生しました。 {0}", e.Message);
+            //    String errorMessage = String.Format("予期しない例外が発生しました。\n ErrorMessage: {0}\n StackTrace:{1}", e.Message, e.StackTrace);
+            //    MessageBox.Show(errorMessage);
+            //}
             
         }
 
@@ -161,6 +177,11 @@ namespace NUInsatsu.UI
                     TransMenuPage();
                     break;
             }
+        }
+
+        private void prevButton_Click(object sender, RoutedEventArgs e)
+        {
+            TransMenuPage();
         }
     }
 }

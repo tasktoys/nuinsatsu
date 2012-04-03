@@ -36,7 +36,7 @@ namespace NUInsatsu.Net
         /// <summary>
         /// サーバと接続し座標データを取得します.
         /// </summary>
-        /// <param name="client">サーバと接続するためのクライアント</param>
+        /// <param name="kinectClient">サーバと接続するためのクライアント</param>
         /// <returns>取得した座標データ</returns>
         public static List<SkeletonTimeline> GetMotionList(KinectClient client)
         {

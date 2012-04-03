@@ -10,7 +10,8 @@
     <DockPanel>
         <my:PageHeader x:Name="pageHeader" Title="用紙をセットし、スキャンを押してください" DockPanel.Dock="Top"/>
         <DockPanel Style="{StaticResource Bottom}">
-            <Button Name="scanButton" Content="Scan" Style="{StaticResource NextButton}" Click="scanButton_Click" />
+            <Button x:Name="prevButton"  Content="戻る" Style="{StaticResource PrevButton}" Click="prevButton_Click" />
+            <Button Name="scanButton" Content="スキャン" Style="{StaticResource NextButton}" Click="scanButton_Click" />
         </DockPanel>
     </DockPanel>
 </Page>

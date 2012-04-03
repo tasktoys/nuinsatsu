@@ -44,7 +44,7 @@ namespace NUInsatsu.Net
             return motionList;
         }
 
-        private List<SkeletonTimeline> MakeMotionList()
+        public List<SkeletonTimeline> MakeMotionList()
         {
             // SkeletonTimelieのリストを作る（全データ)
             List<SkeletonTimeline> motionList = new List<SkeletonTimeline>();

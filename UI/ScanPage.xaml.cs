@@ -41,5 +41,10 @@ namespace NUInsatsu.UI
                 MessageBox.Show("スキャナーが接続されていません。");
             }
         }
+
+        private void prevButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MenuPage());
+        }
     }
 }

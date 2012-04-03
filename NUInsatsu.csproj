@@ -82,6 +82,7 @@
     <Compile Include="Motion\Point.cs" />
     <Compile Include="Motion\Skeleton.cs" />
     <Compile Include="Motion\SkeletonTimeline.cs" />
+    <Compile Include="Navigate\NotInstalledSpeechLibraryException.cs" />
     <Compile Include="Navigate\VoiceNavigation.cs" />
     <Compile Include="Net\ConnectFailedException.cs" />
     <Compile Include="Net\KinectClient.cs" />

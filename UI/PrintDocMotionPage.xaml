@@ -11,7 +11,9 @@
         <my:PageHeader x:Name="pageHeader" DockPanel.Dock="Top" Title="モーションを取得します" />
         <TextBlock Text="フレームが表示されたら「キネクト」と発音してください。" DockPanel.Dock="Top"/>
         <my:SkeletonCanvas x:Name="skeletonCanvas" DockPanel.Dock="Top" HorizontalAlignment="Center" />
-        <DockPanel Style="{StaticResource Bottom}"></DockPanel>
+        <DockPanel Style="{StaticResource Bottom}">
+            <Button x:Name="prevButton"  Content="戻る" Style="{StaticResource PrevButton}" Click="prevButton_Click" />
+        </DockPanel>
         
     </DockPanel>
 </Page>

@@ -21,7 +21,6 @@ namespace NUInsatsu.Document
         /// <exception cref="COMException">スキャナーが繋がっていない場合</exception>
         public FileInfo Scan()
         {
-
             WIA.CommonDialog dlg = new WIA.CommonDialog();
             ImageFile Image = dlg.ShowAcquireImage(WiaDeviceType.ScannerDeviceType,
                          WiaImageIntent.ColorIntent, WiaImageBias.MaximizeQuality,
