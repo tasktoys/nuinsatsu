@@ -17,7 +17,7 @@ namespace NUInsatsu.Motion
 		    float[] shoulderr = new float[3];
 		    float[] head = new float[3];
 
-		    for (int i = 0; i < 2; i++) {
+		    for (int i = 0; i < 3; i++) {
 			    anklel[i] = timelinearray[0,(int)JointID.AnkleLeft, i];
 			    ankler[i] = timelinearray[0,(int)JointID.AnkleRight, i];
 			    shoulderl[i] = timelinearray[0,(int)JointID.HandLeft, i];
@@ -110,5 +110,30 @@ namespace NUInsatsu.Motion
             return distance;
         }
 
+        public SkeletonTimeline StandardlizationWrapper(SkeletonTimeline timeline)
+        {
+            SkeletonTimeline standardlized_timeline = new SkeletonTimeline();
+            Skeleton initial_state = timeline.ElementAt<Skeleton>(0);
+            standardlized_timeline = CenterrizeWrapper(timeline, initial_state);
+            standardlized_timeline = RotateWrapper(standardlized_timeline, initial_state);
+            standardlized_timeline = NormalizeWrapper(standardlized_timeline, initial_state);
+            return standardlized_timeline;
+        }
+
+        private SkeletonTimeline CenterrizeWrapper(SkeletonTimeline timeline, Skeleton initial_state)
+        {
+            //Point anleleft = initial_state.
+            return timeline;
+        }
+
+        private SkeletonTimeline RotateWrapper(SkeletonTimeline timeline, Skeleton initial_state)
+        {
+            return timeline;
+        }
+
+        private SkeletonTimeline NormalizeWrapper(SkeletonTimeline timeline, Skeleton initial_state)
+        {
+            return timeline;
+        }
     }
 }
