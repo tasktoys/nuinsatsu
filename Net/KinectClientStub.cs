@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Research.Kinect.Nui;
 using NUInsatsu.Motion;
+using NUInsatsu.Navigate;
 
 namespace NUInsatsu.Net
 {
@@ -24,6 +25,27 @@ namespace NUInsatsu.Net
 
         List<Motion.SkeletonTimeline> KinectClient.GetMotionList()
         {
+            VoiceNavigation sound = new VoiceNavigation();
+
+            //「Kinect」といわれるまで待機
+            sound.PlaySound("WAIT_MOTION");
+
+            List<SkeletonTimeline> motionList = MakeMotionList();
+
+            sound.PlaySound("START_MOTION");
+
+            Config config = Config.Load();
+
+            //カウントダウン開始
+            sound.CountDown(config.Countdown);
+            //カウントダウン終了まで待機
+            System.Threading.Thread.Sleep(config.Countdown * 1000);
+
+            return motionList;
+        }
+
+        private List<SkeletonTimeline> MakeMotionList()
+        {
             // SkeletonTimelieのリストを作る（全データ)
             List<SkeletonTimeline> motionList = new List<SkeletonTimeline>();
 
@@ -32,7 +54,7 @@ namespace NUInsatsu.Net
 
             Random random = new Random();
             // Skeleton(ある時刻の体のデータ)を作る(30個)
-            foreach( int i in Enumerable.Range(0,30))
+            foreach (int i in Enumerable.Range(0, 30))
             {
                 Skeleton skeleton = new Skeleton();
 
@@ -69,7 +91,6 @@ namespace NUInsatsu.Net
             motionList.Add(t1);
 
             return motionList;
-
         }
 
         System.IO.FileInfo KinectClient.GetFaceImage()

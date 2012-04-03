@@ -119,21 +119,14 @@ namespace NUInsatsu.UI
                 List<SkeletonTimeline> list = KinectClientUtility.GetMotionList(client);
 
                 Key docKeyByMotion = KinectClientUtility.GetKey(list);
-
+                
                 DocumentManager manager = DocumentManager.GetInstance();
                 Key docKey = manager.GetNearestDocumentKey(docKeyByMotion);
 
-                if (manager.IsPassRequired(docKey))
-                {
-                    TransPrintFacePassPage();
-                }
-                else
-                {
-                    // 印刷
-                    manager.Print(docKey);
+                // 印刷
+                manager.Print(docKey);
 
-                    TransMenuPage();
-                }
+                TransMenuPage();
             }
             catch (DocumentNotFoundException)
             {

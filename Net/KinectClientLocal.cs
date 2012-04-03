@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using NUInsatsu.Kinect;
 using NUInsatsu.Motion;
+using NUInsatsu.Navigate;
 
 namespace NUInsatsu.Net
 {
@@ -32,10 +33,21 @@ namespace NUInsatsu.Net
 
         List<SkeletonTimeline> KinectClient.GetMotionList()
         {
+            VoiceNavigation sound = new VoiceNavigation();
+
+            //「Kinect」といわれるまで待機
+            sound.PlaySound("WAIT_MOTION");
+
             // キネクトと発音されるまで待機します
             WaitSaidKinect();
+            sound.PlaySound("START_MOTION");
 
             Config config = Config.Load();
+
+            //カウントダウン開始
+            sound.CountDown(config.Countdown);
+            //カウントダウン終了まで待機
+            System.Threading.Thread.Sleep(config.Countdown * 1000);
 
             // モーションを取得し、XML文字列を生成します。
             String xml = MakeMotionXML(config.MotionTime);

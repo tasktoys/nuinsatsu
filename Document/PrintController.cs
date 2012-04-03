@@ -20,16 +20,22 @@ namespace NUInsatsu.Document
         /// <returns>印刷が成功したらtrue,失敗したらfalse</returns>
         public bool Print(FileInfo fileInfo)
         {
-            this.fileInfo = fileInfo;
+            try
+            {
+                this.fileInfo = fileInfo;
 
-            System.Drawing.Printing.PrintDocument pd =
-                new System.Drawing.Printing.PrintDocument();
-            Config config = Config.Load();
-            pd.PrinterSettings.PrinterName = config.PrinterName;
+                System.Drawing.Printing.PrintDocument pd =
+                    new System.Drawing.Printing.PrintDocument();
+                Config config = Config.Load();
+                pd.PrinterSettings.PrinterName = config.PrinterName;
 
-            pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(pd_PrintPage);
-            pd.Print();
-
+                pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(pd_PrintPage);
+                pd.Print();
+            }
+            catch (System.ComponentModel.Win32Exception e)
+            {
+                Console.Error.WriteLine(e.StackTrace);
+            }
             return true;
         }
 

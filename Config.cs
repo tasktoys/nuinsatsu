@@ -34,7 +34,7 @@ namespace NUInsatsu
         public int MatchingThreshold { get; set; }
         public String DocumentIOType { get; set; }
         public String KinectType { get; set; }
-
+        public int Countdown { get; set; }
 
         /// <summary>
         /// コンフィグのデフォルト値を設定し、クラスを構築します。
@@ -62,6 +62,7 @@ namespace NUInsatsu
             MatchingThreshold = 10;
             DocumentIOType = "local";
             KinectType = "local";
+            Countdown = 3;
         }
 
         /// <summary>

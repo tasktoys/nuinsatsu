@@ -27,15 +27,18 @@ namespace NUInsatsu.UI
 
         private void kinectButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Drawing.Printing.PrintDocument pd =
-                new System.Drawing.Printing.PrintDocument();
-            Config config = Config.Load();
-            pd.PrinterSettings.PrinterName = config.PrinterName;
+            //try
+            {
+                System.Drawing.Printing.PrintDocument pd =
+                    new System.Drawing.Printing.PrintDocument();
+                Config config = Config.Load();
+                pd.PrinterSettings.PrinterName = config.PrinterName;
 
-            pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(pd_PrintPage);
-            pd.Print();
+                pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(pd_PrintPage);
+                pd.Print();
 
-            MessageBox.Show("印刷中です", "確認", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("印刷中です", "確認", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 
             NavigationService.Navigate(new MenuPage());
         }

@@ -82,6 +82,7 @@
     <Compile Include="Motion\Point.cs" />
     <Compile Include="Motion\Skeleton.cs" />
     <Compile Include="Motion\SkeletonTimeline.cs" />
+    <Compile Include="Navigate\VoiceNavigation.cs" />
     <Compile Include="Net\ConnectFailedException.cs" />
     <Compile Include="Net\KinectClient.cs" />
     <Compile Include="Net\KinectClientLocal.cs" />
@@ -215,6 +216,15 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="SpeechLib">
+      <Guid>{D3C4A7F2-7D27-4332-B41F-593D71E16DB1}</Guid>
+      <VersionMajor>11</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="WIA">
       <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
       <VersionMajor>1</VersionMajor>
