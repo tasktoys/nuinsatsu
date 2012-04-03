@@ -9,12 +9,14 @@ namespace NUInsatsu.Motion
     class KeyGeneratorVersion6 : KeyGenerator
     {
         KeyGeneratorHelper helper = new KeyGeneratorHelper();
+        int time_width;
         float[] move_threshold = new float[20];
         float[] area_threshold = new float[20];
         bool[] is_used = new bool[20];
 
         public KeyGeneratorVersion6()
         {
+            time_width = 5;
             for (int i = 0; i < move_threshold.GetLength(0); i++)
             {
                 move_threshold[i] = 0.2F;
@@ -54,7 +56,7 @@ namespace NUInsatsu.Motion
             float[,] area = ConvertToArea(var_thr);
             float[,] area_thr = ApplyAreaThreshold(area);
             String hash = ConvertToHash(area_thr);
-            return "hoge";
+            return hash;
         }
 
         private float[,] ConvertToVariation(float[, ,] data)
@@ -64,13 +66,17 @@ namespace NUInsatsu.Motion
             {
                 for (int joint = 0; joint < data.GetLength(1); joint++)
                 {
-                    float[] tem1 = new float[3];
-                    float[] tem2 = new float[3];
-                    for (int xyz = 0; xyz < 3; xyz++) {
-                        tem1[xyz] = data[t,joint,xyz];
-                        tem2[xyz] = data[t+1,joint,xyz];
+                    if (is_used[joint] == true)
+                    {
+                        float[] tem1 = new float[3];
+                        float[] tem2 = new float[3];
+                        for (int xyz = 0; xyz < 3; xyz++)
+                        {
+                            tem1[xyz] = data[t, joint, xyz];
+                            tem2[xyz] = data[t + 1, joint, xyz];
+                        }
+                        var[t, joint] = helper.GetDistance(tem1, tem2);
                     }
-                    var[t,joint] = helper.GetDistance(tem1,tem2);
                 }
             }
             return var;
@@ -113,7 +119,20 @@ namespace NUInsatsu.Motion
                     }
                     else if ((0 < var_thr[t, joint]) == false && state == 1)
                     {
-                        area[(int)(start_time+t)/2, joint] = tem_area;
+                        float half_area = 0.0F;
+                        int middle_time = start_time;
+                        for (int t2 = start_time; t2 < t; t2++)
+                        {
+                            if (half_area <= tem_area / 2)
+                            {
+                                half_area += var_thr[t2, joint];
+                            }
+                            else if (middle_time == start_time)
+                            {
+                                middle_time = t2;
+                            }
+                        }
+                        area[middle_time, joint] = tem_area;
                         tem_area = 0.0F;
                         state = 0;
                     }
@@ -141,16 +160,34 @@ namespace NUInsatsu.Motion
         private String ConvertToHash(float[,] area_thr)
         {
             String hash = "";
-            for (int t = 0; t < area_thr.GetLength(0); t++)
+            int time_checked = 0;
+            for (int t = 0; t < area_thr.GetLength(0); t += time_width)
             {
-                for (int joint = 0; joint < area_thr.GetLength(1); joint++)
+                for (int joint = 0; joint < area_thr.GetLength(1); joint++) 
                 {
-                    if (area_thr[t, joint] != 0.0F)
+                    for (int dt = 0; dt < time_width; dt++)
                     {
-                        hash += JointUtility.GetKeyToken((JointID)joint);
+                        if (area_thr[t + dt, joint] != 0.0F)
+                        {
+                            hash += JointUtility.GetKeyToken((JointID)joint);
+                        }
                     }
                 }
+                hash += "#";
+                time_checked = t;
             }
+
+            for (int joint = 0; joint < area_thr.GetLength(1); joint++) 
+            {
+                    for (int t = time_checked + 1; t < area_thr.GetLength(0); t++)
+                    {
+                        if (area_thr[t, joint] != 0.0F)
+                        {
+                            hash += JointUtility.GetKeyToken((JointID)joint);
+                        }
+                    }
+            }
+            hash += "#";
             return hash; 
         }
 
@@ -158,19 +195,17 @@ namespace NUInsatsu.Motion
         {
             Skeleton sk = timeline[0];
             int t = 0;
-            int joint = 0;
             float[, ,] a = new float[timeline.Count, sk.Count, 3];
             foreach (var skel in timeline)
             {
                 foreach (var dic in skel)
                 {
                     Point p = dic.Value;
+                    int joint = (int)dic.Key;
                     a[t, joint, 0] = p.X;
                     a[t, joint, 1] = p.Y;
-                    a[t, joint, 2] = p.Z / 10000;
-                    joint++;
+                    a[t, joint, 2] = p.Z;
                 }
-                joint = 0;
                 t++;
             }
             return a;
