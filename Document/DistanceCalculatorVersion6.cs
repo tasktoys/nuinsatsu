@@ -78,14 +78,9 @@ namespace NUInsatsu.Document
             List<String> input_list = new List<String>();
             List<String> searched_list = new List<String>();
 
-            int state = 0;
             for (int i = 0; i < input.Length; i++)
             {
-                if (input[i].Equals(""))
-                {
-                    ;
-                }
-                else
+                if (input[i].Equals("") == false)
                 {
                     input_list.Add(input[i]);
                 }
@@ -93,11 +88,7 @@ namespace NUInsatsu.Document
 
             for (int i = 0; i < searched.Length; i++)
             {
-                if (searched[i].Equals(""))
-                {
-                    ;
-                }
-                else
+                if (searched[i].Equals("") == false)
                 {
                     searched_list.Add(searched[i]);
                 }
@@ -108,6 +99,17 @@ namespace NUInsatsu.Document
                 if (i < searched_list.Count)
                 {
                     distance += StringDistance(input_list.ElementAt<String>(i), searched_list.ElementAt<String>(i));
+                }
+                else
+                {
+                    distance += input_list.ElementAt<String>(i).Length;
+                }
+            }
+            if (input_list.Count < searched_list.Count)
+            {
+                for (int i = input_list.Count; i < searched_list.Count; i++)
+                {
+                    distance += searched_list.ElementAt<String>(i).Length;
                 }
             }
             return distance;
