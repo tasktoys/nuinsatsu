@@ -19,58 +19,58 @@ namespace NUInsatsu.Motion
         {
             time_width = 5;
 
-            move_threshold[(int)JointID.Head] = 0.1F;
+            move_threshold[(int)JointID.Head] = 0.05F;
 
-            move_threshold[(int)JointID.HandRight] = 0.1F;
-            move_threshold[(int)JointID.HandLeft] = 0.1F;
-            move_threshold[(int)JointID.ElbowRight] = 0.1F;
-            move_threshold[(int)JointID.ElbowLeft] = 0.1F;
-            move_threshold[(int)JointID.ShoulderRight] = 0.1F;
-            move_threshold[(int)JointID.ShoulderCenter] = 0.1F;
-            move_threshold[(int)JointID.ShoulderLeft] = 0.1F;
+            move_threshold[(int)JointID.HandRight] = 0.05F;
+            move_threshold[(int)JointID.HandLeft] = 0.05F;
+            move_threshold[(int)JointID.ElbowRight] = 0.05F;
+            move_threshold[(int)JointID.ElbowLeft] = 0.05F;
+            move_threshold[(int)JointID.ShoulderRight] = 0.05F;
+            move_threshold[(int)JointID.ShoulderCenter] = 0.05F;
+            move_threshold[(int)JointID.ShoulderLeft] = 0.05F;
 
-            move_threshold[(int)JointID.AnkleLeft] = 0.1F;
-            move_threshold[(int)JointID.AnkleRight] = 0.1F;
-            move_threshold[(int)JointID.FootLeft] = 0.1F;
-            move_threshold[(int)JointID.FootRight] = 0.1F;
-            move_threshold[(int)JointID.KneeLeft] = 0.1F;
-            move_threshold[(int)JointID.KneeRight] = 0.1F;
+            move_threshold[(int)JointID.AnkleLeft] = 0.08F;
+            move_threshold[(int)JointID.AnkleRight] = 0.08F;
+            move_threshold[(int)JointID.FootLeft] = 0.08F;
+            move_threshold[(int)JointID.FootRight] = 0.08F;
+            move_threshold[(int)JointID.KneeLeft] = 0.08F;
+            move_threshold[(int)JointID.KneeRight] = 0.08F;
 
-            move_threshold[(int)JointID.WristRight] = 0.1F;
-            move_threshold[(int)JointID.WristLeft] = 0.1F;
-            move_threshold[(int)JointID.Spine] = 0.1F;
-            move_threshold[(int)JointID.HipRight] = 0.1F;
-            move_threshold[(int)JointID.HipCenter] = 0.1F;
-            move_threshold[(int)JointID.HipLeft] = 0.1F;
+            move_threshold[(int)JointID.WristRight] = 0.08F;
+            move_threshold[(int)JointID.WristLeft] = 0.08F;
+            move_threshold[(int)JointID.Spine] = 0.08F;
+            move_threshold[(int)JointID.HipRight] = 0.06F;
+            move_threshold[(int)JointID.HipCenter] = 0.06F;
+            move_threshold[(int)JointID.HipLeft] = 0.06F;
 
 
             for (int i = 0; i < area_threshold.GetLength(0); i++)
             {
-                area_threshold[i] = 0;//(float)(move_threshold[i] * time_width * 0.5);
+                area_threshold[i] = 0.002F;//(float)(move_threshold[i] * time_width * 0.5);
             }
-            area_threshold[(int)JointID.Head] = 0.1F;
+            area_threshold[(int)JointID.Head] = 0.08F;
 
-            area_threshold[(int)JointID.HandRight] = 0.2F;
-            area_threshold[(int)JointID.HandLeft] = 0.2F;
-            area_threshold[(int)JointID.ElbowRight] = 0.1F;
-            area_threshold[(int)JointID.ElbowLeft] = 0.1F;
-            area_threshold[(int)JointID.ShoulderRight] = 0.1F;
-            area_threshold[(int)JointID.ShoulderCenter] = 0.1F;
-            area_threshold[(int)JointID.ShoulderLeft] = 0.1F;
+            area_threshold[(int)JointID.HandRight] = 0.24F;
+            area_threshold[(int)JointID.HandLeft] = 0.24F;
+            area_threshold[(int)JointID.ElbowRight] = 0.08F;
+            area_threshold[(int)JointID.ElbowLeft] = 0.08F;
+            area_threshold[(int)JointID.ShoulderRight] = 0.08F;
+            area_threshold[(int)JointID.ShoulderCenter] = 0.08F;
+            area_threshold[(int)JointID.ShoulderLeft] = 0.08F;
 
-            area_threshold[(int)JointID.AnkleLeft] = 0.1F;
-            area_threshold[(int)JointID.AnkleRight] = 0.1F;
-            area_threshold[(int)JointID.FootLeft] = 0.1F;
-            area_threshold[(int)JointID.FootRight] = 0.1F;
-            area_threshold[(int)JointID.KneeLeft] = 0.1F;
-            area_threshold[(int)JointID.KneeRight] = 0.1F;
+            area_threshold[(int)JointID.AnkleLeft] = 0.08F;
+            area_threshold[(int)JointID.AnkleRight] = 0.08F;
+            area_threshold[(int)JointID.FootLeft] = 0.08F;
+            area_threshold[(int)JointID.FootRight] = 0.08F;
+            area_threshold[(int)JointID.KneeLeft] = 0.08F;
+            area_threshold[(int)JointID.KneeRight] = 0.08F;
 
-            area_threshold[(int)JointID.WristRight] = 0.1F;
-            area_threshold[(int)JointID.WristLeft] = 0.1F;
-            area_threshold[(int)JointID.Spine] = 0.1F;
-            area_threshold[(int)JointID.HipRight] = 0.1F;
-            area_threshold[(int)JointID.HipCenter] = 0.1F;
-            area_threshold[(int)JointID.HipLeft] = 0.1F;
+            area_threshold[(int)JointID.WristRight] = 0.08F;
+            area_threshold[(int)JointID.WristLeft] = 0.08F;
+            area_threshold[(int)JointID.Spine] = 0.08F;
+            area_threshold[(int)JointID.HipRight] = 0.04F;
+            area_threshold[(int)JointID.HipCenter] = 0.04F;
+            area_threshold[(int)JointID.HipLeft] = 0.04F;
 
             is_used[(int)JointID.Head] = true;
 
