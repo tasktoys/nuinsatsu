@@ -20,6 +20,24 @@ namespace NUInsatsu.Kinect
         /// </summary>
         public event EventHandler<SaidWordArgs> RecognitionRejected;
 
+        public VoiceRecognizerStub()
+        {
+            // 一回は使ってやらないと警告がうるさいので使ってあげる
+            SaidWordArgs e = new SaidWordArgs();
+            if (Recognized != null)
+            {
+                Recognized(this, e);
+            }
+            if (Hypothesized != null)
+            {
+                Hypothesized(this, e);
+            }
+            if (RecognitionRejected != null)
+            {
+                RecognitionRejected(this, e);
+            }
+        }
+
         /// <summary>
         /// 認識する文字を追加します
         /// </summary>

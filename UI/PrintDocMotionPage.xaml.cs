@@ -156,10 +156,20 @@ namespace NUInsatsu.UI
         }
 
         /// <summary>
-        /// エラーが起こり、リトライを尋ねるダイアログを表示します。
+        /// エラーが起こり、リトライを尋ねるダイアログを表示します。別スレッドからの呼び出しには対応してます。
         /// </summary>
         /// <param name="message">表示するメッセージテキスト</param>
         private void ShowRetryDialog(String message)
+        {
+            Action<String> act = ShowRetryDialog;
+            Dispatcher.Invoke(act, message);
+        }
+
+        /// <summary>
+        /// エラーが起こり、リトライを尋ねるダイアログを表示します。別スレッドからの呼び出しには対応していません。
+        /// </summary>
+        /// <param name="message">表示するメッセージテキスト</param>
+        private void ShowRetryDialogImpl(String message)
         {
             MessageBoxResult result = MessageBox.Show(message, "失敗", MessageBoxButton.YesNo, MessageBoxImage.Information);
 

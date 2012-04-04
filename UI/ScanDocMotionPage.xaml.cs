@@ -118,7 +118,7 @@ namespace NUInsatsu.UI
 
                 io.Put(docKeyByMotion, SharedData.ScanImageFile);
 
-                MessageBox.Show("登録が完了しました。");
+                Dispatcher.Invoke( (Action)( () => { MessageBox.Show("登録が完了しました。"); } ) );
                 TransMenuPage();
             }
             catch (NotInstalledSpeechLibraryException)
@@ -137,10 +137,20 @@ namespace NUInsatsu.UI
         }
 
         /// <summary>
-        /// エラーが起こり、リトライを尋ねるダイアログを表示します。
+        /// エラーが起こり、リトライを尋ねるダイアログを表示します。別スレッドからの呼び出しにも対応しています。
         /// </summary>
         /// <param name="message">表示するメッセージテキスト</param>
         private void ShowRetryDialog(String message)
+        {
+            Action<String> act = ShowRetryDialogImpl;
+            Dispatcher.Invoke(act, message);
+        }
+
+        /// <summary>
+        /// エラーが起こり、リトライを尋ねるダイアログを表示します。別スレッドからの呼び出しには対応していません。
+        /// </summary>
+        /// <param name="message">表示するメッセージテキスト</param>
+        private void ShowRetryDialogImpl(String message)
         {
             MessageBoxResult result = MessageBox.Show(message, "失敗", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
