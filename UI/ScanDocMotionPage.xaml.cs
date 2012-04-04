@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using NUInsatsu.Kinect;
 using System.Threading;
 using NUInsatsu.Net;
 using NUInsatsu.Motion;
 using NUInsatsu.Document;
-using System.IO;
 using System.Runtime.InteropServices;
 using NUInsatsu.Navigate;
 
@@ -27,7 +19,8 @@ namespace NUInsatsu.UI
     /// </summary>
     public partial class ScanDocMotionPage : Page
     {
-        ISkeletonSensor skeletonSensor;
+        readonly IVoiceRecognizer recognizer;
+        readonly ISkeletonSensor skeletonSensor;
         KinectClient client = null;
         bool isFree = false;
 
@@ -36,6 +29,17 @@ namespace NUInsatsu.UI
             InitializeComponent();
             skeletonSensor = KinectInstanceManager.CreateSkeletonSensorInstance();
             skeletonSensor.SkeletonFrameReady += new EventHandler<Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
+
+            recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
+            recognizer.Recognized += new EventHandler<SaidWordArgs>(recognizer_Recognized);
+        }
+
+        void recognizer_Recognized(object sender, SaidWordArgs e)
+        {
+            if (e.Text == "もどる")
+            {
+                TransScanPage();
+            }
         }
 
         void camera_SkeletonFrameReady(object sender, Microsoft.Research.Kinect.Nui.SkeletonFrameReadyEventArgs e)
@@ -43,6 +47,10 @@ namespace NUInsatsu.UI
             skeletonCanvas.DrawSkeletonFrame(e.SkeletonFrame);
         }
 
+
+        /// <summary>
+        /// スキャンページに遷移します。
+        /// </summary>
         private void TransScanPage()
         {
             Action act = () =>
@@ -71,6 +79,8 @@ namespace NUInsatsu.UI
         /// </summary>
         private void Free()
         {
+            recognizer.Recognized -= new EventHandler<SaidWordArgs>(recognizer_Recognized);
+
             skeletonSensor.Dispose();
             client.Close();
             isFree = true;

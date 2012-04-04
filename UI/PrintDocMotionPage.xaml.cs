@@ -21,6 +21,8 @@ namespace NUInsatsu.UI
     {
         EventHandler<SkeletonFrameReadyEventArgs> skeletonFrameReadyHandler;
         NUInsatsu.Kinect.ISkeletonSensor skeletonSensor;
+        readonly IVoiceRecognizer recognizer;
+
         private KinectClient kinectClient;
         private bool isFree = false;
 
@@ -34,6 +36,17 @@ namespace NUInsatsu.UI
             skeletonFrameReadyHandler = new EventHandler<SkeletonFrameReadyEventArgs>(camera_SkeletonFrameReady);
             skeletonSensor.SkeletonFrameReady += skeletonFrameReadyHandler;
 
+            recognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
+
+            recognizer.Recognized += new EventHandler<SaidWordArgs>(recognizer_Recognized);
+        }
+
+        void recognizer_Recognized(object sender, SaidWordArgs e)
+        {
+            if (e.Text == "もどる")
+            {
+                TransMenuPage();
+            }
         }
 
         /// <summary>
@@ -82,6 +95,7 @@ namespace NUInsatsu.UI
         /// </summary>
         private void Free()
         {
+            recognizer.Recognized -= new EventHandler<SaidWordArgs>(recognizer_Recognized);
             // スケルトンセンサーのリソースを解放します
             skeletonSensor.Dispose();
             kinectClient.Close();

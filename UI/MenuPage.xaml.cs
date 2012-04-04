@@ -19,7 +19,6 @@ namespace NUInsatsu.UI
             InitializeComponent();
 
             voiceRecognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
-
             voiceRecognizer.Recognized += new EventHandler<SaidWordArgs>(voiceRecognizer_Recognized);
 
             VoiceNavigation navigation = new VoiceNavigation();
@@ -28,11 +27,11 @@ namespace NUInsatsu.UI
 
         void voiceRecognizer_Recognized(object sender, SaidWordArgs e)
         {
-            if (e.Text == "SCAN")
+            if (e.Text == "とうろく")
             {
                 TransScanPage();
             }
-            else if(e.Text == "PRINT")
+            else if(e.Text == "いんさつ")
             {
                 TransPrintDocMotionPage();
             }

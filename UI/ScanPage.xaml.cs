@@ -5,6 +5,7 @@ using System.Windows.Navigation;
 using NUInsatsu.Document;
 using System.Runtime.InteropServices;
 using NUInsatsu.Navigate;
+using NUInsatsu.Kinect;
 
 namespace NUInsatsu.UI
 {
@@ -13,13 +14,29 @@ namespace NUInsatsu.UI
     /// </summary>
     public partial class ScanPage : Page
     {
+        private readonly IVoiceRecognizer voiceRecognizer;
 
         public ScanPage()
         {
             InitializeComponent();
 
+            voiceRecognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
+            voiceRecognizer.Recognized += new EventHandler<SaidWordArgs>(voiceRecognizer_Recognized);
+
             VoiceNavigation navigation = new VoiceNavigation();
             navigation.PlaySoundASync("SCAN_START");
+        }
+
+        void voiceRecognizer_Recognized(object sender, SaidWordArgs e)
+        {
+            if (e.Text == "スキャン")
+            {
+                DoScan();
+            }
+            else if (e.Text == "もどる")
+            {
+                TransMenuPage();
+            }
         }
 
         /// <summary>
@@ -27,6 +44,7 @@ namespace NUInsatsu.UI
         /// </summary>
         private void Free()
         {
+            voiceRecognizer.Recognized -= new EventHandler<SaidWordArgs>(voiceRecognizer_Recognized);
         }
 
         /// <summary>
@@ -48,6 +66,11 @@ namespace NUInsatsu.UI
         }
 
         private void scanButton_Click(object sender, RoutedEventArgs e)
+        {
+            DoScan();
+        }
+
+        private void DoScan()
         {
             DocumentManager manager = DocumentManager.GetInstance();
             try
