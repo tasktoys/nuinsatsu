@@ -63,10 +63,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
+    <Compile Include="Document\DistanceCalculator.cs" />
+    <Compile Include="Document\DistanceCalculatorVersion6.cs" />
     <Compile Include="Document\DistanceUtility.cs" />
     <Compile Include="Document\DocumentFileIO.cs" />
     <Compile Include="Document\DocumentManager.cs" />
     <Compile Include="Document\DocumentNotFoundException.cs" />
+    <Compile Include="Document\LevenshteinDistance.cs" />
     <Compile Include="Document\LocalFileIO.cs" />
     <Compile Include="Document\PrintController.cs" />
     <Compile Include="Document\ScanController.cs" />

@@ -99,7 +99,9 @@ namespace NUInsatsu.Document
         {
             List<Key> keyList = GetRegisteredKeyList();
 
-            Key targetKey = DistanceUtility.GetNearestDocumentKey(docKey, keyList);
+            DistanceCalculator Calulator = DistanceCalculator.CreateInstance();
+
+            Key targetKey = Calulator.GetNearestDocumentKey(docKey, keyList);
 
             return targetKey;
         }
