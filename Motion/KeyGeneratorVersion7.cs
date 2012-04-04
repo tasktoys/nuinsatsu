@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Research.Kinect.Nui;
 
+
 namespace NUInsatsu.Motion
 {
-    class KeyGeneratorVersion6 : KeyGenerator
+    class KeyGeneratorVersion7 : KeyGenerator
     {
         KeyGeneratorHelper helper = new KeyGeneratorHelper();
         int time_width;
@@ -14,7 +15,7 @@ namespace NUInsatsu.Motion
         float[] area_threshold = new float[20];
         bool[] is_used = new bool[20];
 
-        public KeyGeneratorVersion6()
+        public KeyGeneratorVersion7()
         {
             time_width = 5;
 

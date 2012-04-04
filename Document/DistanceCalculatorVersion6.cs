@@ -80,11 +80,7 @@ namespace NUInsatsu.Document
 
             for (int i = 0; i < input.Length; i++)
             {
-                if (input[i].Equals(""))
-                {
-                    ;
-                }
-                else
+                if (input[i].Equals("") == false)
                 {
                     input_list.Add(input[i]);
                 }
@@ -92,11 +88,7 @@ namespace NUInsatsu.Document
 
             for (int i = 0; i < searched.Length; i++)
             {
-                if (searched[i].Equals(""))
-                {
-                    ;
-                }
-                else
+                if (searched[i].Equals("") == false)
                 {
                     searched_list.Add(searched[i]);
                 }

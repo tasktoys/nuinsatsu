@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUInsatsu", "NUInsatsu.csproj", "{35758886-5D13-4275-A1EB-677D58EA5049}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotionAlgorithmTest", "..\MotionAlgorithmTest\MotionAlgorithmTest.csproj", "{4B1BA344-14D4-4F19-80DD-237A8AE54F40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{35758886-5D13-4275-A1EB-677D58EA5049}.Debug|x86.Build.0 = Debug|x86
 		{35758886-5D13-4275-A1EB-677D58EA5049}.Release|x86.ActiveCfg = Release|x86
 		{35758886-5D13-4275-A1EB-677D58EA5049}.Release|x86.Build.0 = Release|x86
+		{4B1BA344-14D4-4F19-80DD-237A8AE54F40}.Debug|x86.ActiveCfg = Debug|x86
+		{4B1BA344-14D4-4F19-80DD-237A8AE54F40}.Debug|x86.Build.0 = Debug|x86
+		{4B1BA344-14D4-4F19-80DD-237A8AE54F40}.Release|x86.ActiveCfg = Release|x86
+		{4B1BA344-14D4-4F19-80DD-237A8AE54F40}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
