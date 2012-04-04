@@ -120,7 +120,10 @@ namespace NUInsatsu.UI
                 DocumentFileIO io = DocumentManager.GetInstance().GetIOInstance();
                 try
                 {
-                    io.GetNearestDocument(docKeyByMotion);
+                    if (!io.Exists(docKeyByMotion))
+                    {
+                        throw new DocumentNotFoundException();
+                    }
                     ShowRetryDialog("モーションが重複しています。\nモーションを登録しなおしますか？");
                     return;
                 }
