@@ -82,7 +82,10 @@ namespace NUInsatsu.UI
             recognizer.Recognized -= new EventHandler<SaidWordArgs>(recognizer_Recognized);
 
             skeletonSensor.Dispose();
-            client.Close();
+            if (client != null)
+            {
+                client.Close();
+            }
             isFree = true;
         }
 

@@ -98,7 +98,10 @@ namespace NUInsatsu.UI
             recognizer.Recognized -= new EventHandler<SaidWordArgs>(recognizer_Recognized);
             // スケルトンセンサーのリソースを解放します
             skeletonSensor.Dispose();
-            kinectClient.Close();
+            if (kinectClient != null)
+            {
+                kinectClient.Close();
+            }
             isFree = true;
         }
 
@@ -175,7 +178,7 @@ namespace NUInsatsu.UI
         /// <param name="message">表示するメッセージテキスト</param>
         private void ShowRetryDialog(String message)
         {
-            Action<String> act = ShowRetryDialog;
+            Action<String> act = ShowRetryDialogImpl;
             Dispatcher.Invoke(act, message);
         }
 
