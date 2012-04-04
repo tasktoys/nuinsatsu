@@ -19,58 +19,58 @@ namespace NUInsatsu.Motion
         {
             time_width = 5;
 
-            move_threshold[(int)JointID.Head] = 0.1F;
+            move_threshold[(int)JointID.Head] = 0.05F;
 
-            move_threshold[(int)JointID.HandRight] = 0.1F;
-            move_threshold[(int)JointID.HandLeft] = 0.1F;
-            move_threshold[(int)JointID.ElbowRight] = 0.1F;
-            move_threshold[(int)JointID.ElbowLeft] = 0.1F;
-            move_threshold[(int)JointID.ShoulderRight] = 0.1F;
-            move_threshold[(int)JointID.ShoulderCenter] = 0.1F;
-            move_threshold[(int)JointID.ShoulderLeft] = 0.1F;
+            move_threshold[(int)JointID.HandRight] = 0.05F;
+            move_threshold[(int)JointID.HandLeft] = 0.05F;
+            move_threshold[(int)JointID.ElbowRight] = 0.05F;
+            move_threshold[(int)JointID.ElbowLeft] = 0.05F;
+            move_threshold[(int)JointID.ShoulderRight] = 0.05F;
+            move_threshold[(int)JointID.ShoulderCenter] = 0.05F;
+            move_threshold[(int)JointID.ShoulderLeft] = 0.05F;
 
-            move_threshold[(int)JointID.AnkleLeft] = 0.1F;
-            move_threshold[(int)JointID.AnkleRight] = 0.1F;
-            move_threshold[(int)JointID.FootLeft] = 0.1F;
-            move_threshold[(int)JointID.FootRight] = 0.1F;
-            move_threshold[(int)JointID.KneeLeft] = 0.1F;
-            move_threshold[(int)JointID.KneeRight] = 0.1F;
+            move_threshold[(int)JointID.AnkleLeft] = 0.08F;
+            move_threshold[(int)JointID.AnkleRight] = 0.08F;
+            move_threshold[(int)JointID.FootLeft] = 0.08F;
+            move_threshold[(int)JointID.FootRight] = 0.08F;
+            move_threshold[(int)JointID.KneeLeft] = 0.08F;
+            move_threshold[(int)JointID.KneeRight] = 0.08F;
 
-            move_threshold[(int)JointID.WristRight] = 0.1F;
-            move_threshold[(int)JointID.WristLeft] = 0.1F;
-            move_threshold[(int)JointID.Spine] = 0.1F;
-            move_threshold[(int)JointID.HipRight] = 0.1F;
-            move_threshold[(int)JointID.HipCenter] = 0.1F;
-            move_threshold[(int)JointID.HipLeft] = 0.1F;
+            move_threshold[(int)JointID.WristRight] = 0.08F;
+            move_threshold[(int)JointID.WristLeft] = 0.08F;
+            move_threshold[(int)JointID.Spine] = 0.08F;
+            move_threshold[(int)JointID.HipRight] = 0.06F;
+            move_threshold[(int)JointID.HipCenter] = 0.06F;
+            move_threshold[(int)JointID.HipLeft] = 0.06F;
 
 
             for (int i = 0; i < area_threshold.GetLength(0); i++)
             {
-                area_threshold[i] = 0;//(float)(move_threshold[i] * time_width * 0.5);
+                area_threshold[i] = 0.002F;//(float)(move_threshold[i] * time_width * 0.5);
             }
-            area_threshold[(int)JointID.Head] = 0.1F;
+            area_threshold[(int)JointID.Head] = 0.08F;
 
-            area_threshold[(int)JointID.HandRight] = 0.2F;
-            area_threshold[(int)JointID.HandLeft] = 0.2F;
-            area_threshold[(int)JointID.ElbowRight] = 0.1F;
-            area_threshold[(int)JointID.ElbowLeft] = 0.1F;
-            area_threshold[(int)JointID.ShoulderRight] = 0.1F;
-            area_threshold[(int)JointID.ShoulderCenter] = 0.1F;
-            area_threshold[(int)JointID.ShoulderLeft] = 0.1F;
+            area_threshold[(int)JointID.HandRight] = 0.24F;
+            area_threshold[(int)JointID.HandLeft] = 0.24F;
+            area_threshold[(int)JointID.ElbowRight] = 0.08F;
+            area_threshold[(int)JointID.ElbowLeft] = 0.08F;
+            area_threshold[(int)JointID.ShoulderRight] = 0.08F;
+            area_threshold[(int)JointID.ShoulderCenter] = 0.08F;
+            area_threshold[(int)JointID.ShoulderLeft] = 0.08F;
 
-            area_threshold[(int)JointID.AnkleLeft] = 0.1F;
-            area_threshold[(int)JointID.AnkleRight] = 0.1F;
-            area_threshold[(int)JointID.FootLeft] = 0.1F;
-            area_threshold[(int)JointID.FootRight] = 0.1F;
-            area_threshold[(int)JointID.KneeLeft] = 0.1F;
-            area_threshold[(int)JointID.KneeRight] = 0.1F;
+            area_threshold[(int)JointID.AnkleLeft] = 0.08F;
+            area_threshold[(int)JointID.AnkleRight] = 0.08F;
+            area_threshold[(int)JointID.FootLeft] = 0.08F;
+            area_threshold[(int)JointID.FootRight] = 0.08F;
+            area_threshold[(int)JointID.KneeLeft] = 0.08F;
+            area_threshold[(int)JointID.KneeRight] = 0.08F;
 
-            area_threshold[(int)JointID.WristRight] = 0.1F;
-            area_threshold[(int)JointID.WristLeft] = 0.1F;
-            area_threshold[(int)JointID.Spine] = 0.1F;
-            area_threshold[(int)JointID.HipRight] = 0.1F;
-            area_threshold[(int)JointID.HipCenter] = 0.1F;
-            area_threshold[(int)JointID.HipLeft] = 0.1F;
+            area_threshold[(int)JointID.WristRight] = 0.08F;
+            area_threshold[(int)JointID.WristLeft] = 0.08F;
+            area_threshold[(int)JointID.Spine] = 0.08F;
+            area_threshold[(int)JointID.HipRight] = 0.04F;
+            area_threshold[(int)JointID.HipCenter] = 0.04F;
+            area_threshold[(int)JointID.HipLeft] = 0.04F;
 
             is_used[(int)JointID.Head] = true;
 
@@ -117,9 +117,7 @@ namespace NUInsatsu.Motion
             data = helper.Standardlization(data);
             float[,] var = ConvertToVariation(data);
             float[,] var_thr = ApplyMoveThreshold(var);
-            float[,] area = ConvertToArea(var_thr);
-            float[,] area_thr = ApplyAreaThreshold(area);
-            String hash = ConvertToHash(area_thr);
+            String hash = ConvertToHash(var_thr);
             return hash;
         }
 
@@ -162,97 +160,76 @@ namespace NUInsatsu.Motion
             return var;
         }
 
-        private float[,] ConvertToArea(float[,] var_thr)
+        private float CalculateArea(float[] var_thr)
         {
-            int state = 0;
-            int start_time = 0;
-            float tem_area = 0.0F;
-            float[,] area = new float[var_thr.GetLength(0), var_thr.GetLength(1)];
-            for (int joint = 0; joint < var_thr.GetLength(1); joint++)
+            float area = 0.0F;
+            for (int i = 0; i < var_thr.Length; i++)
             {
-                for (int t = 0; t < var_thr.GetLength(0); t++)
-                {
-                    if (0 < var_thr[t, joint] && state == 0)
-                    {
-                        start_time = t;
-                        state = 1;
-                    }
-                    else if (0 < var_thr[t,joint] && state == 1)
-                    {
-                        tem_area += var_thr[t, joint];
-                    }
-                    else if ((0 < var_thr[t, joint]) == false && state == 1)
-                    {
-                        float half_area = 0.0F;
-                        int middle_time = start_time;
-                        for (int t2 = start_time; t2 < t; t2++)
-                        {
-                            if (half_area <= tem_area / 2)
-                            {
-                                half_area += var_thr[t2, joint];
-                            }
-                            else if (middle_time == start_time)
-                            {
-                                middle_time = t2;
-                            }
-                        }
-                        area[middle_time, joint] = tem_area;
-                        tem_area = 0.0F;
-                        state = 0;
-                    }
-                }
+                area += var_thr[i];
             }
             return area;
         }
 
-        private float[,] ApplyAreaThreshold(float[,] area)
-        {
-            for (int t = 0; t < area.GetLength(0); t++)
-            {
-                for (int joint = 0; joint < area.GetLength(1); joint++)
-                {
-                    area[t, joint] -= area_threshold[joint];
-                    if (area[t, joint] < 0)
-                    {
-                        area[t, joint] = 0;
-                    }
-                }
-            }
-            return area;
-        }
-
-        private String ConvertToHash(float[,] area_thr)
+        private String ConvertToHash(float[,] var_thr)
         {
             String hash = "";
             int time_checked = 0;
-            for (int t = 0; t < area_thr.GetLength(0); t += time_width)
+            for (int t = 0; t < var_thr.GetLength(0); t += time_width)
             {
-                for (int joint = 0; joint < area_thr.GetLength(1); joint++) 
+                for (int joint = 0; joint < var_thr.GetLength(1); joint++) 
                 {
-                    for (int dt = 0; dt < time_width; dt++)
+                    float[] sub_var = new float[time_width];
+                    for (int i = t; i < t + time_width; i++)
                     {
-                        if (area_thr[t + dt, joint] != 0.0F)
-                        {
-                            hash += JointUtility.GetKeyToken((JointID)joint);
-                        }
+                        sub_var[i - t] = var_thr[i, joint];
                     }
+
+                    float area = CalculateArea(sub_var);
+                    int weigth = (int)(area / area_threshold[joint]);
+                    hash += AddHash(weigth, JointUtility.GetKeyToken((JointID)joint));
                 }
                 hash += "#";
                 time_checked = t;
             }
 
-            for (int joint = 0; joint < area_thr.GetLength(1); joint++) 
+            for (int joint = 0; joint < var_thr.GetLength(1); joint++)
             {
-                    for (int t = time_checked + 1; t < area_thr.GetLength(0); t++)
-                    {
-                        if (area_thr[t, joint] != 0.0F)
-                        {
-                            hash += JointUtility.GetKeyToken((JointID)joint);
-                        }
-                    }
+                float[] sub_var = new float[time_width];
+                for (int i = time_checked + 1; i < var_thr.GetLength(0); i++)
+                {
+                    sub_var[i - time_checked - 1] = var_thr[i, joint];
+                }
+
+                float area = CalculateArea(sub_var);
+                int weigth = (int)(area / area_threshold[joint]);
+                hash += AddHash(weigth, JointUtility.GetKeyToken((JointID)joint));
             }
             hash += "#";
             return hash; 
+        }
+
+        private String AddHash(int weigth, String joint)
+        {
+            String sub_hash = "";
+            if (weigth < 1)
+            {
+                ;
+            }
+            else if (weigth < 10)
+            {
+                sub_hash += joint;
+                sub_hash += "&";
+                sub_hash += weigth;
+                sub_hash += "&";
+            }
+            else
+            {
+                sub_hash += joint;
+                sub_hash += "&";
+                sub_hash += 9;
+                sub_hash += "&";
+            }
+            return sub_hash;
         }
 
         private float[, ,] TimelineToArray(SkeletonTimeline timeline)

@@ -146,6 +146,8 @@ namespace NUInsatsu.Kinect
 
             double threshold = voiceThresholdTable[said.Text];
 
+            System.Console.WriteLine("[VoiceRecognizer]{0} is Recognized.Confidence:{1}", said.Text, e.Result.Confidence);
+
 			if (Recognized != null && e.Result.Confidence >= threshold)
 			{
                 System.Console.WriteLine("[VoiceRecognizer]{0} is Recognized.Confidence:{1}", said.Text, e.Result.Confidence);

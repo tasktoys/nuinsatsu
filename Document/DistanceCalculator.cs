@@ -11,7 +11,11 @@ namespace NUInsatsu.Document
         public static DistanceCalculator CreateInstance()
         {
             Config config = Config.Load();
-            if (config.MotionAlgorithm == "6")
+            if (config.MotionAlgorithm == "7")
+            {
+                return new DistanceCalculatorVersion7();
+            }
+            else if (config.MotionAlgorithm == "6")
             {
                 return new DistanceCalculatorVersion6();
             }
