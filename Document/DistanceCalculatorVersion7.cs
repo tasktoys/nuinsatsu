@@ -119,89 +119,10 @@ namespace NUInsatsu.Document
 
         static private int StringDistance(String input_string, String searched_string)
         {
-            int distance = 0;
-            String[] input = input_string.Split(new char[] { '&' });
-            String[] searched = searched_string.Split(new char[] { '&' });
-            List<String> input_list = new List<String>();
-            List<String> searched_list = new List<String>();
+            KeyValuePair<String, int>[] pairs1 = ParseJointElement(input_string);
+            KeyValuePair<String, int>[] pairs2 = ParseJointElement(searched_string);
 
-            int state = 0;
-            Regex alphabet_reg = new Regex(@"\w");
-            Regex number_reg = new Regex(@"\d");
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                if (input.ElementAt<String>(i).Equals(""))
-                {
-                    ;
-                }
-                else if (alphabet_reg.IsMatch(input[i]) && state == 0)
-                {
-                    input_list.Add(input[i]);
-                    state = 1;
-                }
-                else if (number_reg.IsMatch(input[i]) && state == 1)
-                {
-                    input_list.Add(input[i]);
-                    state = 0;
-                }
-                else
-                {
-                    Console.Error.WriteLine("Key format is not Version7");
-                }
-            }
-
-            state = 0;
-            for (int i = 0; i < searched.Length; i++)
-            {
-                if (searched.ElementAt<String>(i).Equals(""))
-                {
-                    ;
-                }
-                else if (alphabet_reg.IsMatch(searched[i]) && state == 0)
-                {
-                    searched_list.Add(searched[i]);
-                    state = 1;
-                }
-                else if (number_reg.IsMatch(searched[i]) && state == 1)
-                {
-                    searched_list.Add(searched[i]);
-                    state = 0;
-                }
-                else
-                {
-                    Console.Error.WriteLine("Key format is not Version7");
-                }
-            }
-
-            //if ((int)(input_list.Count / 2) != 0 || (int)(searched_list.Count / 2) != 0)
-            //{
-            //    Console.Error.WriteLine("Key format is not Version7");
-            //    return 0;
-            //}
-
-            for (int i = 0; i < input_list.Count; i += 2)
-            {
-                String c = input_list.ElementAt<String>(i);
-                if (searched_list.Contains(c) == false)
-                {
-                    distance += int.Parse(input_list.ElementAt<String>(i + 1));
-                }
-                else
-                {
-                    distance += FindDifference(searched_list, c, int.Parse(input_list.ElementAt<String>(i + 1)));
-                }
-            }
-
-            for (int i = 0; i < searched_list.Count; i += 2)
-            {
-                String c = searched_list.ElementAt<String>(i);
-                if (input_list.Contains(c) == false)
-                {
-                    distance += int.Parse(searched_list.ElementAt<String>(i + 1));
-                }
-            }
-
+            int distance = JointWeight(pairs1,pairs2);
             return distance;
         }
 
@@ -216,6 +137,73 @@ namespace NUInsatsu.Document
                 }
             }
             return Math.Abs(int.Parse(data.ElementAt<String>(index + 1)) - from);
+        }
+
+        /// <summary>
+        /// MotionAlgorithmV7の識別子のある時間から、関節とその変位を生成します
+        /// </summary>
+        /// <remarks>
+        /// "a1j3m2"といった文字列を、aと1のペアー、jと3のペアー、mと2のペアーを作り、配列にして返す
+        /// </remarks>
+        /// <param name="s">アルゴリズムv7の時間（"a1j3m2"など)</param>
+        /// <returns>関節とその変異の配列</returns>
+        static KeyValuePair<String, int>[] ParseJointElement(String s)
+        {
+            Regex rx = new Regex(@"[a-z][0-9]");
+
+            MatchCollection mc = rx.Matches(s);
+
+            List<KeyValuePair<String, int>> pairList = new List<KeyValuePair<string, int>>();
+
+            foreach (Match m in mc)
+            {
+                String v = m.Value[0].ToString();
+                int d = int.Parse(m.Value[1].ToString());
+
+                pairList.Add(new KeyValuePair<string, int>(v, d));
+            }
+
+            return pairList.ToArray();
+        }
+
+
+        /// <summary>
+        /// 関節とその変異の配列から、その変位を返します
+        /// </summary>
+        /// <param name="joints1">比較する間接と変位の配列</param>
+        /// <param name="joints2">比較する間接と変位の配列</param>
+        /// <returns>変位</returns>
+        static int JointWeight(KeyValuePair<String, int>[] joints1, KeyValuePair<String, int>[] joints2)
+        {
+            int weight = 0;
+
+            // 両方の配列に入っている関節と、joints1にしか入っていない関節を足す
+            foreach (KeyValuePair<String, int> joint in joints1)
+            {
+                KeyValuePair<String, int> p = Array.Find(joints2, delegate(KeyValuePair<String, int> val) { return val.Key == joint.Key; });
+
+                if (p.Key == null)
+                {
+                    weight += joint.Value;
+                }
+                else
+                {
+                    weight += Math.Abs(p.Value - joint.Value);
+                }
+            }
+
+            // joints2にしか入っていない関節を足す
+            foreach (KeyValuePair<String, int> joint in joints2)
+            {
+                KeyValuePair<String, int> p = Array.Find(joints1, delegate(KeyValuePair<String, int> val) { return val.Key == joint.Key; });
+
+                if (p.Key == null)
+                {
+                    weight += joint.Value;
+                }
+            }
+
+            return weight;
         }
     }
 }

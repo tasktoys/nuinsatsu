@@ -218,16 +218,12 @@ namespace NUInsatsu.Motion
             else if (weigth < 10)
             {
                 sub_hash += joint;
-                sub_hash += "&";
                 sub_hash += weigth;
-                sub_hash += "&";
             }
             else
             {
                 sub_hash += joint;
-                sub_hash += "&";
                 sub_hash += 9;
-                sub_hash += "&";
             }
             return sub_hash;
         }
