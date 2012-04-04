@@ -64,7 +64,11 @@ namespace NUInsatsu.Net
 
             KeyGenerator keyGen;
 
-            if (config.MotionAlgorithm == "6")
+            if (config.MotionAlgorithm == "7")
+            {
+                keyGen = new KeyGeneratorVersion7();
+            }
+            else if (config.MotionAlgorithm == "6")
             {
                 keyGen = new KeyGeneratorVersion6();
             }

@@ -179,9 +179,9 @@ namespace NUInsatsu.Motion
                 for (int joint = 0; joint < var_thr.GetLength(1); joint++) 
                 {
                     float[] sub_var = new float[time_width];
-                    for (int i = t; i < time_width; i++)
+                    for (int i = t; i < t + time_width; i++)
                     {
-                        sub_var[i] = var_thr[i, joint];
+                        sub_var[i - t] = var_thr[i, joint];
                     }
 
                     float area = CalculateArea(sub_var);
@@ -197,7 +197,7 @@ namespace NUInsatsu.Motion
                 float[] sub_var = new float[time_width];
                 for (int i = time_checked + 1; i < var_thr.GetLength(0); i++)
                 {
-                    sub_var[i] = var_thr[i, joint];
+                    sub_var[i - time_checked - 1] = var_thr[i, joint];
                 }
 
                 float area = CalculateArea(sub_var);
