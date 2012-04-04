@@ -25,8 +25,8 @@ namespace NUInsatsu.Document
             Config config = Config.Load();
             int threshold = config.MatchingThreshold;
 
-            Console.WriteLine("[DistanceUtility] Request Key: {0} KeyList size: {1}", motion.KeyString, keyList.Count);
-            Console.WriteLine("[DistanceUtility] Matching threshold: {0}", threshold);
+            Console.WriteLine("[DistanceCalculatorVersion7] Request Key: {0} KeyList size: {1}", motion.KeyString, keyList.Count);
+            Console.WriteLine("[DistanceCalculatorVersion7] Matching threshold: {0}", threshold);
 
             // ドキュメントを線形探索
             foreach (Key item in keyList)
@@ -34,18 +34,19 @@ namespace NUInsatsu.Document
                 // パーフェクトマッチするドキュメントがあれば、それを返す
                 if (motion.KeyString == item.KeyString)
                 {
-                    Console.WriteLine("[DistanceUtility] Congratulations! Your motion is perfect match.");
+                    Console.WriteLine("[DistanceCalculatorVersion7] Congratulations! Your motion is perfect match.");
                     return item;
                 }
 
                 int dist = Distance(motion.KeyString, item.KeyString);
 
+                Console.WriteLine("[DistanceCalculatorVersion7] source: {0}", motion.KeyString);
+                Console.WriteLine("[DistanceCalculatorVersion7] target: {0}", item.KeyString);
+                Console.WriteLine("[DistanceCalculatorVersion7] Distance: {0}", dist);
+
                 // 距離が閾値以下ならば、目的のドキュメントの候補とみなします
                 if (dist <= threshold)
                 {
-                    Console.WriteLine("[DistanceUtility] source: {0}", motion.KeyString);
-                    Console.WriteLine("[DistanceUtility] target: {0}", item.KeyString);
-                    Console.WriteLine("[DistanceUtility] Distance: {0}", dist);
                     item.Distance = dist;
                     candidateList.Add(item);
                 }
@@ -54,7 +55,7 @@ namespace NUInsatsu.Document
             if (candidateList.Count <= 0)
             {
                 // 近いドキュメントが見つからなかった
-                Console.WriteLine("[DistanceUtility] mismatching");
+                Console.WriteLine("[DistanceCalculatorVersion7] mismatching");
                 throw new DocumentNotFoundException("mismatching");
             }
             else

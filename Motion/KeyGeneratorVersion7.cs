@@ -46,7 +46,7 @@ namespace NUInsatsu.Motion
 
             for (int i = 0; i < area_threshold.GetLength(0); i++)
             {
-                area_threshold[i] = 0.002F;//(float)(move_threshold[i] * time_width * 0.5);
+                area_threshold[i] = 0.002F;
             }
             area_threshold[(int)JointID.Head] = 0.08F;
 

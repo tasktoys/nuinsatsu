@@ -36,6 +36,11 @@ namespace NUInsatsu.Document
             {
                 Console.Error.WriteLine(e.StackTrace);
             }
+            catch (System.Drawing.Printing.InvalidPrinterException e)
+            {
+                Console.Error.WriteLine(e.StackTrace);
+            }
+
             return true;
         }
 
