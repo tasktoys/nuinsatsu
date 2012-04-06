@@ -35,5 +35,20 @@ namespace NUInsatsu.UI
             //メニューに戻る
             NavigationService.GoBack();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Config config = Config.Load();
+            
+            for(int i = 0 ; i < installedPrinters.Items.Count ; ++i)
+            {
+                String item = (String) installedPrinters.Items[i];
+                if( item == config.PrinterName )
+                {
+                    installedPrinters.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
 }

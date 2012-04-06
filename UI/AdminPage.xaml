@@ -5,12 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="525"
-	Title="AdminPage" xmlns:my="clr-namespace:NUInsatsu.UI">
+	Title="AdminPage" xmlns:my="clr-namespace:NUInsatsu.UI" Loaded="Page_Loaded">
 
     <DockPanel>
         <my:PageHeader Height="70" x:Name="pageHeader" Title="設定を行います" DockPanel.Dock="Top" />
         <DockPanel Style="{StaticResource Bottom}" DockPanel.Dock="Bottom">
-            <Button x:Name="saveButton" Content="保存" Style="{StaticResource NextButton}" Click="saveButton_Click" />
+            <Button x:Name="saveButton" Content="戻る" Style="{StaticResource NextButton}" Click="saveButton_Click" />
         </DockPanel>
 
         <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
