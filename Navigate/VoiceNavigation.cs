@@ -8,14 +8,28 @@ namespace NUInsatsu.Navigate
     /// </summary>
     class VoiceNavigation
     {
-		private SpeechVoiceSpeakFlags flg;
-		private SpeechVoiceSpeakFlags cdflg;
-		private SpVoice tts;
-		private System.Threading.Timer cdtimer;
-		private int counter;
+        private static VoiceNavigation instance;
+        private SpeechVoiceSpeakFlags flg;
+        private SpeechVoiceSpeakFlags cdflg;
+        private SpVoice tts;
+        private System.Threading.Timer cdtimer;
+        private int counter;
 
-		public VoiceNavigation()
-		{
+        /// <summary>
+        /// シングルトンインスタンスを取得します。
+        /// </summary>
+        /// <returns>シングルトンインスタンス</returns>
+        public static VoiceNavigation GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new VoiceNavigation();
+            }
+            return instance;
+        }
+
+        private VoiceNavigation()
+        {
             try
             {
                 tts = new SpVoice();      // 音声合成のオブジェクト
@@ -44,14 +58,14 @@ namespace NUInsatsu.Navigate
             {
                 throw new NotInstalledSpeechLibraryException();
             }
-		}
+        }
 
-		public void PlaySoundSync(string text)
-		{
-			Kinect.VoiceDictionary voiceDictionary = new Kinect.VoiceDictionary();
-			string navi = voiceDictionary.DiscToNavi(text);
+        public void PlaySoundSync(string text)
+        {
+            Kinect.VoiceDictionary voiceDictionary = new Kinect.VoiceDictionary();
+            string navi = voiceDictionary.DiscToNavi(text);
             PlaySync(navi);
-		}
+        }
 
         public void PlaySoundASync(string text)
         {
@@ -60,51 +74,51 @@ namespace NUInsatsu.Navigate
             PlayASync(navi);
         }
 
-		private void PlayASync(string text)
-		{
-			string s = text.Replace("<", "&lt;");
-			s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
-			tts.Speak(s, cdflg);          // 読み上げ
-		}
+        private void PlayASync(string text)
+        {
+            string s = text.Replace("<", "&lt;");
+            s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
+            tts.Speak(s, cdflg);          // 読み上げ
+        }
 
-		private void PlaySync(string text)
-		{
-			string s = text.Replace("<", "&lt;");
-			s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
-			tts.Speak(s, flg);          // 読み上げ
-		}
+        private void PlaySync(string text)
+        {
+            string s = text.Replace("<", "&lt;");
+            s = "<pitch absmiddle=\"" + "4" + "\">" + s + "</pitch>";
+            tts.Speak(s, flg);          // 読み上げ
+        }
 
-		public void PlayLength(int length)
-		{
-			PlaySoundSync("LENGTH1");
-			PlayASync(length.ToString());
-			PlaySoundSync("LENGTH2");
-		}
+        public void PlayLength(int length)
+        {
+            PlaySoundSync("LENGTH1");
+            PlayASync(length.ToString());
+            PlaySoundSync("LENGTH2");
+        }
 
-		public void PlayNum(int num)
-		{
-			PlayASync(num.ToString());
-		}
+        public void PlayNum(int num)
+        {
+            PlayASync(num.ToString());
+        }
 
-		public void CountDown(int count)
-		{
-			counter = count;
-			cdtimer = new System.Threading.Timer(
-			new System.Threading.TimerCallback(CountDownTimer),
-			null, 0, 1000);
-		}
+        public void CountDown(int count)
+        {
+            counter = count;
+            cdtimer = new System.Threading.Timer(
+            new System.Threading.TimerCallback(CountDownTimer),
+            null, 0, 1000);
+        }
 
-		private void CountDownTimer(object o)
-		{
-			if (counter > 0)
-			{
-				PlayASync(counter.ToString());
-				counter--;
-			}
-			else
-			{
-				cdtimer.Dispose();
-			}
-		}
+        private void CountDownTimer(object o)
+        {
+            if (counter > 0)
+            {
+                PlayASync(counter.ToString());
+                counter--;
+            }
+            else
+            {
+                cdtimer.Dispose();
+            }
+        }
     }
 }
