@@ -42,7 +42,7 @@ namespace NUInsatsu.Net
 
         List<SkeletonTimeline> KinectClient.GetMotionList()
         {
-            VoiceNavigation sound = new VoiceNavigation();
+            VoiceNavigation sound = VoiceNavigation.GetInstance();
 
             //「Kinect」といわれるまで待機
             sound.PlaySoundSync("WAIT_MOTION");

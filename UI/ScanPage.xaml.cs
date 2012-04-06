@@ -23,7 +23,7 @@ namespace NUInsatsu.UI
             voiceRecognizer = KinectInstanceManager.GetVoiceRecognizerInstance();
             voiceRecognizer.Recognized += new EventHandler<SaidWordArgs>(voiceRecognizer_Recognized);
 
-            VoiceNavigation navigation = new VoiceNavigation();
+            VoiceNavigation navigation = VoiceNavigation.GetInstance();
             navigation.PlaySoundASync("SCAN_START");
         }
 
