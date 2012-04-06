@@ -22,30 +22,59 @@ namespace NUInsatsu.UI
         public AdminPage()
         {
             InitializeComponent();
-            //データバインド
+            // データバインド
             installedPrinters.DataContext = System.Drawing.Printing.PrinterSettings.InstalledPrinters;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            //設定を反映
+            // 設定を反映
             Config config = Config.Load();
             config.PrinterName = (String)installedPrinters.SelectedItem;
             config.Save();
-            //メニューに戻る
+            // メニューに戻る
             NavigationService.GoBack();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Config config = Config.Load();
-            
-            for(int i = 0 ; i < installedPrinters.Items.Count ; ++i)
+
+            SelectComboBoxItemString(installedPrinters, config.PrinterName);
+            SelectComboBoxItem(kinectConnectionType,config.KinectType);
+        }
+
+        /// <summary>
+        /// コンボボックスの指定のアイテムを選択状態にします。
+        /// </summary>
+        /// <param name="combo">選択を行うコンボボックス</param>
+        /// <param name="targetContent">選択する名前</param>
+        private void SelectComboBoxItem(ComboBox combo, String targetContent)
+        {
+            foreach (ComboBoxItem item in combo.Items)
             {
-                String item = (String) installedPrinters.Items[i];
-                if( item == config.PrinterName )
+                if( item.Name == targetContent)
                 {
-                    installedPrinters.SelectedIndex = i;
+                    item.IsSelected = true;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// コンボボックスの指定のアイテムを選択状態にします。
+        /// </summary>
+        /// <param name="combo">選択を行うコンボボックス</param>
+        /// <param name="targetContent">選択する名前</param>
+        private void SelectComboBoxItemString(ComboBox combo, String targetContent)
+        {
+            // 設定済みの値を選択
+            for (int i = 0; i < combo.Items.Count; ++i)
+            {
+                String content = (String)combo.Items[i];
+                if (content == targetContent)
+                {
+                    combo.SelectedIndex = i;
                     break;
                 }
             }

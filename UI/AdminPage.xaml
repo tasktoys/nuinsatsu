@@ -13,14 +13,19 @@
             <Button x:Name="saveButton" Content="戻る" Style="{StaticResource NextButton}" Click="saveButton_Click" />
         </DockPanel>
 
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="250" Margin="10,10,10,10">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="利用するプリンタ: "/>
                 <ComboBox x:Name="installedPrinters" ItemsSource="{Binding}" Width="100" />
             </StackPanel>
         </StackPanel >
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="10,10,10,10">
             <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Kinect 接続タイプ: "/>
+                <ComboBox x:Name="kinectConnectionType" >
+                    <ComboBoxItem Content="local" />
+                    <ComboBoxItem Content="stub" />
+                </ComboBox>
             </StackPanel>
         </StackPanel>
     </DockPanel>
